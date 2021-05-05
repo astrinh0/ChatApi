@@ -17,8 +17,9 @@ namespace ChatApi.Infrastructure.DB
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Message>()
-                .HasOne(m => m.)
+            
+                
+
         }
         
         
