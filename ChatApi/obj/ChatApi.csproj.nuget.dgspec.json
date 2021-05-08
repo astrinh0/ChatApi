@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ejcc8\\RiderProjects\\ChatApi\\chatapi\\ChatApi.csproj": {}
+    "C:\\Users\\ejcc8\\RiderProjects\\ChatApi\\ChatApi\\ChatApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ejcc8\\RiderProjects\\ChatApi\\chatapi\\ChatApi.csproj": {
+    "C:\\Users\\ejcc8\\RiderProjects\\ChatApi\\ChatApi\\ChatApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ejcc8\\RiderProjects\\ChatApi\\chatapi\\ChatApi.csproj",
+        "projectUniqueName": "C:\\Users\\ejcc8\\RiderProjects\\ChatApi\\ChatApi\\ChatApi.csproj",
         "projectName": "ChatApi",
-        "projectPath": "C:\\Users\\ejcc8\\RiderProjects\\ChatApi\\chatapi\\ChatApi.csproj",
+        "projectPath": "C:\\Users\\ejcc8\\RiderProjects\\ChatApi\\ChatApi\\ChatApi.csproj",
         "packagesPath": "C:\\Users\\ejcc8\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ejcc8\\RiderProjects\\ChatApi\\chatapi\\obj\\",
+        "outputPath": "C:\\Users\\ejcc8\\RiderProjects\\ChatApi\\ChatApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ejcc8\\AppData\\Roaming\\NuGet\\NuGet.Config",

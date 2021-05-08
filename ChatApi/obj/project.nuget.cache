@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "v+gC4hB4lSnAIh6fGfIGGMOuwdZmVbCPNnKikL9fme89xCGaJjeAfJ8tFfB6zoTapRT7oIpVBN+fkUWKWVbArA==",
+  "dgSpecHash": "WJHPRSboDeLAKnXLnI7zY1DzYeXa4Yvub2TMR8/iMUyadoujXED7qs2G/Ldi/HFB7POE+p/FuSJ2brgI0ZyC1Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ejcc8\\RiderProjects\\ChatApi\\chatapi\\ChatApi.csproj",
+  "projectFilePath": "C:\\Users\\ejcc8\\RiderProjects\\ChatApi\\ChatApi\\ChatApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ejcc8\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\ejcc8\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
