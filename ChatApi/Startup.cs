@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ChatApi.Infrastructure.DB;
+using ChatApi.Infrastructure.Repos;
+using ChatApi.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,9 +30,17 @@ namespace ChatApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //SERVICES
+            services.AddTransient<IUserService, UserService>();
+
+            //REPOS
+            services.AddTransient<IUserRepository, UserRepository>();
+
+
+
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "ChatApi", Version = "v1"}); });
-            services.AddDbContext<DataContext>(options =>
+            services.AddDbContext<Infrastructure.DB.AppContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
         }
 
