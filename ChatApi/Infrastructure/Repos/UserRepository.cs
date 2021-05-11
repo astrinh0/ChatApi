@@ -3,6 +3,7 @@
 using ChatApi.Infrastructure.DB;
 using ChatApi.Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -25,7 +26,9 @@ namespace ChatApi.Infrastructure.Repos
 
         public User AddUser(User user)
         {
+            user.CreatedAt = DateTime.UtcNow;
             _context.Users.Add(user);
+            _context.SaveChanges();
             return user;
         }
     }
