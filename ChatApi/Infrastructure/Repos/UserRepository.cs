@@ -22,5 +22,11 @@ namespace ChatApi.Infrastructure.Repos
             var users = await _context.Users.ToListAsync();
             return users;
         }
+
+        public User AddUser(User user)
+        {
+            _context.Users.Add(user);
+            return user;
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace ChatApi.Infrastructure.Repos
     public interface IUserRepository
     {
         Task<IEnumerable<User>> GetAll();
+        User AddUser(User user);
     }
 }

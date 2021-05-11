@@ -98,3 +98,7 @@ C:\VISUALSTUDIO\IPCA\TRABALHOCD\ChatApi\ChatApi\obj\Debug\net5.0\ChatApi.dll
 C:\VISUALSTUDIO\IPCA\TRABALHOCD\ChatApi\ChatApi\obj\Debug\net5.0\ref\ChatApi.dll
 C:\VISUALSTUDIO\IPCA\TRABALHOCD\ChatApi\ChatApi\obj\Debug\net5.0\ChatApi.pdb
 C:\VISUALSTUDIO\IPCA\TRABALHOCD\ChatApi\ChatApi\obj\Debug\net5.0\ChatApi.genruntimeconfig.cache
+C:\VISUALSTUDIO\IPCA\TRABALHOCD\ChatApi\ChatApi\bin\Debug\net5.0\System.Net.Http.Formatting.dll
+C:\VISUALSTUDIO\IPCA\TRABALHOCD\ChatApi\ChatApi\bin\Debug\net5.0\System.Web.Http.dll
+C:\VISUALSTUDIO\IPCA\TRABALHOCD\ChatApi\ChatApi\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\VISUALSTUDIO\IPCA\TRABALHOCD\ChatApi\ChatApi\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll

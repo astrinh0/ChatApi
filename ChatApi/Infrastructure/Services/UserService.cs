@@ -20,5 +20,11 @@ namespace ChatApi.Infrastructure.Services
             var users =  _userRepository.GetAll();
             return users;
         }
+
+        public User AddUser(User user)
+        {
+            _userRepository.AddUser(user);
+            return user;
+        }
     }
 }

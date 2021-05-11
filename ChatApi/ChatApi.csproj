@@ -6,6 +6,7 @@
 
     <ItemGroup>
         <PackageReference Include="EntityFramework" Version="6.4.4" />
+        <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.5" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.5">
           <PrivateAssets>all</PrivateAssets>
@@ -19,8 +20,8 @@
       <Compile Remove="DB\**" />
       <Compile Remove="Controllers\WeatherForecastController.cs" />
       <Compile Remove="WeatherForecast.cs" />
-      <Compile Remove="Infrastructure\DB\MessageContext.cs" />
-      <Compile Remove="Infrastructure\Models\PetaPoco.cs" />
+      <Compile Remove="Infrastructure\Data\DB\MessageContext.cs" />
+      <Compile Remove="Infrastructure\Data\Models\PetaPoco.cs" />
       <Compile Remove="Migrations\**" />
     </ItemGroup>
 

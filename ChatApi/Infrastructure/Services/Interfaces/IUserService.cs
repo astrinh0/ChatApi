@@ -9,5 +9,6 @@ namespace ChatApi.Infrastructure.Services
     public interface IUserService
     {
         Task<IEnumerable<User>> GetUsers();
+        User AddUser(User user);
     }
 }

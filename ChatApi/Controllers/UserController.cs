@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ChatApi.Controllers
 {
+    [Route("[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -21,11 +22,19 @@ namespace ChatApi.Controllers
 
 
         [HttpGet]
-        [Route("users/all")]
+        [Route("/GetAll")]
         public async Task<ActionResult<User>> GetUsers()
         {
             var users = await _userService.GetUsers();
             return Ok(users);
+        }
+
+        [HttpPost]
+        [Route("/register")]
+        public ActionResult AddUser(User user)
+        {
+            _userService.AddUser(user);
+            return Ok();
         }
     }
 
