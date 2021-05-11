@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ChatApi.Infrastructure.DB
 {
-    public class AppContext : DbContext
+    public class DataContext : DbContext
     
     {
-        public AppContext(DbContextOptions<AppContext> options) : base (options)
+        public DataContext(DbContextOptions<DataContext> options) : base (options)
         {
 
         }

@@ -10,5 +10,7 @@ namespace ChatApi.Infrastructure.Repos
     {
         Task<IEnumerable<User>> GetAll();
         User AddUser(User user);
+
+        Task<bool> RemoveUser(int id);
     }
 }

@@ -40,7 +40,7 @@ namespace ChatApi
 
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "ChatApi", Version = "v1"}); });
-            services.AddDbContext<Infrastructure.DB.AppContext>(options =>
+            services.AddDbContext<Infrastructure.DB.DataContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
         }
 

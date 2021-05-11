@@ -26,5 +26,14 @@ namespace ChatApi.Infrastructure.Services
             _userRepository.AddUser(user);
             return user;
         }
+
+        public async Task<bool> RemoveUser(int id)
+        {
+            if (await _userRepository.RemoveUser(id) == true)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

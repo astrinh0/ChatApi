@@ -36,6 +36,14 @@ namespace ChatApi.Controllers
             _userService.AddUser(user);
             return Ok();
         }
+
+        [HttpDelete]
+        [Route("/remove")]
+        public ActionResult RemoveUser(int id)
+        {
+            _userService.RemoveUser(id);
+            return Ok();
+        }
     }
 
 }

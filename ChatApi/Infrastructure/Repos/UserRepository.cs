@@ -11,9 +11,9 @@ namespace ChatApi.Infrastructure.Repos
 {
     public class UserRepository : IUserRepository
     {
-        private readonly AppContext _context;
+        private readonly DataContext _context;
 
-        public UserRepository(AppContext context)
+        public UserRepository(DataContext context)
         {
             _context = context;
         }
@@ -31,5 +31,23 @@ namespace ChatApi.Infrastructure.Repos
             _context.SaveChanges();
             return user;
         }
+
+        public bool RemoveUser(int id)
+        {
+            var user = _context.Users.FirstOrDefaultAsync(c => c.Id == id);
+
+
+            if (user != null)
+            {
+                user = Models.Enums.EnumFlag.N;
+                _context.Users.Update(user);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+
+            return false;
+        }
+
+       
     }
 }
