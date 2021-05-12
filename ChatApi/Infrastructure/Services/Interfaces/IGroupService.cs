@@ -1,5 +1,4 @@
 ﻿using ChatApi.Infrastructure.Models;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace ChatApi.Infrastructure.Services
 {
-    public interface IUserService
+    public interface IGroupService
     {
-        Task<IEnumerable<User>> GetUsers();
-        User AddUser(User user);
-
-        bool RemoveUser(int id);
+        Task<IEnumerable<Group>> GetGroups();
+        Group AddGroup(Group group);
+        bool RemoveGroup(int id);
     }
 }

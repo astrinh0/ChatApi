@@ -13,8 +13,7 @@ namespace ChatApi.Infrastructure.Services
         {
             _userRepository = userRepository;
         }
-        
-
+   
         public Task<IEnumerable<User>> GetUsers()
         {
             var users =  _userRepository.GetAll();
@@ -27,9 +26,9 @@ namespace ChatApi.Infrastructure.Services
             return user;
         }
 
-        public async Task<bool> RemoveUser(int id)
+        public bool RemoveUser(int id)
         {
-            if (await _userRepository.RemoveUser(id) == true)
+            if (_userRepository.RemoveUser(id) == true)
             {
                 return true;
             }

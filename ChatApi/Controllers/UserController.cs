@@ -37,7 +37,7 @@ namespace ChatApi.Controllers
             return Ok();
         }
 
-        [HttpDelete]
+        [HttpPut]
         [Route("/remove")]
         public ActionResult RemoveUser(int id)
         {

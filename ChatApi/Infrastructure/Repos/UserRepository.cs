@@ -2,6 +2,7 @@
 
 using ChatApi.Infrastructure.DB;
 using ChatApi.Infrastructure.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -34,20 +35,17 @@ namespace ChatApi.Infrastructure.Repos
 
         public bool RemoveUser(int id)
         {
-            var user = _context.Users.FirstOrDefaultAsync(c => c.Id == id);
+            var user = _context.Users.Find(id);
 
-
-            if (user != null)
+            if (user == null)
             {
-                user = Models.Enums.EnumFlag.N;
-                _context.Users.Update(user);
-                await _context.SaveChangesAsync();
-                return true;
+                return false;
             }
 
-            return false;
+            user.Active = Models.Enums.EnumFlag.N;
+            _context.Users.Update(user);
+            _context.SaveChanges();
+            return true;
         }
-
-       
     }
 }

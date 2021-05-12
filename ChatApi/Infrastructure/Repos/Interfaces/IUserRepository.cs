@@ -1,4 +1,5 @@
 ﻿using ChatApi.Infrastructure.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,6 @@ namespace ChatApi.Infrastructure.Repos
         Task<IEnumerable<User>> GetAll();
         User AddUser(User user);
 
-        Task<bool> RemoveUser(int id);
+        bool RemoveUser(int id);
     }
 }
