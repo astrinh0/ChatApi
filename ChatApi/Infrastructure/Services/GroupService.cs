@@ -1,5 +1,5 @@
 ﻿using ChatApi.Infrastructure.Models;
-using ChatApi.Infrastructure.Repos.Interfaces;
+using ChatApi.Infrastructure.Repos;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -14,6 +14,7 @@ namespace ChatApi.Infrastructure.Services
         {
             _groupRepository = groupRepository;
         }
+
 
         public Task<IEnumerable<Group>> GetGroups()
         {

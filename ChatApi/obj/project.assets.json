@@ -6991,25 +6991,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Joel\\.nuget\\packages\\": {},
+    "C:\\Users\\João Veloso\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Joel\\OneDrive - Instituto Politécnico do Cávado e do Ave\\Escola\\2 Ano\\Semestre 2\\CD\\ChatAPI\\ChatApi\\ChatApi.csproj",
+      "projectUniqueName": "C:\\VISUALSTUDIO\\IPCA\\TRABALHOCD\\ChatApi\\ChatApi\\ChatApi.csproj",
       "projectName": "ChatApi",
-      "projectPath": "C:\\Users\\Joel\\OneDrive - Instituto Politécnico do Cávado e do Ave\\Escola\\2 Ano\\Semestre 2\\CD\\ChatAPI\\ChatApi\\ChatApi.csproj",
-      "packagesPath": "C:\\Users\\Joel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Joel\\OneDrive - Instituto Politécnico do Cávado e do Ave\\Escola\\2 Ano\\Semestre 2\\CD\\ChatAPI\\ChatApi\\obj\\",
+      "projectPath": "C:\\VISUALSTUDIO\\IPCA\\TRABALHOCD\\ChatApi\\ChatApi\\ChatApi.csproj",
+      "packagesPath": "C:\\Users\\João Veloso\\.nuget\\packages\\",
+      "outputPath": "C:\\VISUALSTUDIO\\IPCA\\TRABALHOCD\\ChatApi\\ChatApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\Joel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\João Veloso\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
@@ -7082,7 +7082,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   },

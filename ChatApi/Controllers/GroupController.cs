@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 
 namespace ChatApi.Controllers
 {
-    public class GroupController
+    
+    [Route("[controller]")]
+    [ApiController]
+    public class GroupController : Controller
     {
 
         private readonly IGroupService _groupService;
@@ -18,7 +21,7 @@ namespace ChatApi.Controllers
 
 
         [HttpGet]
-        [Route("/GetAll")]
+        [Route("/GetAllGroups")]
         public async Task<ActionResult<Group>> GetGroups()
         {
             var groups = await _groupService.GetGroups();
@@ -26,7 +29,7 @@ namespace ChatApi.Controllers
         }
 
         [HttpPost]
-        [Route("/register")]
+        [Route("/AddGroup")]
         public ActionResult AddGroup(Group group)
         {
             _groupService.AddGroup(group);
@@ -34,7 +37,7 @@ namespace ChatApi.Controllers
         }
 
         [HttpPut]
-        [Route("/remove")]
+        [Route("/RemoveGroup")]
         public ActionResult RemoveGroup(int id)
         {
             _groupService.RemoveGroup(id);

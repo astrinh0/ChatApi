@@ -28,6 +28,9 @@ namespace ChatApi.Infrastructure.Mappers
             builder.Property(x => x.CreatedAt)
              .HasColumnName("ms_changedat");
 
+            builder.Property(x => x.Active)
+                .HasColumnName("ms_active");
+
             builder
                .HasMany(p => p.UserMessages)
                .WithOne(p => p.Message)

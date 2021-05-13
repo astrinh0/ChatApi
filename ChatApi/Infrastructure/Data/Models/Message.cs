@@ -13,7 +13,7 @@ namespace ChatApi.Infrastructure.Models
         public string ActualMessage { get; set; } 
         public DateTime CreatedAt { get; set; }
         public DateTime? ChangedAt { get; set; }
-
+        public EnumFlag Active { get; set; }
         public virtual ICollection<GroupMessage> GroupMessage { get; set; }
 
         public virtual ICollection<UserMessage> UserMessages { get; set; }

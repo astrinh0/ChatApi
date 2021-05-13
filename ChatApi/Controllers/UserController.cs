@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ChatApi.Controllers
 {
-    [Route("[controller]")]
+    [Route("[controllers]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UserController : Controller
     {
         private readonly IUserService _userService;
 
@@ -22,7 +22,7 @@ namespace ChatApi.Controllers
 
 
         [HttpGet]
-        [Route("/GetAll")]
+        [Route("/GetAllUsers")]
         public async Task<ActionResult<User>> GetUsers()
         {
             var users = await _userService.GetUsers();
@@ -30,7 +30,7 @@ namespace ChatApi.Controllers
         }
 
         [HttpPost]
-        [Route("/register")]
+        [Route("/AddUser")]
         public ActionResult AddUser(User user)
         {
             _userService.AddUser(user);
@@ -38,7 +38,7 @@ namespace ChatApi.Controllers
         }
 
         [HttpPut]
-        [Route("/remove")]
+        [Route("/RemoveUser")]
         public ActionResult RemoveUser(int id)
         {
             _userService.RemoveUser(id);

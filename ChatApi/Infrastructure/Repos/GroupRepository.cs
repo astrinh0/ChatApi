@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ChatApi.Infrastructure.Repos
 {
-    public class GroupRepository
+    public class GroupRepository : IGroupRepository
     {
         private readonly DataContext _context;
 

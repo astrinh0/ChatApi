@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace ChatApi.Infrastructure.Repos
 {
-    public interface IGroupRepository
+    public interface IMessageRepository
     {
-        Task<IEnumerable<Group>> GetAll();
-        Group AddGroup(Group group);
-        bool RemoveGroup(int id);
+        Task<IEnumerable<Message>> GetAll();
+
+        Message AddMessage(Message message);
+
+        bool RemoveMessage(int id);
 
     }
 }

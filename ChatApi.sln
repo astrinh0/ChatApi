@@ -1,6 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApi", "ChatApi\ChatApi.csproj", "{3B2E1C70-A783-4DBE-8451-7269CA168E34}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31229.75
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatApi", "ChatApi\ChatApi.csproj", "{3B2E1C70-A783-4DBE-8451-7269CA168E34}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{06F23382-B406-4170-9101-78F696C6C878}"
+	ProjectSection(SolutionItems) = preProject
+		DB\CREATE TABLES.sql = DB\CREATE TABLES.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +20,11 @@ Global
 		{3B2E1C70-A783-4DBE-8451-7269CA168E34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B2E1C70-A783-4DBE-8451-7269CA168E34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B2E1C70-A783-4DBE-8451-7269CA168E34}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {11218915-1F2F-455D-96DC-9A6580728E12}
 	EndGlobalSection
 EndGlobal
