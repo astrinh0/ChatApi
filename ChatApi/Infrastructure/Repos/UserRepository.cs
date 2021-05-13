@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ChatApi.Infrastructure.Repos
@@ -46,6 +47,19 @@ namespace ChatApi.Infrastructure.Repos
             _context.Users.Update(user);
             _context.SaveChanges();
             return true;
+        }
+
+        public bool UserExistsAndActive (int id)
+        {
+
+            if (_context.Users.FirstOrDefault(a => a.Id == id && 
+                        a.Active == Models.Enums.EnumFlag.Y) != null)
+            {
+                return true;
+            }
+
+            return false;
+            
         }
     }
 }

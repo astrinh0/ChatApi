@@ -13,5 +13,7 @@ namespace ChatApi.Infrastructure.Repos
         User AddUser(User user);
 
         bool RemoveUser(int id);
+
+        bool UserExistsAndActive(int id);
     }
 }
