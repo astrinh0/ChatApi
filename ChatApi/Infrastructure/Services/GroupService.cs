@@ -26,7 +26,7 @@ namespace ChatApi.Infrastructure.Services
 
         public Group AddGroup(Group group)
         {
-            if (_userRepository.UserExists(group.OwnerId) != false)
+            if (_userRepository.UserExistsAndActive(group.OwnerId) != false)
             {
                 _groupRepository.AddGroup(group);
                 return group;
