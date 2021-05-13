@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{06F23382-B406-4170-9101-78F696C6C878}"
 	ProjectSection(SolutionItems) = preProject
 		DB\CREATE TABLES.sql = DB\CREATE TABLES.sql
+		DB\INSERT DATA.sql = DB\INSERT DATA.sql
 	EndProjectSection
 EndProject
 Global
