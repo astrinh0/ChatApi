@@ -42,12 +42,24 @@ namespace ChatApi
             services.AddTransient<IMessageRepository, MessageRepository>();
 
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                    options.JsonSerializerOptions.IgnoreNullValues = true;
+
+                })
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "ChatApi", Version = "v1"}); });
             services.AddDbContext<Infrastructure.DB.DataContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
+
             
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

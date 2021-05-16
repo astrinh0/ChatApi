@@ -26,24 +26,100 @@ namespace ChatApi.Controllers
         [Route("/GetAllMessages")]
         public async Task<ActionResult<Message>> GetAllMessages()
         {
-            var messages = await _messageService.GetMessages();
-            return Ok(messages);
+            try
+            {
+                var messages = await _messageService.GetMessages();
+
+                if (messages == null)
+                {
+                    return NoContent();
+                }
+
+                return Ok(messages);
+            }
+            catch (Exception ex)
+            {
+
+                return Json(ex);
+            }
         }
 
         [HttpPost]
         [Route("/SendMessageToUser")]
         public ActionResult SendMessageToUser(int senderId, int receiverId, string message)
         {
-            _messageService.SendMessageToUser(senderId, receiverId, message);
-            return Ok();
+            try
+            {
+                _messageService.SendMessageToUser(senderId, receiverId, message);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+
+                return Json(ex);
+            }
         }
+
+        [HttpGet]
+        [Route("/AllMessagesSendByUserId")]
+        public ActionResult MessagesSendByUserId(int userId)
+        {
+            try
+            {
+               var messages = _messageService.GetSendedMessagesByUserId(userId);
+                
+                if (messages == null)
+                {
+                    return NoContent();
+                }
+
+                return Ok(messages);
+            }
+            catch (Exception ex)
+            {
+
+                return Json(ex);
+            }
+        }
+
+        [HttpGet]
+        [Route("/AllMessagesReceiverByUserId")]
+        public ActionResult MessagesReceivedByUserId(int userId)
+        {
+            try
+            {
+                var messages = _messageService.GetReceivedMessagesByUserId(userId);
+
+                if (messages == null)
+                {
+                    return NoContent();
+                }
+
+                return Ok(messages);
+            }
+            catch (Exception ex)
+            {
+
+                return Json(ex);
+            }
+        }
+
 
         [HttpPut]
         [Route("/DeleteMessage")]
         public ActionResult RemoveMessage(int id)
         {
-            _messageService.RemoveMessage(id);
-            return Ok();
+            try
+            {
+                _messageService.RemoveMessage(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+
+                return Json(ex);
+            }
+           
         }
     }
 

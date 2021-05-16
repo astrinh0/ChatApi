@@ -1,4 +1,5 @@
 ﻿using ChatApi.Infrastructure.Models;
+using ChatApi.Infrastructure.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -29,7 +30,8 @@ namespace ChatApi.Infrastructure.Mappers
              .HasColumnName("ms_changedat");
 
             builder.Property(x => x.Active)
-                .HasColumnName("ms_active");
+                .HasColumnName("ms_active")
+                .HasConversion(x => x.ToString(), x => (EnumFlag)Enum.Parse(typeof(EnumFlag), x));
 
             builder
                .HasMany(p => p.UserMessages)

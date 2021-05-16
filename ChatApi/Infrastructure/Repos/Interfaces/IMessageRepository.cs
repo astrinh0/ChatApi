@@ -14,5 +14,9 @@ namespace ChatApi.Infrastructure.Repos
 
         bool RemoveMessage(int id);
 
+        IEnumerable<Message> GetSendedMessagesbyId(int userId);
+
+        IEnumerable<Message> GetReceivedMessagesbyId(int userId);
+
     }
 }

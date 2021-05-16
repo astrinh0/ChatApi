@@ -34,8 +34,6 @@ namespace ChatApi.Infrastructure.Services
                 return null;
             }
 
-            
-           
         }
 
         public bool RemoveMessage(int id)
@@ -45,6 +43,32 @@ namespace ChatApi.Infrastructure.Services
                 return true;
             }
             return false;
+        }
+
+        public IEnumerable<Message> GetSendedMessagesByUserId(int userId)
+        {
+            if (_userRepository.UserExistsAndActive(userId))
+            {
+                var aux = _messageRepository.GetSendedMessagesbyId(userId);
+                return aux;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public IEnumerable<Message> GetReceivedMessagesByUserId(int userId)
+        {
+            if (_userRepository.UserExistsAndActive(userId))
+            {
+                var aux = _messageRepository.GetReceivedMessagesbyId(userId);
+                return aux;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
