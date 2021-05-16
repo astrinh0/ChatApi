@@ -24,17 +24,17 @@ namespace ChatApi.Controllers
 
         [HttpGet]
         [Route("/GetAllMessages")]
-        public async Task<ActionResult<Message>> GetUsers()
+        public async Task<ActionResult<Message>> GetAllMessages()
         {
             var messages = await _messageService.GetMessages();
             return Ok(messages);
         }
 
         [HttpPost]
-        [Route("/SendMessage")]
-        public ActionResult AddMessage(Message message)
+        [Route("/SendMessageToUser")]
+        public ActionResult SendMessageToUser(int senderId, int receiverId, string message)
         {
-            _messageService.AddMessage(message);
+            _messageService.SendMessageToUser(senderId, receiverId, message);
             return Ok();
         }
 

@@ -10,7 +10,7 @@ namespace ChatApi.Infrastructure.Services
     {
         Task<IEnumerable<Message>> GetMessages();
 
-        Message AddMessage(Message message);
+        Message SendMessageToUser(int senderId, int receiverId, string message);
 
         bool RemoveMessage(int id);
     }

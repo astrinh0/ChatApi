@@ -21,7 +21,14 @@ namespace ChatApi.Infrastructure.Models
 
         public virtual ICollection<Group> Groups { get; set; }
 
-        public virtual ICollection<UserMessage> UserMessages { get; set; }
+        public virtual ICollection<UserMessage> SendMessages { get; set; }
+
+        public virtual ICollection<UserMessage> ReceiveMessages { get; set; }
+
+        public virtual ICollection<GroupMessage> SendMessageGroup { get; set; }
+
+
+
 
 
     }

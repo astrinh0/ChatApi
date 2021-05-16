@@ -8,10 +8,12 @@ namespace ChatApi.Infrastructure.Services
     public class MessageService : IMessageService
     {
         private readonly IMessageRepository _messageRepository;
+        private readonly IUserRepository _userRepository;
 
-        public MessageService(IMessageRepository messageRepository)
+        public MessageService(IMessageRepository messageRepository, IUserRepository userRepository)
         {
             _messageRepository = messageRepository;
+            _userRepository = userRepository;
         }
 
         public Task<IEnumerable<Message>> GetMessages()
@@ -20,10 +22,20 @@ namespace ChatApi.Infrastructure.Services
             return users;
         }
 
-        public Message AddMessage(Message message)
+        public Message SendMessageToUser(int senderId, int receiverId, string message)
         {
-            _messageRepository.AddMessage(message);
-            return message;
+            if (_userRepository.UserExistsAndActive(senderId) && _userRepository.UserExistsAndActive(receiverId) == true)
+            {
+                var aux = _messageRepository.SendMessageToUser(senderId, receiverId, message);
+                return aux;
+            }
+            else
+            {
+                return null;
+            }
+
+            
+           
         }
 
         public bool RemoveMessage(int id)

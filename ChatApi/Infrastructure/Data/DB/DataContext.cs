@@ -18,8 +18,13 @@ namespace ChatApi.Infrastructure.DB
 
         public DbSet<GroupMessage> GroupMessages { get; set; }
 
+        public DbSet<UserMessage> UserMessages { get; set; }
 
-     
+
+
+
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.EnableSensitiveDataLogging();

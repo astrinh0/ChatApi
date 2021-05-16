@@ -23,12 +23,32 @@ namespace ChatApi.Infrastructure.Repos
             return users;
         }
 
-        public Message AddMessage(Message message)
+        public Message SendMessageToUser(int senderId, int receiverId, string message)
         {
-            message.CreatedAt = DateTime.UtcNow;
-            _context.Messages.Add(message);
+            Message aux = new Message();
+
+            aux.Active = Models.Enums.EnumFlag.Y;
+            aux.ActualMessage = message;
+            aux.ChangedAt = null;
+            aux.CreatedAt = DateTime.UtcNow;
+            aux.GroupMessage = null;
+
+            _context.Messages.Add(aux);
             _context.SaveChanges();
-            return message;
+
+            UserMessage userMessage = new UserMessage();
+
+            userMessage.CreatedAt = DateTime.UtcNow;
+            userMessage.SenderId = senderId;
+            userMessage.ReceiverId = receiverId;
+            userMessage.MessageId = aux.Id;
+
+            _context.UserMessages.Add(userMessage);
+            _context.SaveChanges();
+
+
+            return aux;
+
         }
 
         public bool RemoveMessage(int id)
