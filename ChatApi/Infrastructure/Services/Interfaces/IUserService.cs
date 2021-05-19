@@ -10,7 +10,7 @@ namespace ChatApi.Infrastructure.Services
     public interface IUserService
     {
         Task<IEnumerable<User>> GetUsers();
-        User AddUser(User user);
+        User AddUser(string name, string email, string username, string password);
 
         bool RemoveUser(int id);
         Task<User> Authenticate(string username, string password);

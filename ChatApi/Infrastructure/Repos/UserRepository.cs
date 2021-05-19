@@ -27,9 +27,20 @@ namespace ChatApi.Infrastructure.Repos
             return users.WithoutPasswords();
         }
 
-        public User AddUser(User user)
+        public User AddUser(string name, string email, string username, string password)
         {
-            user.CreatedAt = DateTime.UtcNow;
+            var user = new User
+            {
+                Active = Models.Enums.EnumFlag.Y,
+                ChangedAt = null,
+                CreatedAt = DateTime.UtcNow,
+                Name = name,
+                Email = email,
+                Username = username,
+                Password = password,
+
+            };
+
             _context.Users.Add(user);
             _context.SaveChanges();
             return user.WithoutPassword();

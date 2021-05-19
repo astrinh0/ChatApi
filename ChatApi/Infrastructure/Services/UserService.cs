@@ -21,9 +21,9 @@ namespace ChatApi.Infrastructure.Services
             return users;
         }
 
-        public User AddUser(User user)
+        public User AddUser(string name, string email, string username, string password)
         {
-            _userRepository.AddUser(user);
+            var user = _userRepository.AddUser(name, email, username, password);
             return user;
         }
 

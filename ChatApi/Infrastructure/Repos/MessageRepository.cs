@@ -69,21 +69,7 @@ namespace ChatApi.Infrastructure.Repos
 
         public IEnumerable<Message> GetSendedMessagesbyId(int userId)
         {
-            var listOfUserMessage = _context.Messages.Where(um => um.SenderId == userId).ToList();
-
-            var aux = new List<Message>();
-
-            foreach (var message in listOfUserMessage)
-            {
-                message.Receiver = _context.Users.FirstOrDefault(c => c.Id == message.ReceiverId);
-
-                var msg = _context.Messages.FirstOrDefault(c => c.Id == message.MessageId);
-                
-                
-                aux.Add(msg);
-            }
-
-            return aux;
+           
 
         }
 
@@ -95,8 +81,8 @@ namespace ChatApi.Infrastructure.Repos
 
             foreach (var message in listOfUserMessage)
             {
-                message.Sender = _context.Users.FirstOrDefault(c => c.Id == message.SenderId);
-                aux.Add(_context.Messages.FirstOrDefault(c => c.Id == message.MessageId));
+                var msg = _context.Messages.FirstOrDefault(c => c.Id == message.MessageId);
+                aux.Add(msg);
             }
 
             return aux;

@@ -10,7 +10,7 @@ namespace ChatApi.Infrastructure.Repos
     public interface IUserRepository
     {
         Task<IEnumerable<User>> GetAll();
-        User AddUser(User user);
+        User AddUser(string name, string email, string username, string password);
 
         bool RemoveUser(int id);
 

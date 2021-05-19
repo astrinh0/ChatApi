@@ -33,9 +33,9 @@ namespace ChatApi.Controllers
 
         [HttpPost]
         [Route("/AddUser")]
-        public ActionResult AddUser(User user)
+        public ActionResult AddUser(string name, string email, string username, string password)
         {
-            _userService.AddUser(user);
+            _userService.AddUser(name, email, username, password);
             return Ok();
         }
 
