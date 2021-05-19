@@ -13,5 +13,6 @@ namespace ChatApi.Infrastructure.Services
         User AddUser(User user);
 
         bool RemoveUser(int id);
+        Task<User> Authenticate(string username, string password);
     }
 }

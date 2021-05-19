@@ -1,4 +1,5 @@
-﻿using ChatApi.Infrastructure.Models;
+﻿using ChatApi.Infrastructure.Helpers;
+using ChatApi.Infrastructure.Models;
 using ChatApi.Infrastructure.Repos;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -33,6 +34,17 @@ namespace ChatApi.Infrastructure.Services
                 return true;
             }
             return false;
+        }
+
+        public async Task<User> Authenticate(string username, string password)
+        {
+            var user = await Task.Run(() => _userRepository.FindUser(username, password));
+            // return null if user not found
+            if (user == null)
+                return null;
+
+            // authentication successful so return user details without password
+            return user;
         }
     }
 }

@@ -16,6 +16,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Authentication;
+using ChatApi.Infrastructure.Helpers;
 
 namespace ChatApi
 {
@@ -41,6 +43,7 @@ namespace ChatApi
             services.AddTransient<IGroupRepository, GroupRepository>();
             services.AddTransient<IMessageRepository, MessageRepository>();
 
+            services.AddCors();
 
             services.AddControllers()
                 .AddJsonOptions(options =>
@@ -52,6 +55,9 @@ namespace ChatApi
                 .AddNewtonsoftJson(options =>
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
+
+            services.AddAuthentication("BasicAuthentication")
+                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "ChatApi", Version = "v1"}); });
             services.AddDbContext<Infrastructure.DB.DataContext>(options =>
@@ -76,6 +82,13 @@ namespace ChatApi
 
             app.UseRouting();
 
+            // global cors policy
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });

@@ -14,6 +14,11 @@ namespace ChatApi.Infrastructure.Models
 
         public string Email { get; set; }
 
+        public string Username { get; set; }
+
+        public string Password { get; set; }
+
+
         public DateTime CreatedAt { get; set; }
 
         public DateTime? ChangedAt { get; set; }

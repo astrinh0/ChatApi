@@ -6,6 +6,8 @@ CREATE TABLE "User" (
    us_email varchar(50) not null,
    us_active varchar(1) not null,
    us_createdat date not null,
+   us_username varchar(25) not null,
+   us_password varchar(25) not null,
    us_changedat date,
    constraint PK_us_id primary key (us_id)
   );

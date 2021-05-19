@@ -26,6 +26,12 @@ namespace ChatApi.Infrastructure.Mappers
             builder.Property(u => u.Email)
                 .HasColumnName("us_email");
 
+            builder.Property(u => u.Username)
+              .HasColumnName("us_username");
+
+            builder.Property(u => u.Password)
+              .HasColumnName("us_password");
+
             builder.Property(u => u.CreatedAt)
                 .HasColumnName("us_createdat");
 

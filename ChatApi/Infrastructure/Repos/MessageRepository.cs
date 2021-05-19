@@ -33,6 +33,7 @@ namespace ChatApi.Infrastructure.Repos
             aux.ChangedAt = null;
             aux.CreatedAt = DateTime.UtcNow;
             aux.GroupMessage = null;
+            aux.SenderId = senderId;
 
             _context.Messages.Add(aux);
             _context.SaveChanges();
@@ -40,7 +41,6 @@ namespace ChatApi.Infrastructure.Repos
             UserMessage userMessage = new UserMessage();
 
             userMessage.CreatedAt = DateTime.UtcNow;
-            userMessage.SenderId = senderId;
             userMessage.ReceiverId = receiverId;
             userMessage.MessageId = aux.Id;
 
@@ -69,7 +69,7 @@ namespace ChatApi.Infrastructure.Repos
 
         public IEnumerable<Message> GetSendedMessagesbyId(int userId)
         {
-            var listOfUserMessage = _context.UserMessages.Where(um => um.SenderId == userId).ToList();
+            var listOfUserMessage = _context.Messages.Where(um => um.SenderId == userId).ToList();
 
             var aux = new List<Message>();
 

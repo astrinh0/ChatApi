@@ -1,6 +1,7 @@
 ﻿
 
 using ChatApi.Infrastructure.DB;
+using ChatApi.Infrastructure.Helpers;
 using ChatApi.Infrastructure.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,7 @@ namespace ChatApi.Infrastructure.Repos
         public async Task <IEnumerable<User>> GetAll()
         {
             var users = await _context.Users.ToListAsync();
-            return users;
+            return users.WithoutPasswords();
         }
 
         public User AddUser(User user)
@@ -31,7 +32,7 @@ namespace ChatApi.Infrastructure.Repos
             user.CreatedAt = DateTime.UtcNow;
             _context.Users.Add(user);
             _context.SaveChanges();
-            return user;
+            return user.WithoutPassword();
         }
 
         public bool RemoveUser(int id)
@@ -60,6 +61,14 @@ namespace ChatApi.Infrastructure.Repos
 
             return false;
             
+        }
+
+        public User FindUser(string username, string password)
+        {
+
+            return _context.Users.FirstOrDefault(a => a.Username == username && a.Password == password
+            && a.Active == Models.Enums.EnumFlag.Y).WithoutPassword();
+
         }
     }
 }
