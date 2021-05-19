@@ -38,7 +38,7 @@ namespace ChatApi.Infrastructure.Mappers
                 .WithMany(b => b.Groups)
                 .HasForeignKey(p => p.OwnerId);
 
-            //REVIEW
+      
             builder
                 .HasMany(p => p.GroupMessages)
                 .WithOne(p => p.Group)

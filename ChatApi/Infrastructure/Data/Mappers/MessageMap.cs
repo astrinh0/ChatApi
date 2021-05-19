@@ -20,6 +20,9 @@ namespace ChatApi.Infrastructure.Mappers
             builder.Property(x => x.Id)
                 .HasColumnName("ms_id");
 
+            builder.Property(x => x.SenderId)
+                .HasColumnName("ms_sender_id");
+
             builder.Property(x => x.ActualMessage)
                 .HasColumnName("ms_message");
 
@@ -42,6 +45,11 @@ namespace ChatApi.Infrastructure.Mappers
                .HasMany(p => p.GroupMessage)
                .WithOne(p => p.Message)
                .HasForeignKey(p => p.MessageId);
+
+            builder
+                .HasOne(p => p.Sender)
+                .WithMany(b => b.SendMessages)
+                .HasForeignKey(p => p.SenderId);
 
 
         }

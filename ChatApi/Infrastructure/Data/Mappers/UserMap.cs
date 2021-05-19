@@ -37,10 +37,6 @@ namespace ChatApi.Infrastructure.Mappers
                 .HasConversion(u => u.ToString(), u => (EnumFlag)Enum.Parse(typeof(EnumFlag), u));
 
 
-            builder
-                .HasMany(p => p.SendMessages)
-                .WithOne(um => um.Sender)
-                .HasForeignKey(um => um.SenderId);
 
             builder
                .HasMany(p => p.ReceiveMessages)
