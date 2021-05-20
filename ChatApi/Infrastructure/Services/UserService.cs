@@ -44,6 +44,8 @@ namespace ChatApi.Infrastructure.Services
                 return null;
 
             // authentication successful so return user details without password
+
+
             return user;
         }
     }

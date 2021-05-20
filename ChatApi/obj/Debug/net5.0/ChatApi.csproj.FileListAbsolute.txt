@@ -158,3 +158,6 @@ C:\Users\Joel\OneDrive - Instituto Politécnico do Cávado e do Ave\Escola\2 Ano
 C:\Users\Joel\OneDrive - Instituto Politécnico do Cávado e do Ave\Escola\2 Ano\Semestre 2\CD\ChatAPI\ChatApi\obj\Debug\net5.0\ChatApi.genruntimeconfig.cache
 C:\VISUALSTUDIO\IPCA\TRABALHOCD\ChatApi\ChatApi\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\VISUALSTUDIO\IPCA\TRABALHOCD\ChatApi\ChatApi\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\VISUALSTUDIO\IPCA\TRABALHOCD\ChatApi\ChatApi\bin\Debug\net5.0\Isopoh.Cryptography.Argon2.dll
+C:\VISUALSTUDIO\IPCA\TRABALHOCD\ChatApi\ChatApi\bin\Debug\net5.0\Isopoh.Cryptography.Blake2b.dll
+C:\VISUALSTUDIO\IPCA\TRABALHOCD\ChatApi\ChatApi\bin\Debug\net5.0\Isopoh.Cryptography.SecureArray.dll

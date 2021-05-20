@@ -3,6 +3,7 @@
 using ChatApi.Infrastructure.DB;
 using ChatApi.Infrastructure.Helpers;
 using ChatApi.Infrastructure.Models;
+using Isopoh.Cryptography.Argon2;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -29,6 +30,11 @@ namespace ChatApi.Infrastructure.Repos
 
         public User AddUser(string name, string email, string username, string password)
         {
+
+
+
+
+
             var user = new User
             {
                 Active = Models.Enums.EnumFlag.Y,

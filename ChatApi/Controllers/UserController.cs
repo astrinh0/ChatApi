@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ChatApi.Infrastructure.Data.Models;
 using ChatApi.Infrastructure.Models;
 using ChatApi.Infrastructure.Services;
+using Isopoh.Cryptography.Argon2;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,6 +33,7 @@ namespace ChatApi.Controllers
             return Ok(users);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("/AddUser")]
         public ActionResult AddUser(string name, string email, string username, string password)
