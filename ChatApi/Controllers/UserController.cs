@@ -10,8 +10,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ChatApi.Controllers
 {
-    [Route("[controllers]")]
+    [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : Controller
     {
         private readonly IUserService _userService;

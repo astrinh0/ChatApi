@@ -69,7 +69,8 @@ namespace ChatApi.Infrastructure.Repos
 
         public IEnumerable<Message> GetSendedMessagesbyId(int userId)
         {
-           
+            var listOfSendedMessage = _context.Messages.Where(m => m.SenderId == userId);
+            return listOfSendedMessage;
 
         }
 
