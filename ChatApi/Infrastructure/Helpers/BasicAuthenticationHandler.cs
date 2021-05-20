@@ -49,7 +49,7 @@ namespace ChatApi.Infrastructure.Helpers
                 var username = credentials[0];
                 var password = credentials[1];
 
-                user = await _userService.Authenticate(username, passHashed);
+                user = await _userService.Authenticate(username, password);
             }
             catch
             {
