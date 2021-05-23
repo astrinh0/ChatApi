@@ -5,6 +5,7 @@ CREATE TABLE "User" (
    us_name varchar(50) not null,
    us_email varchar(50) not null,
    us_active varchar(1) not null,
+   us_role varchar(15),
    us_createdat date not null,
    us_username varchar(25) not null,
    us_password varchar(25) not null,
