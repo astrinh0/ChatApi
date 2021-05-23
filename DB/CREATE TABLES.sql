@@ -8,7 +8,7 @@ CREATE TABLE "User" (
    us_role varchar(15),
    us_createdat date not null,
    us_username varchar(25) not null,
-   us_password varchar(25) not null,
+   us_password varchar(100) not null,
    us_changedat date,
    constraint PK_us_id primary key (us_id)
   );

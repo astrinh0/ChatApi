@@ -56,3 +56,4 @@ C:\VSTUDIO\CD\ChatApi\obj\Debug\net5.0\ChatApi.dll
 C:\VSTUDIO\CD\ChatApi\obj\Debug\net5.0\ref\ChatApi.dll
 C:\VSTUDIO\CD\ChatApi\obj\Debug\net5.0\ChatApi.pdb
 C:\VSTUDIO\CD\ChatApi\obj\Debug\net5.0\ChatApi.genruntimeconfig.cache
+C:\VSTUDIO\CD\ChatApi\obj\Debug\net5.0\ChatApi.csprojAssemblyReference.cache

@@ -2,6 +2,7 @@
 using ChatApi.Infrastructure.Models;
 using ChatApi.Infrastructure.Repos;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ChatApi.Infrastructure.Services
@@ -23,7 +24,8 @@ namespace ChatApi.Infrastructure.Services
 
         public User AddUser(string name, string email, string username, string password)
         {
-            var user = _userRepository.AddUser(name, email, username, password);
+            var passHash = ExtensionMethods.Encrypt(password);
+            var user = _userRepository.AddUser(name, email, username, passHash);
             return user;
         }
 
@@ -38,7 +40,8 @@ namespace ChatApi.Infrastructure.Services
 
         public async Task<User> Authenticate(string username, string password)
         {
-            var user = await Task.Run(() => _userRepository.FindUser(username, password));
+            var passHash = ExtensionMethods.Encrypt(password);
+            var user = await Task.Run(() => _userRepository.FindUser(username, passHash));
             // return null if user not found
             if (user == null)
                 return null;

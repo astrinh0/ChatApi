@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "E39FCThd32yMT4sz6arDIq08FN7Hrw7BzNtuQLD5wb52P2hBuFr9KVQyYq1vUYCQW8Bd/JEnS+/lDXT90PUeWg==",
+  "dgSpecHash": "5/daCyIf/e5gZGHv36K8JluOVuPg2OIr5c42aLipQQCGIw2+hLJUNEskwdEZkc+kEhkx8QCXgv3GVq7Omku41g==",
   "success": true,
   "projectFilePath": "C:\\VSTUDIO\\CD\\ChatApi\\ChatApi.csproj",
   "expectedPackageFiles": [
@@ -68,7 +68,7 @@
     "C:\\Users\\astri\\.nuget\\packages\\system.runtime.interopservices\\4.3.0\\system.runtime.interopservices.4.3.0.nupkg.sha512",
     "C:\\Users\\astri\\.nuget\\packages\\system.runtime.interopservices.runtimeinformation\\4.3.0\\system.runtime.interopservices.runtimeinformation.4.3.0.nupkg.sha512",
     "C:\\Users\\astri\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
-    "C:\\Users\\astri\\.nuget\\packages\\system.security.cryptography.protecteddata\\4.7.0\\system.security.cryptography.protecteddata.4.7.0.nupkg.sha512",
+    "C:\\Users\\astri\\.nuget\\packages\\system.security.cryptography.protecteddata\\5.0.0\\system.security.cryptography.protecteddata.5.0.0.nupkg.sha512",
     "C:\\Users\\astri\\.nuget\\packages\\system.security.permissions\\4.7.0\\system.security.permissions.4.7.0.nupkg.sha512",
     "C:\\Users\\astri\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
     "C:\\Users\\astri\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",

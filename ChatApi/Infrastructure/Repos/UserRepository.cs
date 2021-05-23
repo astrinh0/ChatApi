@@ -34,7 +34,6 @@ namespace ChatApi.Infrastructure.Repos
 
 
 
-
             var user = new User
             {
                 Active = Models.Enums.EnumFlag.Y,
@@ -82,7 +81,7 @@ namespace ChatApi.Infrastructure.Repos
 
         public User FindUser(string username, string password)
         {
-
+            
             return _context.Users.FirstOrDefault(a => a.Username == username && a.Password == password
             && a.Active == Models.Enums.EnumFlag.Y).WithoutPassword();
 

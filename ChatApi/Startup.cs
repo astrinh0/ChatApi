@@ -88,10 +88,11 @@ namespace ChatApi
        
             });
             services.AddDbContext<Infrastructure.DB.DataContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+                //options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            options.UseNpgsql(Configuration.GetConnectionString("PCConnection")));
 
 
-            
+
 
         }
 
