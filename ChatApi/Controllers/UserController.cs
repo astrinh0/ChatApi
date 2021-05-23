@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using ChatApi.Infrastructure.Data.Models;
 using ChatApi.Infrastructure.Models;
 using ChatApi.Infrastructure.Services;
-using Isopoh.Cryptography.Argon2;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

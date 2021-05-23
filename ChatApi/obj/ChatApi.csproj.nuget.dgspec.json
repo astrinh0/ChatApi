@@ -1,27 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\VISUALSTUDIO\\IPCA\\TRABALHOCD\\ChatApi\\ChatApi\\ChatApi.csproj": {}
+    "C:\\VSTUDIO\\CD\\ChatApi\\ChatApi.csproj": {}
   },
   "projects": {
-    "C:\\VISUALSTUDIO\\IPCA\\TRABALHOCD\\ChatApi\\ChatApi\\ChatApi.csproj": {
+    "C:\\VSTUDIO\\CD\\ChatApi\\ChatApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\VISUALSTUDIO\\IPCA\\TRABALHOCD\\ChatApi\\ChatApi\\ChatApi.csproj",
+        "projectUniqueName": "C:\\VSTUDIO\\CD\\ChatApi\\ChatApi.csproj",
         "projectName": "ChatApi",
-        "projectPath": "C:\\VISUALSTUDIO\\IPCA\\TRABALHOCD\\ChatApi\\ChatApi\\ChatApi.csproj",
-        "packagesPath": "C:\\Users\\João Veloso\\.nuget\\packages\\",
-        "outputPath": "C:\\VISUALSTUDIO\\IPCA\\TRABALHOCD\\ChatApi\\ChatApi\\obj\\",
+        "projectPath": "C:\\VSTUDIO\\CD\\ChatApi\\ChatApi.csproj",
+        "packagesPath": "C:\\Users\\astri\\.nuget\\packages\\",
+        "outputPath": "C:\\VSTUDIO\\CD\\ChatApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\João Veloso\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\astri\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
