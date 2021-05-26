@@ -1,4 +1,6 @@
-﻿using ChatApi.Infrastructure.Mappers;
+﻿using ChatApi.Infrastructure.Data.Mappers;
+using ChatApi.Infrastructure.Data.Models;
+using ChatApi.Infrastructure.Mappers;
 using ChatApi.Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,7 +22,7 @@ namespace ChatApi.Infrastructure.DB
 
         public DbSet<UserMessage> UserMessages { get; set; }
 
-
+        public DbSet<GroupUser> GroupUsers { get; set; }
 
 
 
@@ -38,6 +40,7 @@ namespace ChatApi.Infrastructure.DB
             builder.ApplyConfiguration(new GroupMap());
             builder.ApplyConfiguration(new GroupMessageMap());
             builder.ApplyConfiguration(new UserMessageMap());
+            builder.ApplyConfiguration(new GroupUserMap());
         }
         
         

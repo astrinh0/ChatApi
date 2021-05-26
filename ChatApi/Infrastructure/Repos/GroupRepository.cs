@@ -46,5 +46,29 @@ namespace ChatApi.Infrastructure.Repos
             _context.SaveChanges();
             return true;
         }
+
+        public Group GetGroup(int groupId)
+        {
+            var group = _context.Groups.FirstOrDefault(g => g.Id == groupId);
+
+
+            if (group != null)
+            {
+                return group;
+            }
+
+            return null;
+        }
+
+        public bool CheckIfUserBelongsToGroup(int userId, int groupId)
+        {
+            var aux = _context.GroupUsers.FirstOrDefault(gu => gu.UserId == userId && gu.GroupId == groupId);
+            if (aux != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

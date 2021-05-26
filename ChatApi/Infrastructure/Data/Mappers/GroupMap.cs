@@ -13,30 +13,30 @@ namespace ChatApi.Infrastructure.Mappers
         {
             builder.ToTable("Group");
 
-            builder.HasKey(u => u.Id);
+            builder.HasKey(g => g.Id);
 
-            builder.Property(x => x.Id)
+            builder.Property(g => g.Id)
                 .HasColumnName("gr_id");
 
 
-            builder.Property(x => x.CreatedAt)
+            builder.Property(g => g.CreatedAt)
                 .HasColumnName("gr_createdat");
 
-            builder.Property(x => x.CreatedAt)
+            builder.Property(g => g.CreatedAt)
              .HasColumnName("gr_changedat");
 
-            builder.Property(x => x.Type)
+            builder.Property(g => g.Type)
                 .HasColumnName("gr_type")
-                .HasConversion(x => x.ToString(), x => (EnumTypeGroup)Enum.Parse(typeof(EnumTypeGroup), x));
+                .HasConversion(g => g.ToString(), x => (EnumTypeGroup)Enum.Parse(typeof(EnumTypeGroup), x));
 
-            builder.Property(x => x.Active)
+            builder.Property(g => g.Active)
                 .HasColumnName("gr_active")
-                .HasConversion(x => x.ToString(), x => (EnumFlag)Enum.Parse(typeof(EnumFlag), x));
+                .HasConversion(g => g.ToString(), x => (EnumFlag)Enum.Parse(typeof(EnumFlag), x));
 
             builder
-                .HasOne(p => p.Owner)
-                .WithMany(b => b.Groups)
-                .HasForeignKey(p => p.OwnerId);
+                .HasOne(g => g.Owner)
+                .WithMany(u => u.OwnerGroups)
+                .HasForeignKey(g => g.OwnerId);
 
       
             builder

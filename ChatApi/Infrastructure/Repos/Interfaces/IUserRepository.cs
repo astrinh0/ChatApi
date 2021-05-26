@@ -16,6 +16,8 @@ namespace ChatApi.Infrastructure.Repos
 
         bool UserExistsAndActive(int id);
 
+        User FindUserByUsername(string username);
+
         User FindUser(string username, string password);
     }
 }

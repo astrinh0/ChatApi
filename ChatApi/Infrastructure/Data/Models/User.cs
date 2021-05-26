@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using ChatApi.Infrastructure.Data.Models;
 using ChatApi.Infrastructure.Models.Enums;
 
 namespace ChatApi.Infrastructure.Models
@@ -24,13 +25,20 @@ namespace ChatApi.Infrastructure.Models
         public DateTime? ChangedAt { get; set; }
         public EnumFlag Active { get; set; }
 
-        public virtual ICollection<Group> Groups { get; set; }
+
+        public virtual ICollection<GroupUser> GroupUsers { get; set; }
+
+        public virtual ICollection<Group> OwnerGroups { get; set; }
+
+        //rever
 
         public virtual ICollection<Message> SendMessages { get; set; }
 
         public virtual ICollection<UserMessage> ReceiveMessages { get; set; }
 
         public virtual ICollection<GroupMessage> SendMessageGroup { get; set; }
+
+
 
 
 

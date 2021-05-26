@@ -12,5 +12,9 @@ namespace ChatApi.Infrastructure.Repos
         Group AddGroup(Group group);
         bool RemoveGroup(int id);
 
+        Group GetGroup(int groupId);
+
+        bool CheckIfUserBelongsToGroup(int userId, int groupId);
+
     }
 }

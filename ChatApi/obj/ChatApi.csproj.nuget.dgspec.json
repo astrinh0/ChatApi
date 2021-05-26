@@ -1,26 +1,28 @@
 {
   "format": 1,
   "restore": {
-    "C:\\VSTUDIO\\CD\\ChatApi\\ChatApi.csproj": {}
+    "C:\\VISUALSTUDIO\\IPCA\\TRABALHOCD\\ChatApi\\ChatApi\\ChatApi.csproj": {}
   },
   "projects": {
-    "C:\\VSTUDIO\\CD\\ChatApi\\ChatApi.csproj": {
+    "C:\\VISUALSTUDIO\\IPCA\\TRABALHOCD\\ChatApi\\ChatApi\\ChatApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\VSTUDIO\\CD\\ChatApi\\ChatApi.csproj",
+        "projectUniqueName": "C:\\VISUALSTUDIO\\IPCA\\TRABALHOCD\\ChatApi\\ChatApi\\ChatApi.csproj",
         "projectName": "ChatApi",
-        "projectPath": "C:\\VSTUDIO\\CD\\ChatApi\\ChatApi.csproj",
-        "packagesPath": "C:\\Users\\astri\\.nuget\\packages\\",
-        "outputPath": "C:\\VSTUDIO\\CD\\ChatApi\\obj\\",
+        "projectPath": "C:\\VISUALSTUDIO\\IPCA\\TRABALHOCD\\ChatApi\\ChatApi\\ChatApi.csproj",
+        "packagesPath": "C:\\Users\\João Veloso\\.nuget\\packages\\",
+        "outputPath": "C:\\VISUALSTUDIO\\IPCA\\TRABALHOCD\\ChatApi\\ChatApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\astri\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\João Veloso\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -102,7 +104,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }

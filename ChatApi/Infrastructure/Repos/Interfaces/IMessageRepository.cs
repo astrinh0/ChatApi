@@ -12,6 +12,8 @@ namespace ChatApi.Infrastructure.Repos
 
         Message SendMessageToUser(int senderId, int receiverId, string message);
 
+        Message SendMessageToGroup(int senderId, int groupId, string message);
+
         bool RemoveMessage(int id);
 
         IEnumerable<Message> GetSendedMessagesbyId(int userId);

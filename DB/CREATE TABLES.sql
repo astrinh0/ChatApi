@@ -54,7 +54,13 @@ CREATE TABLE "User" (
  constraint FK_gm_gr_id foreign key (gm_gr_id) references "Group" (gr_id));
 
 
-
+create table "Group_User"(
+gu_gr_id int not null,
+gu_us_id int not null,
+gu_createdat date not null,
+constraint PK_gu_id primary key(gu_gr_id, gu_us_id),
+constraint FK_gu_us_id foreign key (gu_us_id) references "User" (us_id),
+constraint FK_gu_gr_id foreign key (gu_gr_id) references "Group" (gr_id));
 
 
   

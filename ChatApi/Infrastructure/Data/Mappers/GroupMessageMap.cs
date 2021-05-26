@@ -21,14 +21,12 @@ namespace ChatApi.Infrastructure.Mappers
             builder.Property(u => u.GroupId)
                 .HasColumnName("gm_gr_id");
 
-            builder.Property(u => u.SenderId)
-                .HasColumnName("gm_sender_id");
 
             builder.Property(u => u.CreatedAt)
                 .HasColumnName("um_createdat");
 
             builder
-                .HasKey(gm => new { gm.GroupId, gm.MessageId, gm.SenderId });
+                .HasKey(gm => new { gm.GroupId, gm.MessageId});
 
             builder
                  .HasOne(g => g.Group)
@@ -39,10 +37,7 @@ namespace ChatApi.Infrastructure.Mappers
                  .HasOne(m => m.Message)
                  .WithMany(gm => gm.GroupMessage)
                  .HasForeignKey(gm => gm.MessageId);
-            builder
-                .HasOne(u => u.Sender)
-                .WithMany(gm => gm.SendMessageGroup)
-                .HasForeignKey(gm => gm.SenderId);
+
 
 
         }

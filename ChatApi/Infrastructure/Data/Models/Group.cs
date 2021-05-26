@@ -1,4 +1,5 @@
-﻿using ChatApi.Infrastructure.Models.Enums;
+﻿using ChatApi.Infrastructure.Data.Models;
+using ChatApi.Infrastructure.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace ChatApi.Infrastructure.Models
         public virtual User Owner { get; set; }
 
         public virtual ICollection<GroupMessage> GroupMessages { get; set; }
+
+        public virtual ICollection<GroupUser> GroupUsers { get; set; }
 
 
     }

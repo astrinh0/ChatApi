@@ -1,16 +1,17 @@
-﻿using System;
+﻿using ChatApi.Infrastructure.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ChatApi.Infrastructure.Models
+namespace ChatApi.Infrastructure.Data.Models
 {
-    public class GroupMessage
+    public class GroupUser
     {
         public int GroupId { get; set; }
         public Group Group { get; set; }
-        public int MessageId { get; set; }
-        public Message Message { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
         public DateTime CreatedAt { get; set; }
     }
 }

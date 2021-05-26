@@ -79,6 +79,12 @@ namespace ChatApi.Infrastructure.Repos
             
         }
 
+        public User FindUserByUsername(string username)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Username == username);
+            return user;
+        }
+
         public User FindUser(string username, string password)
         {
             

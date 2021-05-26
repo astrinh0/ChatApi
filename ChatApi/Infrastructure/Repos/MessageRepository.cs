@@ -28,7 +28,7 @@ namespace ChatApi.Infrastructure.Repos
         {
             Message aux = new Message();
 
-            aux.Active = Models.Enums.EnumFlag.Y;
+            aux.Active = EnumFlag.Y;
             aux.ActualMessage = message;
             aux.ChangedAt = null;
             aux.CreatedAt = DateTime.UtcNow;
@@ -85,6 +85,33 @@ namespace ChatApi.Infrastructure.Repos
                 var msg = _context.Messages.FirstOrDefault(c => c.Id == message.MessageId);
                 aux.Add(msg);
             }
+
+            return aux;
+
+        }
+
+        public Message SendMessageToGroup(int senderId, int groupId, string message)
+        {
+            Message aux = new Message();
+
+            aux.Active = EnumFlag.Y;
+            aux.ActualMessage = message;
+            aux.ChangedAt = null;
+            aux.CreatedAt = DateTime.UtcNow;
+            aux.SenderId = senderId;
+
+            _context.Messages.Add(aux);
+            _context.SaveChanges();
+
+            GroupMessage groupMessage = new GroupMessage();
+
+            groupMessage.CreatedAt = DateTime.UtcNow;
+            groupMessage.GroupId = groupId;
+            groupMessage.MessageId = aux.Id;
+
+            _context.GroupMessages.Add(groupMessage);
+            _context.SaveChanges();
+
 
             return aux;
 

@@ -46,11 +46,27 @@ namespace ChatApi.Controllers
 
         [HttpPost]
         [Route("/SendMessageToUser")]
-        public ActionResult SendMessageToUser(int senderId, int receiverId, string message)
+        public ActionResult SendMessageToUser(string receiverName, string message)
         {
             try
             {
-                _messageService.SendMessageToUser(senderId, receiverId, message);
+                _messageService.SendMessageToUser(User.Identity.Name, receiverName, message);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+
+                return Json(ex);
+            }
+        }
+
+        [HttpPost]
+        [Route("/SendMessageToGroup")]
+        public ActionResult SendMessageToGroup(int groupId, string message)
+        {
+            try
+            {
+                _messageService.SendMessageToGroup(User.Identity.Name, groupId, message);
                 return Ok();
             }
             catch (Exception ex)

@@ -43,5 +43,13 @@ namespace ChatApi.Infrastructure.Services
             }
             return false;
         }
+
+        public Group CheckUserBelongsToGroup(string username, int groupId)
+        {
+            var group = _groupRepository.GetGroup(groupId);
+            var user = _userRepository.FindUserByUsername(username);
+
+
+        }
     }
 }

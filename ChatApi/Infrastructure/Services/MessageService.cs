@@ -9,11 +9,13 @@ namespace ChatApi.Infrastructure.Services
     {
         private readonly IMessageRepository _messageRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IGroupRepository _groupRepository;
 
-        public MessageService(IMessageRepository messageRepository, IUserRepository userRepository)
+        public MessageService(IMessageRepository messageRepository, IUserRepository userRepository, IGroupRepository groupRepository)
         {
             _messageRepository = messageRepository;
             _userRepository = userRepository;
+            _groupRepository = groupRepository;
         }
 
         public Task<IEnumerable<Message>> GetMessages()
@@ -22,17 +24,39 @@ namespace ChatApi.Infrastructure.Services
             return users;
         }
 
-        public Message SendMessageToUser(int senderId, int receiverId, string message)
+        public Message SendMessageToUser(string sender, string receiver, string message)
         {
-            if (_userRepository.UserExistsAndActive(senderId) && _userRepository.UserExistsAndActive(receiverId) == true)
+            var senderUser = _userRepository.FindUserByUsername(sender);
+            var receiverUser = _userRepository.FindUserByUsername(receiver);
+
+            if (senderUser != null && receiverUser != null)
             {
-                var aux = _messageRepository.SendMessageToUser(senderId, receiverId, message);
+                var aux = _messageRepository.SendMessageToUser(senderUser.Id, receiverUser.Id, message);
                 return aux;
             }
             else
             {
                 return null;
             }
+
+        }
+
+        public Message SendMessageToGroup(string sender, int groupId, string message)
+        {
+            var senderUser = _userRepository.FindUserByUsername(sender);
+            var group = _groupRepository.GetGroup(groupId);
+
+            if (senderUser != null && group != null)
+            {
+                if (_groupRepository.CheckIfUserBelongsToGroup(senderUser.Id, group.Id) == true)
+                {
+                    var aux =_messageRepository.SendMessageToGroup(senderUser.Id, group.Id, message);
+                    return aux;
+                }
+                
+            }
+                return null;
+            
 
         }
 

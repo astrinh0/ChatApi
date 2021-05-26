@@ -10,12 +10,14 @@ namespace ChatApi.Infrastructure.Services
     {
         Task<IEnumerable<Message>> GetMessages();
 
-        Message SendMessageToUser(int senderId, int receiverId, string message);
+        Message SendMessageToUser(string sender, string receiver, string message);
 
         bool RemoveMessage(int id);
 
         IEnumerable<Message> GetSendedMessagesByUserId(int userId);
 
         IEnumerable<Message> GetReceivedMessagesByUserId(int userId);
+
+        Message SendMessageToGroup(string sender, int groupId, string message);
     }
 }
