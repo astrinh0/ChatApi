@@ -22,27 +22,6 @@ namespace ChatApi.Controllers
         }
 
 
-        [HttpGet]
-        [Route("/GetAllMessages")]
-        public async Task<ActionResult<Message>> GetAllMessages()
-        {
-            try
-            {
-                var messages = await _messageService.GetMessages();
-
-                if (messages == null)
-                {
-                    return NoContent();
-                }
-
-                return Ok(messages);
-            }
-            catch (Exception ex)
-            {
-
-                return Json(ex);
-            }
-        }
 
         [HttpPost]
         [Route("/SendMessageToUser")]
@@ -77,12 +56,12 @@ namespace ChatApi.Controllers
         }
 
         [HttpGet]
-        [Route("/AllMessagesSendByUserId")]
-        public ActionResult MessagesSendByUserId(int userId)
+        [Route("/SentMessages")]
+        public ActionResult MessagesSendByUser()
         {
             try
             {
-               var messages = _messageService.GetSendedMessagesByUserId(userId);
+               var messages = _messageService.GetSentMessages(User.Identity.Name);
                 
                 if (messages == null)
                 {
@@ -99,12 +78,12 @@ namespace ChatApi.Controllers
         }
 
         [HttpGet]
-        [Route("/AllMessagesReceiverByUserId")]
-        public ActionResult MessagesReceivedByUserId(int userId)
+        [Route("/ReceivedMessages")]
+        public ActionResult MessagesReceivedByUserId()
         {
             try
             {
-                var messages = _messageService.GetReceivedMessagesByUserId(userId);
+                var messages = _messageService.GetReceivedMessages(User.Identity.Name);
 
                 if (messages == null)
                 {
@@ -120,6 +99,49 @@ namespace ChatApi.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("/UnreadedMessages")]
+        public ActionResult MessagesReceivedUnreadedByUserId()
+        {
+            try
+            {
+                var messages = _messageService.GetReceivedMessagesUnread(User.Identity.Name);
+
+                if (messages == null)
+                {
+                    return NoContent();
+                }
+
+                return Ok(messages);
+            }
+            catch (Exception ex)
+            {
+
+                return Json(ex);
+            }
+        }
+
+        [HttpGet]
+        [Route("/NumberOfMessages")]
+        public ActionResult GetNumberOfMessages()
+        {
+            try
+            {
+                var messages = _messageService.GetNumberOfMessages(User.Identity.Name);
+
+                if (messages == null)
+                {
+                    return NoContent();
+                }
+
+                return Ok(messages);
+            }
+            catch (Exception ex)
+            {
+
+                return Json(ex);
+            }
+        }
 
         [HttpPut]
         [Route("/DeleteMessage")]

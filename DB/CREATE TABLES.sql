@@ -18,6 +18,7 @@ CREATE TABLE "User" (
    ms_message text not null,
    ms_sender_id int NOT NULL,
    ms_createdat date not null,
+   ms_readed varchar(1) not null,
    ms_changedat date,
    ms_active varchar(1) not null,
   constraint PK_ms_id primary key (ms_id),

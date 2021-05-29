@@ -28,8 +28,18 @@ namespace ChatApi.Controllers
         [Route("/GetAllUsers")]
         public async Task<ActionResult<User>> GetUsers()
         {
-            var users = await _userService.GetUsers();
-            return Ok(users);
+            try
+            {
+                var users = await _userService.GetUsers();
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+
+                return Json(ex);
+            }
+
+            
         }
 
         [AllowAnonymous]
@@ -37,17 +47,29 @@ namespace ChatApi.Controllers
         [Route("/AddUser")]
         public ActionResult AddUser(string name, string email, string username, string password)
         {
-            
-            _userService.AddUser(name, email, username, password);
-            return Ok();
+            try
+            {
+                _userService.AddUser(name, email, username, password);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+
+                return Json(ex);
+            }
+
         }
 
         [HttpPut]
         [Route("/RemoveUser")]
-        public ActionResult RemoveUser(int id)
+        public ActionResult RemoveUser(string? username)
         {
-            _userService.RemoveUser(id);
-            return Ok();
+            try
+            {
+                _userService.RemoveUser(User.Identity.Name, username);
+                return Ok();
+            }
+            catch (Exception ex) { return Json(ex); }
         }
 
 
@@ -61,6 +83,20 @@ namespace ChatApi.Controllers
                 return BadRequest(new { message = "Username or password is incorrect" });
 
             return Ok(user);
+        }
+
+
+        [HttpPut]
+        [Route("/ChangePassword")]
+        public ActionResult ChangePassword(string password)
+        {
+            try
+            {
+                _userService.ChangePassword(User.Identity.Name, password);
+                return Ok();
+            }
+            catch (Exception ex) { return Json(ex); }
+           
         }
     }
 

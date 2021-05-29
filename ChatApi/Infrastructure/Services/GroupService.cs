@@ -1,4 +1,5 @@
 ﻿using ChatApi.Infrastructure.Models;
+using ChatApi.Infrastructure.Models.Enums;
 using ChatApi.Infrastructure.Repos;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -24,11 +25,13 @@ namespace ChatApi.Infrastructure.Services
             return groups;
         }
 
-        public Group AddGroup(Group group)
+        public Group AddGroup(EnumTypeGroup type, string username)
         {
-            if (_userRepository.UserExistsAndActive(group.OwnerId) != false)
+            var owner = _userRepository.FindUserByUsername(username);
+
+            if (owner != null)
             {
-                _groupRepository.AddGroup(group);
+                var group = _groupRepository.AddGroup(type, owner.Id);
                 return group;
             }
             
@@ -44,12 +47,6 @@ namespace ChatApi.Infrastructure.Services
             return false;
         }
 
-        public Group CheckUserBelongsToGroup(string username, int groupId)
-        {
-            var group = _groupRepository.GetGroup(groupId);
-            var user = _userRepository.FindUserByUsername(username);
-
-
-        }
+       
     }
 }

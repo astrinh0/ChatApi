@@ -29,13 +29,36 @@ namespace ChatApi.Infrastructure.Services
             return user;
         }
 
-        public bool RemoveUser(int id)
+        public bool RemoveUser(string actualUser, string userToRemove)
         {
-            if (_userRepository.RemoveUser(id) == true)
+            if (actualUser == userToRemove)
             {
-                return true;
+                var user = _userRepository.FindUserByUsername(actualUser);
+                if (user != null)
+                {
+                    var aux = _userRepository.RemoveUser(user.Id);
+                    return aux;
+                }
+
+                return false;
             }
-            return false;
+            else if (actualUser == "admin")
+            {
+                var user = _userRepository.FindUserByUsername(userToRemove);
+                if (user != null)
+                {
+                    var aux = _userRepository.RemoveUser(user.Id);
+                    return aux;
+                }
+
+                return false;
+            }
+            else
+            {
+                return false;
+            }
+
+           
         }
 
         public async Task<User> Authenticate(string username, string password)
@@ -50,6 +73,21 @@ namespace ChatApi.Infrastructure.Services
 
 
             return user;
+        }
+
+        public bool ChangePassword(string username, string password)
+        {
+            var user = _userRepository.FindUserByUsername(username);
+            var pashHash = ExtensionMethods.Encrypt(password);
+
+            if (user != null)
+            {
+                var aux = _userRepository.ChangePassword(user.Id, pashHash);
+                return aux;
+            }
+
+           
+            return false;
         }
     }
 }

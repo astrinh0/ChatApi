@@ -8,16 +8,21 @@ namespace ChatApi.Infrastructure.Services
 {
     public interface IMessageService
     {
-        Task<IEnumerable<Message>> GetMessages();
+
 
         Message SendMessageToUser(string sender, string receiver, string message);
 
         bool RemoveMessage(int id);
 
-        IEnumerable<Message> GetSendedMessagesByUserId(int userId);
+        IEnumerable<Message> GetSentMessages(string username);
 
-        IEnumerable<Message> GetReceivedMessagesByUserId(int userId);
+        IEnumerable<Message> GetReceivedMessages(string username);
+
+        IEnumerable<Message> GetReceivedMessagesUnread(string username);
 
         Message SendMessageToGroup(string sender, int groupId, string message);
+
+        int? GetNumberOfMessages(string username);
+
     }
 }

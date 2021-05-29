@@ -36,6 +36,10 @@ namespace ChatApi.Infrastructure.Mappers
                 .HasColumnName("ms_active")
                 .HasConversion(x => x.ToString(), x => (EnumFlag)Enum.Parse(typeof(EnumFlag), x));
 
+            builder.Property(x => x.Readed)
+               .HasColumnName("ms_readed")
+               .HasConversion(x => x.ToString(), x => (EnumFlag)Enum.Parse(typeof(EnumFlag), x));
+
             builder
                .HasMany(p => p.UserMessages)
                .WithOne(p => p.Message)

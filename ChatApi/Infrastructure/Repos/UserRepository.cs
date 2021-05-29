@@ -3,6 +3,7 @@
 using ChatApi.Infrastructure.DB;
 using ChatApi.Infrastructure.Helpers;
 using ChatApi.Infrastructure.Models;
+using ChatApi.Infrastructure.Models.Enums;
 using Isopoh.Cryptography.Argon2;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -53,14 +54,14 @@ namespace ChatApi.Infrastructure.Repos
 
         public bool RemoveUser(int id)
         {
-            var user = _context.Users.Find(id);
+            var user = _context.Users.FirstOrDefault(u => u.Id == id);
 
             if (user == null)
             {
                 return false;
             }
 
-            user.Active = Models.Enums.EnumFlag.N;
+            user.Active = EnumFlag.N;
             _context.Users.Update(user);
             _context.SaveChanges();
             return true;
@@ -70,7 +71,7 @@ namespace ChatApi.Infrastructure.Repos
         {
 
             if (_context.Users.FirstOrDefault(a => a.Id == id && 
-                        a.Active == Models.Enums.EnumFlag.Y) != null)
+                        a.Active == EnumFlag.Y) != null)
             {
                 return true;
             }
@@ -81,7 +82,7 @@ namespace ChatApi.Infrastructure.Repos
 
         public User FindUserByUsername(string username)
         {
-            var user = _context.Users.FirstOrDefault(u => u.Username == username);
+            var user = _context.Users.FirstOrDefault(u => u.Username == username && u.Active == EnumFlag.Y);
             return user;
         }
 
@@ -89,8 +90,21 @@ namespace ChatApi.Infrastructure.Repos
         {
             
             return _context.Users.FirstOrDefault(a => a.Username == username && a.Password == password
-            && a.Active == Models.Enums.EnumFlag.Y).WithoutPassword();
+            && a.Active == EnumFlag.Y).WithoutPassword();
 
+        }
+
+        public bool ChangePassword(int userId, string password)
+        {
+            var user = _context.Users.FirstOrDefault(c => c.Id == userId);
+
+
+            user.Password = password;
+
+            _context.Users.Update(user);
+            _context.SaveChanges();
+
+            return true;
         }
     }
 }

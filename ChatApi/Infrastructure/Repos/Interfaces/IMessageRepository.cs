@@ -8,7 +8,6 @@ namespace ChatApi.Infrastructure.Repos
 {
     public interface IMessageRepository
     {
-        Task<IEnumerable<Message>> GetAll();
 
         Message SendMessageToUser(int senderId, int receiverId, string message);
 
@@ -20,5 +19,8 @@ namespace ChatApi.Infrastructure.Repos
 
         IEnumerable<Message> GetReceivedMessagesbyId(int userId);
 
+        IEnumerable<Message> GetReceivedMessagesUnreadedbyId(int userId);
+
+  
     }
 }

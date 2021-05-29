@@ -18,11 +18,7 @@ namespace ChatApi.Infrastructure.Repos
             _context = context;
         }
 
-        public async Task<IEnumerable<Message>> GetAll()
-        {
-            var users = await _context.Messages.ToListAsync();
-            return users;
-        }
+      
 
         public Message SendMessageToUser(int senderId, int receiverId, string message)
         {
@@ -34,6 +30,7 @@ namespace ChatApi.Infrastructure.Repos
             aux.CreatedAt = DateTime.UtcNow;
             aux.GroupMessage = null;
             aux.SenderId = senderId;
+            aux.Readed = EnumFlag.N;
 
             _context.Messages.Add(aux);
             _context.SaveChanges();
@@ -61,7 +58,7 @@ namespace ChatApi.Infrastructure.Repos
                 return false;
             }
 
-            message.Active = Models.Enums.EnumFlag.N;
+            message.Active = EnumFlag.N;
             _context.Messages.Update(message);
             _context.SaveChanges();
             return true;
@@ -70,6 +67,7 @@ namespace ChatApi.Infrastructure.Repos
         public IEnumerable<Message> GetSendedMessagesbyId(int userId)
         {
             var listOfSendedMessage = _context.Messages.Where(m => m.SenderId == userId);
+            
             return listOfSendedMessage;
 
         }
@@ -78,15 +76,80 @@ namespace ChatApi.Infrastructure.Repos
         {
             var listOfUserMessage = _context.UserMessages.Where(um => um.ReceiverId == userId).ToList();
 
-            var aux = new List<Message>();
+            var messages = new List<Message>();
 
             foreach (var message in listOfUserMessage)
             {
-                var msg = _context.Messages.FirstOrDefault(c => c.Id == message.MessageId);
-                aux.Add(msg);
+                var msg = _context.Messages.FirstOrDefault(c => c.Id == message.MessageId && c.Active == EnumFlag.Y && c.Readed == EnumFlag.Y);
+                messages.Add(msg);
             }
 
-            return aux;
+
+            var listOfGroupUsers = _context.GroupUsers.Where(gu => gu.UserId == userId).ToList();
+
+            var groupMessages = new List<GroupMessage>();
+
+            if (listOfGroupUsers != null)
+            {
+                foreach (var groupUser in listOfGroupUsers)
+                {
+                    var groupMsg = _context.GroupMessages.FirstOrDefault(gm => gm.GroupId == groupUser.GroupId);
+                    groupMessages.Add(groupMsg);
+
+                }
+
+                if (groupMessages != null)
+                {
+                    foreach (var groupMessage in groupMessages)
+                    {
+                        var message = _context.Messages.FirstOrDefault(m => m.Id == groupMessage.MessageId && m.Active == EnumFlag.Y && m.Readed == EnumFlag.Y);
+                        messages.Add(message);
+                    }
+                }
+            }
+           
+            return messages;
+
+        }
+
+        public IEnumerable<Message> GetReceivedMessagesUnreadedbyId(int userId)
+        {
+            var listOfUserMessage = _context.UserMessages.Where(um => um.ReceiverId == userId).ToList();
+
+            var messages = new List<Message>();
+
+            foreach (var message in listOfUserMessage)
+            {
+                var msg = _context.Messages.FirstOrDefault(c => c.Id == message.MessageId && c.Readed == EnumFlag.N && c.Active == EnumFlag.Y);
+                msg.Readed = EnumFlag.Y;
+                messages.Add(msg);
+            }
+
+            var listOfGroupUsers = _context.GroupUsers.Where(gu => gu.UserId == userId).ToList();
+
+            var groupMessages = new List<GroupMessage>();
+
+            if (listOfGroupUsers != null)
+            {
+                foreach (var groupUser in listOfGroupUsers)
+                {
+                    var groupMsg = _context.GroupMessages.FirstOrDefault(gm => gm.GroupId == groupUser.GroupId);
+                    groupMessages.Add(groupMsg);
+
+                }
+
+                if (groupMessages != null)
+                {
+                    foreach (var groupMessage in groupMessages)
+                    {
+                        var message = _context.Messages.FirstOrDefault(m => m.Id == groupMessage.MessageId && m.Readed == EnumFlag.N && m.Active == EnumFlag.Y);
+                        message.Readed = EnumFlag.Y;
+                        messages.Add(message);
+                    }
+                }
+            }
+
+            return messages;
 
         }
 
@@ -99,6 +162,7 @@ namespace ChatApi.Infrastructure.Repos
             aux.ChangedAt = null;
             aux.CreatedAt = DateTime.UtcNow;
             aux.SenderId = senderId;
+            aux.Readed = EnumFlag.N;
 
             _context.Messages.Add(aux);
             _context.SaveChanges();
@@ -116,6 +180,8 @@ namespace ChatApi.Infrastructure.Repos
             return aux;
 
         }
+
+        
     }
 }
 

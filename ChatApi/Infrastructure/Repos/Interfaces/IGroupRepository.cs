@@ -1,4 +1,5 @@
 ﻿using ChatApi.Infrastructure.Models;
+using ChatApi.Infrastructure.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace ChatApi.Infrastructure.Repos
     public interface IGroupRepository
     {
         Task<IEnumerable<Group>> GetAll();
-        Group AddGroup(Group group);
+        Group AddGroup(EnumTypeGroup type, int ownerId);
         bool RemoveGroup(int id);
 
         Group GetGroup(int groupId);

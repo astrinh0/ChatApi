@@ -12,7 +12,9 @@ namespace ChatApi.Infrastructure.Services
         Task<IEnumerable<User>> GetUsers();
         User AddUser(string name, string email, string username, string password);
 
-        bool RemoveUser(int id);
+        bool RemoveUser(string actualUser, string userToRemove);
         Task<User> Authenticate(string username, string password);
+
+        bool ChangePassword(string username, string password);
     }
 }

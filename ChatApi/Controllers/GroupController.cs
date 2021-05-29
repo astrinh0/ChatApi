@@ -1,6 +1,8 @@
 ﻿using ChatApi.Infrastructure.Models;
+using ChatApi.Infrastructure.Models.Enums;
 using ChatApi.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace ChatApi.Controllers
@@ -24,24 +26,51 @@ namespace ChatApi.Controllers
         [Route("/GetAllGroups")]
         public async Task<ActionResult<Group>> GetGroups()
         {
-            var groups = await _groupService.GetGroups();
-            return Ok(groups);
+            try
+            {
+                var groups = await _groupService.GetGroups();
+                return Ok(groups);
+            }
+            catch (Exception ex)
+            {
+
+                return Json(ex);
+            }
+            
         }
 
         [HttpPost]
         [Route("/AddGroup")]
-        public ActionResult AddGroup(Group group)
+        public ActionResult AddGroup(EnumTypeGroup type)
         {
-            _groupService.AddGroup(group);
-            return Ok();
+            try
+            {
+                _groupService.AddGroup(type, User.Identity.Name);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+
+                return Json(ex);
+            }
+          
         }
 
         [HttpPut]
         [Route("/RemoveGroup")]
         public ActionResult RemoveGroup(int id)
         {
-            _groupService.RemoveGroup(id);
-            return Ok();
+            try
+            {
+                _groupService.RemoveGroup(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+
+                return Json(ex);
+            }
+
         }
     }
 }

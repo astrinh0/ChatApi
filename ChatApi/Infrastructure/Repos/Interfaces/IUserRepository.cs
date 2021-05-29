@@ -19,5 +19,7 @@ namespace ChatApi.Infrastructure.Repos
         User FindUserByUsername(string username);
 
         User FindUser(string username, string password);
+
+        bool ChangePassword(int userId, string password);
     }
 }

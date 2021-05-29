@@ -1,6 +1,7 @@
 ﻿using ChatApi.Infrastructure.Models;
 using ChatApi.Infrastructure.Repos;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ChatApi.Infrastructure.Services
@@ -18,11 +19,6 @@ namespace ChatApi.Infrastructure.Services
             _groupRepository = groupRepository;
         }
 
-        public Task<IEnumerable<Message>> GetMessages()
-        {
-            var users = _messageRepository.GetAll();
-            return users;
-        }
 
         public Message SendMessageToUser(string sender, string receiver, string message)
         {
@@ -69,11 +65,13 @@ namespace ChatApi.Infrastructure.Services
             return false;
         }
 
-        public IEnumerable<Message> GetSendedMessagesByUserId(int userId)
+        public IEnumerable<Message> GetSentMessages(string username)
         {
-            if (_userRepository.UserExistsAndActive(userId))
+            var user = _userRepository.FindUserByUsername(username);
+
+            if (user != null)
             {
-                var aux = _messageRepository.GetSendedMessagesbyId(userId);
+                var aux = _messageRepository.GetSendedMessagesbyId(user.Id);
                 return aux;
             }
             else
@@ -82,12 +80,52 @@ namespace ChatApi.Infrastructure.Services
             }
         }
 
-        public IEnumerable<Message> GetReceivedMessagesByUserId(int userId)
+        public IEnumerable<Message> GetReceivedMessages(string username)
         {
-            if (_userRepository.UserExistsAndActive(userId))
+            var user = _userRepository.FindUserByUsername(username);
+
+            if (user != null)
             {
-                var aux = _messageRepository.GetReceivedMessagesbyId(userId);
+                var aux = _messageRepository.GetReceivedMessagesbyId(user.Id);
                 return aux;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public IEnumerable<Message> GetReceivedMessagesUnread(string username)
+        {
+            var user = _userRepository.FindUserByUsername(username);
+
+            if (user != null)
+            {
+                var aux = _messageRepository.GetReceivedMessagesUnreadedbyId(user.Id);
+                return aux;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public int? GetNumberOfMessages(string username)
+        {
+            var user = _userRepository.FindUserByUsername(username);
+
+            if (user != null)
+            {
+                var aux = _messageRepository.GetReceivedMessagesbyId(user.Id);
+
+                if (aux != null)
+                {
+                    return aux.Count();
+                }
+                else
+                {
+                    return null;
+                }
             }
             else
             {

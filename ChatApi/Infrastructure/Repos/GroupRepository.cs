@@ -1,5 +1,6 @@
 ﻿using ChatApi.Infrastructure.DB;
 using ChatApi.Infrastructure.Models;
+using ChatApi.Infrastructure.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -23,12 +24,20 @@ namespace ChatApi.Infrastructure.Repos
             return group;
         }
 
-        public Group AddGroup(Group group)
+        public Group AddGroup(EnumTypeGroup type, int ownerId)
         {
+            var group = new Group
+            {
+                Type = type,
+                OwnerId = ownerId,
+                CreatedAt = DateTime.UtcNow,
+                Active = EnumFlag.Y
+            };
+            
 
-            group.CreatedAt = DateTime.UtcNow;
             _context.Groups.Add(group);
             _context.SaveChanges();
+
             return group;
         }
 
