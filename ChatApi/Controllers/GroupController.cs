@@ -1,6 +1,7 @@
 ﻿using ChatApi.Infrastructure.Models;
 using ChatApi.Infrastructure.Models.Enums;
 using ChatApi.Infrastructure.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace ChatApi.Controllers
     
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class GroupController : Controller
     {
 

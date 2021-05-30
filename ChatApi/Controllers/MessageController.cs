@@ -1,5 +1,6 @@
 ﻿using ChatApi.Infrastructure.Models;
 using ChatApi.Infrastructure.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,6 +12,7 @@ namespace ChatApi.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class MessageController : Controller
     {
         private readonly IMessageService _messageService;
