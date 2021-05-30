@@ -10,6 +10,8 @@ namespace ChatApi.Infrastructure.Models
     public class Group
     {
         public int Id { get; set; }
+
+        public string Name { get; set; }
         public EnumTypeGroup Type { get; set; }
         public int OwnerId { get; set; }
         public DateTime CreatedAt { get; set; }

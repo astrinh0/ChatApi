@@ -41,11 +41,11 @@ namespace ChatApi.Controllers
 
         [HttpPost]
         [Route("/AddGroup")]
-        public ActionResult AddGroup(EnumTypeGroup type)
+        public ActionResult AddGroup(EnumTypeGroup type, string name)
         {
             try
             {
-                _groupService.AddGroup(type, User.Identity.Name);
+                _groupService.AddGroup(type, User.Identity.Name, name);
                 return Ok();
             }
             catch (Exception ex)
@@ -54,6 +54,41 @@ namespace ChatApi.Controllers
                 return Json(ex);
             }
           
+        }
+
+        [HttpPost]
+        [Route("/AddUserToGroup")]
+        public ActionResult AddUserToGroup(string name, string userToAdd)
+        {
+            try
+            {
+                _groupService.AddUserToGroup(name, User.Identity.Name, userToAdd);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+
+                return Json(ex);
+            }
+
+        }
+
+
+        [HttpPost]
+        [Route("/RemoveUserFromGroup")]
+        public ActionResult RemoveUserFromGroup(string name, string userToAdd)
+        {
+            try
+            {
+                _groupService.RemoveUserToGroup(name, User.Identity.Name, userToAdd);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+
+                return Json(ex);
+            }
+
         }
 
         [HttpPut]

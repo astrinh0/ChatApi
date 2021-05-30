@@ -41,11 +41,11 @@ namespace ChatApi.Controllers
 
         [HttpPost]
         [Route("/SendMessageToGroup")]
-        public ActionResult SendMessageToGroup(int groupId, string message)
+        public ActionResult SendMessageToGroup(string groupName, string message)
         {
             try
             {
-                _messageService.SendMessageToGroup(User.Identity.Name, groupId, message);
+                _messageService.SendMessageToGroup(User.Identity.Name, groupName, message);
                 return Ok();
             }
             catch (Exception ex)
@@ -57,7 +57,7 @@ namespace ChatApi.Controllers
 
         [HttpGet]
         [Route("/SentMessages")]
-        public ActionResult MessagesSendByUser()
+        public ActionResult MessagesSentByUser()
         {
             try
             {

@@ -28,6 +28,7 @@ CREATE TABLE "User" (
   CREATE TABLE "Group" (
    gr_id int generated always as identity,
    gr_type varchar(1) not null,
+   gr_name varchar(20) not null,
    gr_owner int not null,
    gr_createdat date not null,
    gr_changedat date,

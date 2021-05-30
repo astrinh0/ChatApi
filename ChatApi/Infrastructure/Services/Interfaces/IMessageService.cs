@@ -20,7 +20,7 @@ namespace ChatApi.Infrastructure.Services
 
         IEnumerable<Message> GetReceivedMessagesUnread(string username);
 
-        Message SendMessageToGroup(string sender, int groupId, string message);
+        Message SendMessageToGroup(string sender, string groupName, string message);
 
         int? GetNumberOfMessages(string username);
 

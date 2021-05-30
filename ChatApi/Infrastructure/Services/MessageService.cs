@@ -37,10 +37,10 @@ namespace ChatApi.Infrastructure.Services
 
         }
 
-        public Message SendMessageToGroup(string sender, int groupId, string message)
+        public Message SendMessageToGroup(string sender, string groupName, string message)
         {
             var senderUser = _userRepository.FindUserByUsername(sender);
-            var group = _groupRepository.GetGroup(groupId);
+            var group = _groupRepository.GetGroupByName(groupName);
 
             if (senderUser != null && group != null)
             {

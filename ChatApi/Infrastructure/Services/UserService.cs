@@ -34,6 +34,7 @@ namespace ChatApi.Infrastructure.Services
             if (actualUser == userToRemove)
             {
                 var user = _userRepository.FindUserByUsername(actualUser);
+
                 if (user != null)
                 {
                     var aux = _userRepository.RemoveUser(user.Id);
@@ -78,10 +79,10 @@ namespace ChatApi.Infrastructure.Services
         public bool ChangePassword(string username, string password)
         {
             var user = _userRepository.FindUserByUsername(username);
-            var pashHash = ExtensionMethods.Encrypt(password);
 
             if (user != null)
             {
+                var pashHash = ExtensionMethods.Encrypt(password);
                 var aux = _userRepository.ChangePassword(user.Id, pashHash);
                 return aux;
             }

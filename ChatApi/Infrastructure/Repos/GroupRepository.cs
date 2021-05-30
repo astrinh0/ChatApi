@@ -1,4 +1,5 @@
-﻿using ChatApi.Infrastructure.DB;
+﻿using ChatApi.Infrastructure.Data.Models;
+using ChatApi.Infrastructure.DB;
 using ChatApi.Infrastructure.Models;
 using ChatApi.Infrastructure.Models.Enums;
 using System;
@@ -24,11 +25,12 @@ namespace ChatApi.Infrastructure.Repos
             return group;
         }
 
-        public Group AddGroup(EnumTypeGroup type, int ownerId)
+        public Group AddGroup(EnumTypeGroup type, int ownerId, string name)
         {
             var group = new Group
             {
                 Type = type,
+                Name = name,
                 OwnerId = ownerId,
                 CreatedAt = DateTime.UtcNow,
                 Active = EnumFlag.Y
@@ -50,7 +52,7 @@ namespace ChatApi.Infrastructure.Repos
                 return false;
             }
 
-            group.Active = Models.Enums.EnumFlag.N;
+            group.Active = EnumFlag.N;
             _context.Groups.Update(group);
             _context.SaveChanges();
             return true;
@@ -59,6 +61,19 @@ namespace ChatApi.Infrastructure.Repos
         public Group GetGroup(int groupId)
         {
             var group = _context.Groups.FirstOrDefault(g => g.Id == groupId);
+
+
+            if (group != null)
+            {
+                return group;
+            }
+
+            return null;
+        }
+
+        public Group GetGroupByName(string groupName)
+        {
+            var group = _context.Groups.FirstOrDefault(g => g.Name == groupName);
 
 
             if (group != null)
@@ -79,5 +94,34 @@ namespace ChatApi.Infrastructure.Repos
 
             return false;
         }
+
+        public bool AddUserToGroup(int userId, int groupId)
+        {
+
+            var groupUsers = new GroupUser
+            {
+                GroupId = groupId,
+                UserId = userId,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            _context.GroupUsers.Add(groupUsers);
+            _context.SaveChanges();
+
+            return true;
+        }
+
+        public bool RemoveUserFromGroup(int userId, int groupId)
+        {
+
+            var groupUsers = _context.GroupUsers.FirstOrDefault(gu => gu.UserId == userId && gu.GroupId == groupId);
+
+            _context.GroupUsers.Remove(groupUsers);
+            _context.SaveChanges();
+            
+
+            return true;
+        }
+
     }
 }
