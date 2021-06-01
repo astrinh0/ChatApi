@@ -18,6 +18,9 @@ using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication;
 using ChatApi.Infrastructure.Helpers;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using System.Reflection;
+using System.IO;
 
 namespace ChatApi
 {
@@ -46,9 +49,13 @@ namespace ChatApi
 
             services.AddCors();
 
-            services.AddControllers()
+            services.AddControllers(configure =>
+            {
+                configure.OutputFormatters.RemoveType<StringOutputFormatter>();
+            })
                 .AddJsonOptions(options =>
                 {
+                    
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                     options.JsonSerializerOptions.IgnoreNullValues = true;
 
@@ -61,7 +68,16 @@ namespace ChatApi
                 .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
             services.AddSwaggerGen(c =>
-            { c.SwaggerDoc("v1", new OpenApiInfo { Title = "ChatApi", Version = "v1" });
+            { c.SwaggerDoc("v1", new OpenApiInfo 
+            { 
+                Title = "ChatApi", 
+                Version = "v1",
+                Description = "Chat Api no ambito da unidade curricular de CD"
+            });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+                c.EnableAnnotations();
                 c.AddSecurityDefinition("basic", new OpenApiSecurityScheme
                 {
                     Name = "Authorization",

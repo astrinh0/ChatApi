@@ -11,6 +11,7 @@ namespace ChatApi.Infrastructure.Services
         string UploadFile(FileUpload fileUpload);
         byte[] FileDownload(string fileName);
 
+        string FileDelete(string fileName);
         List<string> ListAllFiles();
     }
 }

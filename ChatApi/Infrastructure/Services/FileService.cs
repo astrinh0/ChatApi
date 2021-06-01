@@ -35,6 +35,7 @@ namespace ChatApi.Infrastructure.Services
                 {
                     fileUpload.Files.CopyTo(fileStream);
                     fileStream.Flush();
+                    
                     return ("Upload Done!");
                 }
 
@@ -68,6 +69,21 @@ namespace ChatApi.Infrastructure.Services
             }
 
             return null;
+        }
+
+
+        public string FileDelete(string fileName)
+        {
+
+            string path = _webHostEnviroment.WebRootPath + "\\uploads\\";
+            var filePath = path + fileName + ".png";
+            if (File.Exists(filePath))
+            {
+                File.Delete(path);
+                return ("File deleted!");
+            }
+
+            return ("File delete error!");
         }
     }
 }
