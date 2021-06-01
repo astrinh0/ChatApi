@@ -1,8 +1,10 @@
 ﻿using ChatApi.Infrastructure.Data.Models;
+using ChatApi.Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -13,40 +15,21 @@ namespace ChatApi.Controllers
     [Authorize]
     public class FileController : Controller
     {
-        public static IWebHostEnvironment _webHostEnviroment;
+        private readonly IFileService _fileService;
 
 
-        public FileController(IWebHostEnvironment webHostEnvironment)
+        public FileController(IFileService fileService)
         {
-            _webHostEnviroment = webHostEnvironment;
+            _fileService = fileService;
         }
 
+        [Route("/FileUpload")]
         [HttpPost]
         public async Task<string> FileUpload([FromForm] FileUpload fileUpload)
         {
             try
             {
-                if (fileUpload.Files.Length > 0)
-                {
-                    string path = _webHostEnviroment.WebRootPath + "\\uploads\\";
-                    if (!Directory.Exists(path))
-                    {
-                        Directory.CreateDirectory(path);
-                    }
-
-                    using (FileStream fileStream = System.IO.File.Create(path + fileUpload.Files.FileName))
-                    {
-                        fileUpload.Files.CopyTo(fileStream);
-                        fileStream.Flush();
-                        return ("Upload Done!");
-                    }
-                }
-
-                else
-                {
-                    return ("Upload Failed");
-                }
-
+                return (_fileService.UploadFile(fileUpload));
             }
             catch (Exception ex)
             {
@@ -55,19 +38,22 @@ namespace ChatApi.Controllers
             }
         }
 
+        [Route("/GetAllFiles")]
+        [HttpGet]
+        public List<string> GetAllFiles()
+        {
+            return _fileService.ListAllFiles();
+        }
+
+        [Route("/FileDownload")]
         [HttpGet]
         public async Task<IActionResult> FileDownload(string fileName)
         {
-            
-            string path = _webHostEnviroment.WebRootPath + "\\uploads\\";
-            var filePath = path + fileName + ".png";
-            if (System.IO.File.Exists(filePath))
-            {
-                byte[] b = System.IO.File.ReadAllBytes(filePath);
-                return File(b, "image/png");
-            }
 
-            return null;
+            var aux = _fileService.FileDownload(fileName);
+
+           return File(aux, "image/png");
+            
         }
 
     }

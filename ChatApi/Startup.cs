@@ -37,6 +37,7 @@ namespace ChatApi
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IGroupService, GroupService>();
             services.AddTransient<IMessageService, MessageService>();
+            services.AddTransient<IFileService, FileService>();
 
             //REPOS
             services.AddTransient<IUserRepository, UserRepository>();
