@@ -38,13 +38,22 @@ namespace ChatApi.Infrastructure.Services
             return null;
         }
 
-        public bool RemoveGroup(int id)
+        public bool RemoveGroup(string groupName, string ownerName)
         {
-            if (_groupRepository.RemoveGroup(id) == true)
-            {
+            var group = _groupRepository.GetGroupByName(groupName);
+            var owner = _userRepository.FindUserByUsername(ownerName);
+            
+
+           if (group != null && owner != null && group.OwnerId == owner.Id)
+           {
+                _groupRepository.RemoveGroup(group.Id);
                 return true;
-            }
+
+           }
+
             return false;
+
+            
         }
 
         public bool AddUserToGroup(string name, string owner, string userToAdd)

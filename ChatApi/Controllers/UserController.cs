@@ -51,33 +51,32 @@ namespace ChatApi.Controllers
         }
 
         [SwaggerOperation("Add a user", null, Tags = new[] { "1. Users" })]
-        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(ActionResult))]
+        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(string))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
         [SwaggerResponse(StatusCodes.Status401Unauthorized, Description = "Authentication was not provided or it is not valid.", Type = typeof(UnauthorizedResult))]
         [SwaggerResponse(StatusCodes.Status403Forbidden, Description = "You do not have permissions to perform the operation.", Type = typeof(StatusCodeResult))]
         [SwaggerResponse(StatusCodes.Status404NotFound, Description = "The requested resource was not found.", Type = typeof(NotFoundResult))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Description = "An unexpected API error has occurred.", Type = typeof(StatusCodeResult))]
-        [AllowAnonymous]
         [HttpPost]
         [Route("/AddUser")]
-        public ActionResult AddUser(string name, string email, string username, string password)
+        public async Task<string> AddUser(string name, string email, string username, string password)
         {
             try
             {
                 _userService.AddUser(name, email, username, password);
-                return Ok();
+                return ("User created");
             }
             catch (Exception ex)
             {
 
-                return Json(ex);
+                return ex.Message;
             }
 
         }
 
 
         [SwaggerOperation("Remove a user", null, Tags = new[] { "1. Users" })]
-        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(ActionResult))]
+        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(string))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
         [SwaggerResponse(StatusCodes.Status401Unauthorized, Description = "Authentication was not provided or it is not valid.", Type = typeof(UnauthorizedResult))]
         [SwaggerResponse(StatusCodes.Status403Forbidden, Description = "You do not have permissions to perform the operation.", Type = typeof(StatusCodeResult))]
@@ -85,20 +84,20 @@ namespace ChatApi.Controllers
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Description = "An unexpected API error has occurred.", Type = typeof(StatusCodeResult))]
         [HttpPut]
         [Route("/RemoveUser")]
-        public ActionResult RemoveUser(string? username)
+        public async Task<string> RemoveUser(string? username)
         {
             try
             {
                 _userService.RemoveUser(User.Identity.Name, username);
-                return Ok();
+                return ("User Removed!");
             }
-            catch (Exception ex) { return Json(ex); }
+            catch (Exception ex) { return ex.Message; }
         }
 
 
 
         [SwaggerOperation("Autenticate a user", null, Tags = new[] { "1. Users" })]
-        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(ActionResult))]
+        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(string))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
         [SwaggerResponse(StatusCodes.Status401Unauthorized, Description = "Authentication was not provided or it is not valid.", Type = typeof(UnauthorizedResult))]
         [SwaggerResponse(StatusCodes.Status403Forbidden, Description = "You do not have permissions to perform the operation.", Type = typeof(StatusCodeResult))]
@@ -119,7 +118,7 @@ namespace ChatApi.Controllers
 
 
         [SwaggerOperation("Change password", null, Tags = new[] { "1. Users" })]
-        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(ActionResult))]
+        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(string))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
         [SwaggerResponse(StatusCodes.Status401Unauthorized, Description = "Authentication was not provided or it is not valid.", Type = typeof(UnauthorizedResult))]
         [SwaggerResponse(StatusCodes.Status403Forbidden, Description = "You do not have permissions to perform the operation.", Type = typeof(StatusCodeResult))]
@@ -127,14 +126,14 @@ namespace ChatApi.Controllers
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Description = "An unexpected API error has occurred.", Type = typeof(StatusCodeResult))]
         [HttpPut]
         [Route("/ChangePassword")]
-        public ActionResult ChangePassword(string password)
+        public async Task<string> ChangePassword(string password)
         {
             try
             {
                 _userService.ChangePassword(User.Identity.Name, password);
-                return Ok();
+                return "Password Changed!";
             }
-            catch (Exception ex) { return Json(ex); }
+            catch (Exception ex) { return ex.Message; }
            
         }
     }

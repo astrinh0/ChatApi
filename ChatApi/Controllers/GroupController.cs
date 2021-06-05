@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ChatApi.Controllers
@@ -26,7 +27,7 @@ namespace ChatApi.Controllers
         }
 
         [SwaggerOperation("Get all Groups", null, Tags = new[] { "3. Groups" })]
-        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(ActionResult))]
+        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(List<Group>))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
         [SwaggerResponse(StatusCodes.Status401Unauthorized, Description = "Authentication was not provided or it is not valid.", Type = typeof(UnauthorizedResult))]
         [SwaggerResponse(StatusCodes.Status403Forbidden, Description = "You do not have permissions to perform the operation.", Type = typeof(StatusCodeResult))]
@@ -51,7 +52,7 @@ namespace ChatApi.Controllers
 
 
         [SwaggerOperation("Create a group", null, Tags = new[] { "3. Groups" })]
-        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(ActionResult))]
+        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(string))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
         [SwaggerResponse(StatusCodes.Status401Unauthorized, Description = "Authentication was not provided or it is not valid.", Type = typeof(UnauthorizedResult))]
         [SwaggerResponse(StatusCodes.Status403Forbidden, Description = "You do not have permissions to perform the operation.", Type = typeof(StatusCodeResult))]
@@ -59,24 +60,24 @@ namespace ChatApi.Controllers
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Description = "An unexpected API error has occurred.", Type = typeof(StatusCodeResult))]
         [HttpPost]
         [Route("/AddGroup")]
-        public ActionResult AddGroup(EnumTypeGroup type, string name)
+        public async Task<string> AddGroup(EnumTypeGroup type, string name)
         {
             try
             {
                 _groupService.AddGroup(type, User.Identity.Name, name);
-                return Ok();
+                return ("Group/Channel created!");
             }
             catch (Exception ex)
             {
 
-                return Json(ex);
+                return ex.Message;
             }
           
         }
 
 
         [SwaggerOperation("Add user to group", null, Tags = new[] { "3. Groups" })]
-        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(ActionResult))]
+        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(string))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
         [SwaggerResponse(StatusCodes.Status401Unauthorized, Description = "Authentication was not provided or it is not valid.", Type = typeof(UnauthorizedResult))]
         [SwaggerResponse(StatusCodes.Status403Forbidden, Description = "You do not have permissions to perform the operation.", Type = typeof(StatusCodeResult))]
@@ -84,24 +85,24 @@ namespace ChatApi.Controllers
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Description = "An unexpected API error has occurred.", Type = typeof(StatusCodeResult))]
         [HttpPost]
         [Route("/AddUserToGroup")]
-        public ActionResult AddUserToGroup(string name, string userToAdd)
+        public async Task<string> AddUserToGroup(string name, string userToAdd)
         {
             try
             {
                 _groupService.AddUserToGroup(name, User.Identity.Name, userToAdd);
-                return Ok();
+                return ("User added to group {name}");
             }
             catch (Exception ex)
             {
 
-                return Json(ex);
+                return ex.Message;
             }
 
         }
 
 
         [SwaggerOperation("Remove user from group", null, Tags = new[] { "3. Groups" })]
-        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(ActionResult))]
+        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(string))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
         [SwaggerResponse(StatusCodes.Status401Unauthorized, Description = "Authentication was not provided or it is not valid.", Type = typeof(UnauthorizedResult))]
         [SwaggerResponse(StatusCodes.Status403Forbidden, Description = "You do not have permissions to perform the operation.", Type = typeof(StatusCodeResult))]
@@ -109,24 +110,24 @@ namespace ChatApi.Controllers
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Description = "An unexpected API error has occurred.", Type = typeof(StatusCodeResult))]
         [HttpPost]
         [Route("/RemoveUserFromGroup")]
-        public ActionResult RemoveUserFromGroup(string name, string userToAdd)
+        public async Task<string> RemoveUserFromGroup(string name, string userToAdd)
         {
             try
             {
                 _groupService.RemoveUserToGroup(name, User.Identity.Name, userToAdd);
-                return Ok();
+                return ("User removed from the group {name}");
             }
             catch (Exception ex)
             {
 
-                return Json(ex);
+                return ex.Message;
             }
 
         }
 
 
         [SwaggerOperation("Delete group", null, Tags = new[] { "3. Groups" })]
-        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(ActionResult))]
+        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(string))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
         [SwaggerResponse(StatusCodes.Status401Unauthorized, Description = "Authentication was not provided or it is not valid.", Type = typeof(UnauthorizedResult))]
         [SwaggerResponse(StatusCodes.Status403Forbidden, Description = "You do not have permissions to perform the operation.", Type = typeof(StatusCodeResult))]
@@ -134,17 +135,17 @@ namespace ChatApi.Controllers
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Description = "An unexpected API error has occurred.", Type = typeof(StatusCodeResult))]
         [HttpPut]
         [Route("/RemoveGroup")]
-        public ActionResult RemoveGroup(int id)
+        public async Task<string> RemoveGroup(string groupName)
         {
             try
             {
-                _groupService.RemoveGroup(id);
-                return Ok();
+                _groupService.RemoveGroup(groupName, User.Identity.Name);
+                return ("Group deleted!");
             }
             catch (Exception ex)
             {
 
-                return Json(ex);
+                return ex.Message;
             }
 
         }

@@ -15,7 +15,7 @@ namespace ChatApi.Infrastructure.Services
         bool AddUserToGroup(string name, string owner, string userToAdd);
 
         bool RemoveUserToGroup(string name, string owner, string userToAdd);
-        bool RemoveGroup(int id);
+        bool RemoveGroup(string groupName, string ownerName);
 
 
     }

@@ -34,22 +34,22 @@ namespace ChatApi.Controllers
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Description = "An unexpected API error has occurred.", Type = typeof(StatusCodeResult))]
         [HttpPost]
         [Route("/SendMessageToUser")]
-        public ActionResult SendMessageToUser(string receiverName, string message)
+        public async Task<string> SendMessageToUser(string receiverName, string message)
         {
             try
             {
                 _messageService.SendMessageToUser(User.Identity.Name, receiverName, message);
-                return Ok();
+                return ("Message: {message} sent to {receiverName}");
             }
             catch (Exception ex)
             {
 
-                return Json(ex);
+                return ex.Message;
             }
         }
 
         [SwaggerOperation("Send message to group", null, Tags = new[] { "2. Messages" })]
-        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(ActionResult))]
+        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(string))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
         [SwaggerResponse(StatusCodes.Status401Unauthorized, Description = "Authentication was not provided or it is not valid.", Type = typeof(UnauthorizedResult))]
         [SwaggerResponse(StatusCodes.Status403Forbidden, Description = "You do not have permissions to perform the operation.", Type = typeof(StatusCodeResult))]
@@ -57,23 +57,23 @@ namespace ChatApi.Controllers
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Description = "An unexpected API error has occurred.", Type = typeof(StatusCodeResult))]
         [HttpPost]
         [Route("/SendMessageToGroup")]
-        public ActionResult SendMessageToGroup(string groupName, string message)
+        public async Task<string> SendMessageToGroup(string groupName, string message)
         {
             try
             {
                 _messageService.SendMessageToGroup(User.Identity.Name, groupName, message);
-                return Ok();
+                return ("Message: {message} sent to group {groupName}");
             }
             catch (Exception ex)
             {
 
-                return Json(ex);
+                return ex.Message;
             }
         }
 
 
         [SwaggerOperation("See messages sent", null, Tags = new[] { "2. Messages" })]
-        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(ActionResult))]
+        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(IEnumerable<Message>))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
         [SwaggerResponse(StatusCodes.Status401Unauthorized, Description = "Authentication was not provided or it is not valid.", Type = typeof(UnauthorizedResult))]
         [SwaggerResponse(StatusCodes.Status403Forbidden, Description = "You do not have permissions to perform the operation.", Type = typeof(StatusCodeResult))]
@@ -103,7 +103,7 @@ namespace ChatApi.Controllers
 
 
         [SwaggerOperation("See message received", null, Tags = new[] { "2. Messages" })]
-        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(ActionResult))]
+        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(IEnumerable<Message>))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
         [SwaggerResponse(StatusCodes.Status401Unauthorized, Description = "Authentication was not provided or it is not valid.", Type = typeof(UnauthorizedResult))]
         [SwaggerResponse(StatusCodes.Status403Forbidden, Description = "You do not have permissions to perform the operation.", Type = typeof(StatusCodeResult))]
@@ -133,7 +133,7 @@ namespace ChatApi.Controllers
 
 
         [SwaggerOperation("See messages unreaded", null, Tags = new[] { "2. Messages" })]
-        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(ActionResult))]
+        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(IEnumerable<Message>))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
         [SwaggerResponse(StatusCodes.Status401Unauthorized, Description = "Authentication was not provided or it is not valid.", Type = typeof(UnauthorizedResult))]
         [SwaggerResponse(StatusCodes.Status403Forbidden, Description = "You do not have permissions to perform the operation.", Type = typeof(StatusCodeResult))]
@@ -163,7 +163,7 @@ namespace ChatApi.Controllers
 
 
         [SwaggerOperation("Number of messages", null, Tags = new[] { "2. Messages" })]
-        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(ActionResult))]
+        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(int))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
         [SwaggerResponse(StatusCodes.Status401Unauthorized, Description = "Authentication was not provided or it is not valid.", Type = typeof(UnauthorizedResult))]
         [SwaggerResponse(StatusCodes.Status403Forbidden, Description = "You do not have permissions to perform the operation.", Type = typeof(StatusCodeResult))]
@@ -193,7 +193,7 @@ namespace ChatApi.Controllers
 
 
         [SwaggerOperation("Delete a message", null, Tags = new[] { "2. Messages" })]
-        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(ActionResult))]
+        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(string))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
         [SwaggerResponse(StatusCodes.Status401Unauthorized, Description = "Authentication was not provided or it is not valid.", Type = typeof(UnauthorizedResult))]
         [SwaggerResponse(StatusCodes.Status403Forbidden, Description = "You do not have permissions to perform the operation.", Type = typeof(StatusCodeResult))]
@@ -201,17 +201,17 @@ namespace ChatApi.Controllers
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Description = "An unexpected API error has occurred.", Type = typeof(StatusCodeResult))]
         [HttpPut]
         [Route("/DeleteMessage")]
-        public ActionResult RemoveMessage(int id)
+        public async Task<string> RemoveMessage(int id)
         {
             try
             {
                 _messageService.RemoveMessage(id);
-                return Ok();
+                return ("Message deleted!");
             }
             catch (Exception ex)
             {
 
-                return Json(ex);
+                return ex.Message;
             }
            
         }
