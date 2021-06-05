@@ -1,4 +1,5 @@
-﻿using ChatApi.Infrastructure.Models;
+﻿using ChatApi.Infrastructure.Data.DTO;
+using ChatApi.Infrastructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,11 @@ namespace ChatApi.Infrastructure.Services
 
         bool RemoveMessage(int id);
 
-        IEnumerable<Message> GetSentMessages(string username);
+        IEnumerable<MessageForJson> GetSentMessages(string username);
 
-        IEnumerable<Message> GetReceivedMessages(string username);
+        IEnumerable<MessageForJson> GetReceivedMessages(string username);
 
-        IEnumerable<Message> GetReceivedMessagesUnread(string username);
+        IEnumerable<MessageForJson> GetReceivedMessagesUnread(string username);
 
         Message SendMessageToGroup(string sender, string groupName, string message);
 

@@ -45,11 +45,13 @@ namespace ChatApi.Infrastructure.Repos
             {
                 foreach (var file in files)
                 {
-                    if (file.ExpireAt < DateTime.UtcNow)
+                    if (file.ExpireAt < DateTime.UtcNow && file.Active == Models.Enums.EnumFlag.Y)
                     {
                         
                         file.Active = Models.Enums.EnumFlag.N;
                         var filePath = path + file.Name + ".png";
+                        _context.Files.Update(file);
+                        _context.SaveChanges();
                         System.IO.File.SetAttributes(filePath, System.IO.FileAttributes.Normal);
                         System.IO.File.Delete(filePath);
 

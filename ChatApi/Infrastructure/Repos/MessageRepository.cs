@@ -1,4 +1,5 @@
-﻿using ChatApi.Infrastructure.DB;
+﻿using ChatApi.Infrastructure.Data.Models;
+using ChatApi.Infrastructure.DB;
 using ChatApi.Infrastructure.Models;
 using ChatApi.Infrastructure.Models.Enums;
 using Microsoft.EntityFrameworkCore;
@@ -66,90 +67,177 @@ namespace ChatApi.Infrastructure.Repos
 
         public IEnumerable<Message> GetSendedMessagesbyId(int userId)
         {
-            var listOfSendedMessage = _context.Messages.Where(m => m.SenderId == userId);
+            var listOfSendedMessage = _context.Messages.Where(m => m.SenderId == userId).ToList();
             
             return listOfSendedMessage;
 
         }
 
+        public UserMessage GetReceiver(int messageId)
+        {
+            return _context.UserMessages.FirstOrDefault(um => um.MessageId == messageId);
+        }
+            
+
+
         public IEnumerable<Message> GetReceivedMessagesbyId(int userId)
         {
-            var listOfUserMessage = _context.UserMessages.Where(um => um.ReceiverId == userId).ToList();
+            var listOfUserMessages = new List<UserMessage>();
+
+            listOfUserMessages = _context.UserMessages.Where(um => um.ReceiverId == userId).ToList();
 
             var messages = new List<Message>();
 
-            foreach (var message in listOfUserMessage)
+            foreach (var message in listOfUserMessages)
             {
-                var msg = _context.Messages.FirstOrDefault(c => c.Id == message.MessageId && c.Active == EnumFlag.Y && c.Readed == EnumFlag.Y);
-                messages.Add(msg);
+                var msg = _context.Messages.Where(m => m.Id == message.MessageId && m.Active == EnumFlag.Y && m.Readed == EnumFlag.Y).ToList();
+                if(msg != null && msg.Count > 0)
+                {
+                    foreach (var item in msg)
+                    {
+                        messages.Add(item);
+                    }
+                }
+             
             }
 
+            var listOfGroups = new List<GroupUser>();
 
-            var listOfGroupUsers = _context.GroupUsers.Where(gu => gu.UserId == userId).ToList();
+            listOfGroups = _context.GroupUsers.Where(gu => gu.UserId == userId).ToList();
 
-            var groupMessages = new List<GroupMessage>();
-
-            if (listOfGroupUsers != null)
+            foreach (var group in listOfGroups)
             {
-                foreach (var groupUser in listOfGroupUsers)
+                var groupsMsg = _context.GroupMessages.Where(gm => gm.GroupId == group.GroupId).ToList();
+                if (groupsMsg != null && groupsMsg.Count > 0)
                 {
-                    var groupMsg = _context.GroupMessages.FirstOrDefault(gm => gm.GroupId == groupUser.GroupId);
-                    groupMessages.Add(groupMsg);
-
-                }
-
-                if (groupMessages != null)
-                {
-                    foreach (var groupMessage in groupMessages)
+                    foreach (var item in groupsMsg)
                     {
-                        var message = _context.Messages.FirstOrDefault(m => m.Id == groupMessage.MessageId && m.Active == EnumFlag.Y && m.Readed == EnumFlag.Y);
-                        messages.Add(message);
+                        var msg = _context.Messages.Where(m => m.Id == item.MessageId && m.Active == EnumFlag.Y && m.Readed == EnumFlag.Y).ToList();
+
+                        if (msg != null && msg.Count > 0)
+                        {
+                            foreach (var mensagem in msg)
+                            {
+                                messages.Add(mensagem);
+                            }
+                        }
                     }
                 }
             }
-           
+
+            var listOfGroupOwned = new List<Group>();
+
+            listOfGroupOwned = _context.Groups.Where(gu => gu.OwnerId == userId).ToList();
+
+            foreach (var group in listOfGroupOwned)
+            {
+                var groupsMsg = _context.GroupMessages.Where(gm => gm.GroupId == group.Id).ToList();
+                if (groupsMsg != null && groupsMsg.Count() > 0)
+                {
+                    foreach (var item in groupsMsg)
+                    {
+                        var msg = _context.Messages.Where(m => m.Id == item.MessageId && m.Active == EnumFlag.Y && m.Readed == EnumFlag.Y).ToList();
+
+                        if (msg != null && msg.Count > 0)
+                        {
+                            foreach (var mensagem in msg)
+                            {
+                                mensagem.Readed = EnumFlag.Y;
+                                _context.Messages.Update(mensagem);
+                                _context.SaveChanges();
+                                messages.Add(mensagem);
+                            }
+                        }
+                    }
+                }
+            }
+
+
             return messages;
 
         }
 
         public IEnumerable<Message> GetReceivedMessagesUnreadedbyId(int userId)
         {
-            var listOfUserMessage = _context.UserMessages.Where(um => um.ReceiverId == userId).ToList();
+            var listOfUserMessages = new List<UserMessage>();
+
+            listOfUserMessages = _context.UserMessages.Where(um => um.ReceiverId == userId).ToList();
 
             var messages = new List<Message>();
 
-            foreach (var message in listOfUserMessage)
+            foreach (var message in listOfUserMessages)
             {
-                var msg = _context.Messages.FirstOrDefault(c => c.Id == message.MessageId && c.Readed == EnumFlag.N && c.Active == EnumFlag.Y);
-                msg.Readed = EnumFlag.Y;
-                messages.Add(msg);
-            }
-
-            var listOfGroupUsers = _context.GroupUsers.Where(gu => gu.UserId == userId).ToList();
-
-            var groupMessages = new List<GroupMessage>();
-
-            if (listOfGroupUsers != null)
-            {
-                foreach (var groupUser in listOfGroupUsers)
+                var msg = _context.Messages.Where(m => m.Id == message.MessageId && m.Active == EnumFlag.Y && m.Readed == EnumFlag.N).ToList();
+                if (msg != null && msg.Count() > 0)
                 {
-                    var groupMsg = _context.GroupMessages.FirstOrDefault(gm => gm.GroupId == groupUser.GroupId);
-                    groupMessages.Add(groupMsg);
-
+                    foreach (var item in msg)
+                    {
+                        item.Readed = EnumFlag.Y;
+                        _context.Messages.Update(item);
+                        _context.SaveChanges();
+                        messages.Add(item);
+                    }
                 }
 
-                if (groupMessages != null)
+            }
+
+            var listOfGroups = new List<GroupUser>();
+
+            listOfGroups = _context.GroupUsers.Where(gu => gu.UserId == userId).ToList();
+
+            foreach (var group in listOfGroups)
+            {
+                var groupsMsg = _context.GroupMessages.Where(gm => gm.GroupId == group.GroupId).ToList();
+                if (groupsMsg != null && groupsMsg.Count > 0)
                 {
-                    foreach (var groupMessage in groupMessages)
+                    foreach (var item in groupsMsg)
                     {
-                        var message = _context.Messages.FirstOrDefault(m => m.Id == groupMessage.MessageId && m.Readed == EnumFlag.N && m.Active == EnumFlag.Y);
-                        message.Readed = EnumFlag.Y;
-                        messages.Add(message);
+                        var msg = _context.Messages.Where(m => m.Id == item.MessageId && m.Active == EnumFlag.Y && m.Readed == EnumFlag.N).ToList();
+
+                        if (msg != null && msg.Count() > 0)
+                        {
+                            foreach (var mensagem in msg)
+                            {
+                                mensagem.Readed = EnumFlag.Y;
+                                _context.Messages.Update(mensagem);
+                                _context.SaveChanges();
+                                messages.Add(mensagem);
+                            }
+                        }
+                    }
+                }
+            }
+
+            var listOfGroupOwned = new List<Group>();
+
+            listOfGroupOwned = _context.Groups.Where(gu => gu.OwnerId == userId).ToList();
+
+            foreach (var group in listOfGroupOwned)
+            {
+                var groupsMsg = _context.GroupMessages.Where(gm => gm.GroupId == group.Id).ToList();
+                if (groupsMsg != null && groupsMsg.Count() > 0)
+                {
+                    foreach (var item in groupsMsg)
+                    {
+                        var msg = _context.Messages.Where(m => m.Id == item.MessageId && m.Active == EnumFlag.Y && m.Readed == EnumFlag.N).ToList();
+
+                        if (msg != null && msg.Count() > 0)
+                        {
+                            foreach (var mensagem in msg)
+                            {
+                                mensagem.Readed = EnumFlag.Y;
+                                _context.Messages.Update(mensagem);
+                                _context.SaveChanges();
+                                messages.Add(mensagem);
+                            }
+                        }
                     }
                 }
             }
 
             return messages;
+
+           
 
         }
 

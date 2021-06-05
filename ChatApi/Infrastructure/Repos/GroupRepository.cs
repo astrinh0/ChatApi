@@ -19,9 +19,9 @@ namespace ChatApi.Infrastructure.Repos
             _context = context;
         }
 
-        public async Task<IEnumerable<Group>> GetAll()
+        public async Task<IEnumerable<Group>> GetAllGroups()
         {
-            var group = await _context.Groups.ToListAsync();
+            var group = await _context.Groups.Where(g => g.Type == EnumTypeGroup.G).ToListAsync();
             return group;
         }
 
@@ -43,7 +43,7 @@ namespace ChatApi.Infrastructure.Repos
             return group;
         }
 
-        public bool RemoveGroup(int id)
+        public bool RemoveGroupOrChannel(int id)
         {
             var group = _context.Groups.Find(id);
 
@@ -58,9 +58,12 @@ namespace ChatApi.Infrastructure.Repos
             return true;
         }
 
+        
+
+
         public Group GetGroup(int groupId)
         {
-            var group = _context.Groups.FirstOrDefault(g => g.Id == groupId);
+            var group = _context.Groups.FirstOrDefault(g => g.Id == groupId && g.Type == EnumTypeGroup.G);
 
 
             if (group != null)
@@ -73,7 +76,7 @@ namespace ChatApi.Infrastructure.Repos
 
         public Group GetGroupByName(string groupName)
         {
-            var group = _context.Groups.FirstOrDefault(g => g.Name == groupName);
+            var group = _context.Groups.FirstOrDefault(g => g.Name == groupName && g.Type == EnumTypeGroup.G);
 
 
             if (group != null)
@@ -84,7 +87,7 @@ namespace ChatApi.Infrastructure.Repos
             return null;
         }
 
-        public bool CheckIfUserBelongsToGroup(int userId, int groupId)
+        public bool CheckIfUserBelongsToGroupOrChannel(int userId, int groupId)
         {
             var aux = _context.GroupUsers.FirstOrDefault(gu => gu.UserId == userId && gu.GroupId == groupId);
             if (aux != null)
@@ -111,7 +114,7 @@ namespace ChatApi.Infrastructure.Repos
             return true;
         }
 
-        public bool RemoveUserFromGroup(int userId, int groupId)
+        public bool RemoveUserFromGroupOrChannel(int userId, int groupId)
         {
 
             var groupUsers = _context.GroupUsers.FirstOrDefault(gu => gu.UserId == userId && gu.GroupId == groupId);
@@ -119,6 +122,48 @@ namespace ChatApi.Infrastructure.Repos
             _context.GroupUsers.Remove(groupUsers);
             _context.SaveChanges();
             
+
+            return true;
+        }
+
+        public Group GetChannel(int channelId)
+        {
+            var group = _context.Groups.FirstOrDefault(g => g.Id == channelId && g.Type == EnumTypeGroup.C);
+
+
+            if (group != null)
+            {
+                return group;
+            }
+
+            return null;
+        }
+
+        public Group GetChannelByName(string channelName)
+        {
+            var group = _context.Groups.FirstOrDefault(g => g.Name == channelName && g.Type == EnumTypeGroup.C);
+
+
+            if (group != null)
+            {
+                return group;
+            }
+
+            return null;
+        }
+
+        public bool SubscribeToChannel(int userId, int channelId)
+        {
+
+            var groupUsers = new GroupUser
+            {
+                GroupId = channelId,
+                UserId = userId,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            _context.GroupUsers.Add(groupUsers);
+            _context.SaveChanges();
 
             return true;
         }

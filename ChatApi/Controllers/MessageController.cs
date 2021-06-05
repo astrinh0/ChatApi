@@ -38,8 +38,9 @@ namespace ChatApi.Controllers
         {
             try
             {
-                _messageService.SendMessageToUser(User.Identity.Name, receiverName, message);
-                return ("Message: {message} sent to {receiverName}");
+                var aux = _messageService.SendMessageToUser(User.Identity.Name, receiverName, message);
+                if (aux != null) return ($"Message: {message} sent to {receiverName}");
+                else return ("User doesn't exist.");
             }
             catch (Exception ex)
             {
@@ -61,8 +62,9 @@ namespace ChatApi.Controllers
         {
             try
             {
-                _messageService.SendMessageToGroup(User.Identity.Name, groupName, message);
-                return ("Message: {message} sent to group {groupName}");
+                var aux = _messageService.SendMessageToGroup(User.Identity.Name, groupName, message);
+                if (aux != null) return ($"Message: {message} sent to group {groupName}");
+                else return ("Group doesn't exist or you dont belong to this group.");
             }
             catch (Exception ex)
             {
@@ -117,7 +119,7 @@ namespace ChatApi.Controllers
             {
                 var messages = _messageService.GetReceivedMessages(User.Identity.Name);
 
-                if (messages == null)
+                if (messages.Count() == 0 || messages == null)
                 {
                     return NoContent();
                 }
@@ -147,7 +149,7 @@ namespace ChatApi.Controllers
             {
                 var messages = _messageService.GetReceivedMessagesUnread(User.Identity.Name);
 
-                if (messages == null)
+                if (messages.Count() == 0 || messages == null)
                 {
                     return NoContent();
                 }

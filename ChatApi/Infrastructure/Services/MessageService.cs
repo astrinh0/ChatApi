@@ -1,4 +1,5 @@
-﻿using ChatApi.Infrastructure.Models;
+﻿using ChatApi.Infrastructure.Data.DTO;
+using ChatApi.Infrastructure.Models;
 using ChatApi.Infrastructure.Repos;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +45,7 @@ namespace ChatApi.Infrastructure.Services
 
             if (senderUser != null && group != null)
             {
-                if (_groupRepository.CheckIfUserBelongsToGroup(senderUser.Id, group.Id) == true)
+                if (_groupRepository.CheckIfUserBelongsToGroupOrChannel(senderUser.Id, group.Id) == true || group.OwnerId == senderUser.Id)
                 {
                     var aux =_messageRepository.SendMessageToGroup(senderUser.Id, group.Id, message);
                     return aux;
@@ -65,14 +66,29 @@ namespace ChatApi.Infrastructure.Services
             return false;
         }
 
-        public IEnumerable<Message> GetSentMessages(string username)
+        public IEnumerable<MessageForJson> GetSentMessages(string username)
         {
             var user = _userRepository.FindUserByUsername(username);
 
             if (user != null)
             {
                 var aux = _messageRepository.GetSendedMessagesbyId(user.Id);
-                return aux;
+                var list = new List<MessageForJson>();
+                foreach (var item in aux)
+                {
+                    var UserMessage = _messageRepository.GetReceiver(item.Id);
+                    var receiver = _userRepository.UserName(UserMessage.ReceiverId);
+                    var newItem = new MessageForJson
+                    {
+                        Message = item.ActualMessage,
+                        Sender = _userRepository.UserName(item.SenderId),
+                        Receiver = receiver
+                    };
+                    list.Add(newItem);
+                }
+
+                return list;
+                
             }
             else
             {
@@ -80,14 +96,25 @@ namespace ChatApi.Infrastructure.Services
             }
         }
 
-        public IEnumerable<Message> GetReceivedMessages(string username)
+        public IEnumerable<MessageForJson> GetReceivedMessages(string username)
         {
             var user = _userRepository.FindUserByUsername(username);
 
             if (user != null)
             {
                 var aux = _messageRepository.GetReceivedMessagesbyId(user.Id);
-                return aux;
+                var list = new List<MessageForJson>();
+                foreach (var item in aux)
+                {
+                    var newItem = new MessageForJson
+                    {
+                        Message = item.ActualMessage,
+                        Sender = _userRepository.UserName(item.SenderId),
+                        Receiver = _userRepository.UserName(user.Id)
+                    };
+                    list.Add(newItem);
+                }
+                return list;
             }
             else
             {
@@ -95,14 +122,27 @@ namespace ChatApi.Infrastructure.Services
             }
         }
 
-        public IEnumerable<Message> GetReceivedMessagesUnread(string username)
+        public IEnumerable<MessageForJson> GetReceivedMessagesUnread(string username)
         {
             var user = _userRepository.FindUserByUsername(username);
 
             if (user != null)
             {
                 var aux = _messageRepository.GetReceivedMessagesUnreadedbyId(user.Id);
-                return aux;
+                var list = new List<MessageForJson>();
+                foreach (var item in aux)
+                {
+                    var newItem = new MessageForJson
+                    {
+                        Message = item.ActualMessage,
+                        Sender = _userRepository.UserName(item.SenderId),
+                        Receiver = _userRepository.UserName(user.Id)
+                    };
+                    list.Add(newItem);
+
+                }
+
+                return list;
             }
             else
             {

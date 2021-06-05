@@ -21,6 +21,9 @@ namespace ChatApi.Infrastructure.Mappers
             builder.Property(g => g.Name)
                 .HasColumnName("gr_name");
 
+            builder.Property(g => g.OwnerId)
+                .HasColumnName("gr_owner");
+
 
             builder.Property(g => g.CreatedAt)
                 .HasColumnName("gr_createdat");

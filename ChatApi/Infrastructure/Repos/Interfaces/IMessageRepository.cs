@@ -21,6 +21,9 @@ namespace ChatApi.Infrastructure.Repos
 
         IEnumerable<Message> GetReceivedMessagesUnreadedbyId(int userId);
 
-  
+        UserMessage GetReceiver(int messageId);
+
+
+
     }
 }

@@ -21,11 +21,11 @@ namespace ChatApi.Infrastructure.Services
 
         public Task<IEnumerable<Group>> GetGroups()
         {
-            var groups = _groupRepository.GetAll();
+            var groups = _groupRepository.GetAllGroups();
             return groups;
         }
 
-        public Group AddGroup(EnumTypeGroup type, string username, string name)
+        public Group AddGroupOrChannel(EnumTypeGroup type, string username, string name)
         {
             var owner = _userRepository.FindUserByUsername(username);
 
@@ -38,15 +38,17 @@ namespace ChatApi.Infrastructure.Services
             return null;
         }
 
+
+
         public bool RemoveGroup(string groupName, string ownerName)
         {
             var group = _groupRepository.GetGroupByName(groupName);
             var owner = _userRepository.FindUserByUsername(ownerName);
             
 
-           if (group != null && owner != null && group.OwnerId == owner.Id)
+           if (group != null && owner != null && group.OwnerId == owner.Id && group.Type == EnumTypeGroup.G)
            {
-                _groupRepository.RemoveGroup(group.Id);
+                _groupRepository.RemoveGroupOrChannel(group.Id);
                 return true;
 
            }
@@ -68,7 +70,7 @@ namespace ChatApi.Infrastructure.Services
 
                 if (user != null)
                 {
-                    var aux = _groupRepository.CheckIfUserBelongsToGroup(user.Id, group.Id);
+                    var aux = _groupRepository.CheckIfUserBelongsToGroupOrChannel(user.Id, group.Id);
 
                     if (aux == false)
                     {
@@ -101,11 +103,11 @@ namespace ChatApi.Infrastructure.Services
 
                 if (user != null)
                 {
-                    var aux = _groupRepository.CheckIfUserBelongsToGroup(user.Id, group.Id);
+                    var aux = _groupRepository.CheckIfUserBelongsToGroupOrChannel(user.Id, group.Id);
 
                     if (aux == false)
                     {
-                        var addUser = _groupRepository.RemoveUserFromGroup(user.Id, group.Id);
+                        var addUser = _groupRepository.RemoveUserFromGroupOrChannel(user.Id, group.Id);
                         return true;
                     }
 
@@ -120,6 +122,52 @@ namespace ChatApi.Infrastructure.Services
             {
                 return false;
             }
+        }
+
+        public bool SubscribeToChannel(string username, string channelName)
+        {
+            var user = _userRepository.FindUserByUsername(username);
+
+            var channel = _groupRepository.GetChannelByName(channelName);
+
+            if (user != null && channel != null)
+            {
+                return _groupRepository.SubscribeToChannel(user.Id, channel.Id);
+            }
+
+            return false;
+        }
+
+        public bool UnsubscribeToChannel(string username, string channelName)
+        {
+            var user = _userRepository.FindUserByUsername(username);
+
+            var channel = _groupRepository.GetChannelByName(channelName);
+
+            if (user != null && channel != null)
+            {
+                return _groupRepository.RemoveUserFromGroupOrChannel(user.Id, channel.Id);
+            }
+
+            return false;
+        }
+
+        public bool RemoveChannel(string channelName, string ownerName)
+        {
+            var channel = _groupRepository.GetChannelByName(channelName);
+            var owner = _userRepository.FindUserByUsername(ownerName);
+
+
+            if (channel != null && owner != null && channel.OwnerId == owner.Id && channel.Type == EnumTypeGroup.C)
+            {
+                _groupRepository.RemoveGroupOrChannel(channel.Id);
+                return true;
+
+            }
+
+            return false;
+
+
         }
 
     }

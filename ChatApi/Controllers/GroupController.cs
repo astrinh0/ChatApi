@@ -51,7 +51,7 @@ namespace ChatApi.Controllers
         }
 
 
-        [SwaggerOperation("Create a group", null, Tags = new[] { "3. Groups/Channels" })]
+        [SwaggerOperation("Create a group/channel", null, Tags = new[] { "3. Groups/Channels" })]
         [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(string))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
         [SwaggerResponse(StatusCodes.Status401Unauthorized, Description = "Authentication was not provided or it is not valid.", Type = typeof(UnauthorizedResult))]
@@ -64,7 +64,7 @@ namespace ChatApi.Controllers
         {
             try
             {
-                _groupService.AddGroup(type, User.Identity.Name, name);
+                _groupService.AddGroupOrChannel(type, User.Identity.Name, name);
                 return ("Group/Channel created!");
             }
             catch (Exception ex)
@@ -91,6 +91,54 @@ namespace ChatApi.Controllers
             {
                 _groupService.AddUserToGroup(name, User.Identity.Name, userToAdd);
                 return ($"User added to group {name}");
+            }
+            catch (Exception ex)
+            {
+
+                return ex.Message;
+            }
+
+        }
+
+        [SwaggerOperation("Subscribe to a channel", null, Tags = new[] { "3. Groups/Channels" })]
+        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(string))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
+        [SwaggerResponse(StatusCodes.Status401Unauthorized, Description = "Authentication was not provided or it is not valid.", Type = typeof(UnauthorizedResult))]
+        [SwaggerResponse(StatusCodes.Status403Forbidden, Description = "You do not have permissions to perform the operation.", Type = typeof(StatusCodeResult))]
+        [SwaggerResponse(StatusCodes.Status404NotFound, Description = "The requested resource was not found.", Type = typeof(NotFoundResult))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Description = "An unexpected API error has occurred.", Type = typeof(StatusCodeResult))]
+        [HttpPost]
+        [Route("/SubscribeToChannel")]
+        public async Task<string> SubscriveToChannel(string name)
+        {
+            try
+            {
+                _groupService.SubscribeToChannel(name, User.Identity.Name);
+                return ($"Subscribed to {name} channel!");
+            }
+            catch (Exception ex)
+            {
+
+                return ex.Message;
+            }
+
+        }
+
+        [SwaggerOperation("Unsubscribe to a channel", null, Tags = new[] { "3. Groups/Channels" })]
+        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(string))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
+        [SwaggerResponse(StatusCodes.Status401Unauthorized, Description = "Authentication was not provided or it is not valid.", Type = typeof(UnauthorizedResult))]
+        [SwaggerResponse(StatusCodes.Status403Forbidden, Description = "You do not have permissions to perform the operation.", Type = typeof(StatusCodeResult))]
+        [SwaggerResponse(StatusCodes.Status404NotFound, Description = "The requested resource was not found.", Type = typeof(NotFoundResult))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Description = "An unexpected API error has occurred.", Type = typeof(StatusCodeResult))]
+        [HttpPut]
+        [Route("/UnsubscribeToChannel")]
+        public async Task<string> UnsubscribeToChannel(string name)
+        {
+            try
+            {
+                _groupService.UnsubscribeToChannel(name, User.Identity.Name);
+                return ($"Subscribed to {name} channel!");
             }
             catch (Exception ex)
             {
@@ -140,6 +188,30 @@ namespace ChatApi.Controllers
             try
             {
                 _groupService.RemoveGroup(groupName, User.Identity.Name);
+                return ("Group deleted!");
+            }
+            catch (Exception ex)
+            {
+
+                return ex.Message;
+            }
+
+        }
+
+        [SwaggerOperation("Delete group", null, Tags = new[] { "3. Groups/Channels" })]
+        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(string))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
+        [SwaggerResponse(StatusCodes.Status401Unauthorized, Description = "Authentication was not provided or it is not valid.", Type = typeof(UnauthorizedResult))]
+        [SwaggerResponse(StatusCodes.Status403Forbidden, Description = "You do not have permissions to perform the operation.", Type = typeof(StatusCodeResult))]
+        [SwaggerResponse(StatusCodes.Status404NotFound, Description = "The requested resource was not found.", Type = typeof(NotFoundResult))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Description = "An unexpected API error has occurred.", Type = typeof(StatusCodeResult))]
+        [HttpPut]
+        [Route("/RemoveChannel")]
+        public async Task<string> RemoveChannel(string channelName)
+        {
+            try
+            {
+                _groupService.UnsubscribeToChannel(channelName, User.Identity.Name);
                 return ("Group deleted!");
             }
             catch (Exception ex)

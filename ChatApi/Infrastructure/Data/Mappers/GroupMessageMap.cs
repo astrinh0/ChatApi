@@ -23,7 +23,7 @@ namespace ChatApi.Infrastructure.Mappers
 
 
             builder.Property(u => u.CreatedAt)
-                .HasColumnName("um_createdat");
+                .HasColumnName("gm_createdat");
 
             builder
                 .HasKey(gm => new { gm.GroupId, gm.MessageId});

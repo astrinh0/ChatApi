@@ -10,12 +10,18 @@ namespace ChatApi.Infrastructure.Services
     public interface IGroupService
     {
         Task<IEnumerable<Group>> GetGroups();
-        Group AddGroup(EnumTypeGroup type, string username, string name);
+        Group AddGroupOrChannel(EnumTypeGroup type, string username, string name);
 
         bool AddUserToGroup(string name, string owner, string userToAdd);
 
+        bool SubscribeToChannel(string username, string channelName);
+
+        bool UnsubscribeToChannel(string username, string channelName);
+
         bool RemoveUserToGroup(string name, string owner, string userToAdd);
         bool RemoveGroup(string groupName, string ownerName);
+
+
 
 
     }
