@@ -37,7 +37,7 @@ namespace ChatApi.Infrastructure.Repos
 
             var user = new User
             {
-                Active = Models.Enums.EnumFlag.Y,
+                Active = EnumFlag.Y,
                 ChangedAt = null,
                 CreatedAt = DateTime.UtcNow,
                 Name = name,

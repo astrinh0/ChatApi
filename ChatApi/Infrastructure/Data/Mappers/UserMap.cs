@@ -49,6 +49,25 @@ namespace ChatApi.Infrastructure.Mappers
                .WithOne(um => um.Receiver)
                .HasForeignKey(um => um.ReceiverId);
 
+            builder
+                .HasMany(p => p.GroupUsers)
+                .WithOne(p => p.User)
+                .HasForeignKey(p => p.UserId); 
+            
+            builder
+                .HasMany(p => p.OwnerGroups)
+                .WithOne(p => p.Owner)
+                .HasForeignKey(p => p.OwnerId);
+            
+            builder
+                .HasMany(p => p.SendMessages)
+                .WithOne(p => p.Sender)
+                .HasForeignKey(p => p.SenderId);
+
+          
+
+
+
 
 
         }
