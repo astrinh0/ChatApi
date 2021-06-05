@@ -1,4 +1,5 @@
 ﻿using ChatApi.Infrastructure.Data.Models;
+using ChatApi.Infrastructure.Repos;
 using ChatApi.Infrastructure.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -13,15 +14,20 @@ namespace ChatApi.Infrastructure.Services
     public class FileService : IFileService
     {
         public static IWebHostEnvironment _webHostEnviroment;
-      
+        private readonly IUserRepository _userRepository;
+        private readonly IFileRepository _fileRepository;
 
 
-        public FileService(IWebHostEnvironment webHostEnvironment)
+        public FileService(IWebHostEnvironment webHostEnvironment, IUserRepository userRepository, IFileRepository fileRepository)
         {
             _webHostEnviroment = webHostEnvironment;
+
+            _userRepository = userRepository;
+
+            _fileRepository = fileRepository;
         }
 
-        public string UploadFile(FileUpload fileUpload)
+        public string UploadFile(FileUpload fileUpload, string ownerName)
         {
             if (fileUpload.Files.Length > 0)
             {
@@ -31,11 +37,18 @@ namespace ChatApi.Infrastructure.Services
                     Directory.CreateDirectory(path);
                 }
 
-                using (FileStream fileStream = File.Create(path + fileUpload.Files.FileName))
+                using (FileStream fileStream = System.IO.File.Create(path + fileUpload.Files.FileName))
                 {
                     fileUpload.Files.CopyTo(fileStream);
                     fileStream.Flush();
+                    System.IO.File.SetAttributes(path, FileAttributes.Normal);
+                    var owner = _userRepository.FindUserByUsername(ownerName);
                     
+                    var expireDate = DateTime.UtcNow.AddSeconds(30);
+                    
+                  
+                    var file = _fileRepository.AddFile(owner.Id, expireDate, fileUpload.Files.FileName.Replace(".png", ""));
+
                     return ("Upload Done!");
                 }
 
@@ -62,9 +75,9 @@ namespace ChatApi.Infrastructure.Services
 
             string path = _webHostEnviroment.WebRootPath + "\\uploads\\";
             var filePath = path + fileName + ".png";
-            if (File.Exists(filePath))
+            if (System.IO.File.Exists(filePath))
             {
-                byte[] b = File.ReadAllBytes(filePath);
+                byte[] b = System.IO.File.ReadAllBytes(filePath);
                 return b;
             }
 
@@ -77,13 +90,14 @@ namespace ChatApi.Infrastructure.Services
 
             string path = _webHostEnviroment.WebRootPath + "\\uploads\\";
             var filePath = path + fileName + ".png";
-            if (File.Exists(filePath))
+            if (System.IO.File.Exists(filePath))
             {
-                File.Delete(path);
+                System.IO.File.Delete(path);
                 return ("File deleted!");
             }
 
             return ("File delete error!");
         }
+
     }
 }

@@ -63,8 +63,9 @@ namespace ChatApi.Controllers
         {
             try
             {
-                _userService.AddUser(name, email, username, password);
-                return ("User created");
+                var aux = _userService.AddUser(User.Identity.Name, name, email, username, password);
+                if (aux != null) return ($"User: {username} created");
+                else return ("No permission!!!");
             }
             catch (Exception ex)
             {
@@ -88,8 +89,10 @@ namespace ChatApi.Controllers
         {
             try
             {
-                _userService.RemoveUser(User.Identity.Name, username);
-                return ("User Removed!");
+                var aux = _userService.RemoveUser(User.Identity.Name, username);
+                if (aux == true) { return ("User Removed!"); }
+
+                return ("U must be admin or owner of the account!");
             }
             catch (Exception ex) { return ex.Message; }
         }

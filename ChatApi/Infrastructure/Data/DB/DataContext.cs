@@ -24,6 +24,8 @@ namespace ChatApi.Infrastructure.DB
 
         public DbSet<GroupUser> GroupUsers { get; set; }
 
+        public DbSet<File> Files { get; set; }
+
 
 
 
@@ -41,6 +43,7 @@ namespace ChatApi.Infrastructure.DB
             builder.ApplyConfiguration(new GroupMessageMap());
             builder.ApplyConfiguration(new UserMessageMap());
             builder.ApplyConfiguration(new GroupUserMap());
+            builder.ApplyConfiguration(new FileMap());
         }
         
         

@@ -60,6 +60,11 @@ namespace ChatApi.Infrastructure.Mappers
                 .HasForeignKey(p => p.OwnerId);
             
             builder
+                .HasMany(p => p.Files)
+                .WithOne(p => p.Owner)
+                .HasForeignKey(p => p.OwnerId);
+            
+            builder
                 .HasMany(p => p.SendMessages)
                 .WithOne(p => p.Sender)
                 .HasForeignKey(p => p.SenderId);

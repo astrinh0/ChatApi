@@ -26,7 +26,7 @@ namespace ChatApi.Infrastructure.Repos
         public async Task <IEnumerable<User>> GetAll()
         {
             var users = await _context.Users.ToListAsync();
-            return users.WithoutPasswords();
+            return users;
         }
 
         public User AddUser(string name, string email, string username, string password)
@@ -49,7 +49,7 @@ namespace ChatApi.Infrastructure.Repos
 
             _context.Users.Add(user);
             _context.SaveChanges();
-            return user.WithoutPassword();
+            return user;
         }
 
         public bool RemoveUser(int id)
@@ -90,7 +90,7 @@ namespace ChatApi.Infrastructure.Repos
         {
             
             return _context.Users.FirstOrDefault(a => a.Username == username && a.Password == password
-            && a.Active == EnumFlag.Y).WithoutPassword();
+            && a.Active == EnumFlag.Y);
 
         }
 

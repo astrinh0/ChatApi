@@ -21,6 +21,7 @@ using ChatApi.Infrastructure.Helpers;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using System.Reflection;
 using System.IO;
+using ChatApi.Infrastructure.WorkServices;
 
 namespace ChatApi
 {
@@ -46,6 +47,7 @@ namespace ChatApi
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IGroupRepository, GroupRepository>();
             services.AddTransient<IMessageRepository, MessageRepository>();
+            services.AddTransient<IFileRepository, FileRepository>();
 
             services.AddCors();
 
@@ -104,9 +106,11 @@ namespace ChatApi
 
        
             });
-            services.AddDbContext<Infrastructure.DB.DataContext>(options =>
-                //options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-            options.UseNpgsql(Configuration.GetConnectionString("PCConnection")));
+            services.AddDbContext<DataContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddHostedService<CleanFiles>();
+            services.AddLogging();
+
 
 
 

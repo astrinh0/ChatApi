@@ -37,6 +37,18 @@ CREATE TABLE "User" (
   	constraint FK_gr_owner foreign key (gr_owner)
    references "User"(us_id));
 
+   CREATE TABLE "File" (
+   fl_id int generated always as identity,
+   fl_owner_id int not null,
+   fl_name varchar(20) not null,
+   fl_createdat timestamp(0) not null,
+   fl_endedat timestamp(0) not null,
+   fl_active varchar(1) not null,
+   fl_changedat timestamp(0),
+  constraint PK_fl_id primary KEY (fl_id),
+  constraint FK_fl_owner_id foreign key (fl_owner_id)
+   REFERENCES "User"(us_id));
+
    
   
   create table "User_Message"(

@@ -39,7 +39,7 @@ namespace ChatApi.Controllers
         {
             try
             {
-                return _fileService.UploadFile(fileUpload);
+                return _fileService.UploadFile(fileUpload, User.Identity.Name);
             }
             catch (Exception ex)
             {

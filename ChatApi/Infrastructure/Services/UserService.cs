@@ -22,11 +22,16 @@ namespace ChatApi.Infrastructure.Services
             return users;
         }
 
-        public User AddUser(string name, string email, string username, string password)
+        public User AddUser(string admin, string name, string email, string username, string password)
         {
-            var passHash = ExtensionMethods.Encrypt(password);
-            var user = _userRepository.AddUser(name, email, username, passHash);
-            return user;
+            if (admin == "admin")
+            {
+                var passHash = ExtensionMethods.Encrypt(password);
+                var user = _userRepository.AddUser(name, email, username, passHash);
+                return user;
+            }
+
+            return null;
         }
 
         public bool RemoveUser(string actualUser, string userToRemove)

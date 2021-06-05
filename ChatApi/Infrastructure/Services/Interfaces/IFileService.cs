@@ -8,7 +8,7 @@ namespace ChatApi.Infrastructure.Services
 {
     public interface IFileService
     {
-        string UploadFile(FileUpload fileUpload);
+        string UploadFile(FileUpload fileUpload, string ownerName);
         byte[] FileDownload(string fileName);
 
         string FileDelete(string fileName);

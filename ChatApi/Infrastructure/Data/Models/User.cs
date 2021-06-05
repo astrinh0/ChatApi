@@ -30,6 +30,8 @@ namespace ChatApi.Infrastructure.Models
 
         public virtual ICollection<Group> OwnerGroups { get; set; }
 
+        public virtual ICollection<File> Files { get; set; }
+
         //rever
 
         public virtual ICollection<Message> SendMessages { get; set; }

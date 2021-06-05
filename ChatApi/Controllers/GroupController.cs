@@ -26,7 +26,7 @@ namespace ChatApi.Controllers
             _groupService = groupService;
         }
 
-        [SwaggerOperation("Get all Groups", null, Tags = new[] { "3. Groups" })]
+        [SwaggerOperation("Get all Groups", null, Tags = new[] { "3. Groups/Channels" })]
         [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(List<Group>))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
         [SwaggerResponse(StatusCodes.Status401Unauthorized, Description = "Authentication was not provided or it is not valid.", Type = typeof(UnauthorizedResult))]
@@ -51,7 +51,7 @@ namespace ChatApi.Controllers
         }
 
 
-        [SwaggerOperation("Create a group", null, Tags = new[] { "3. Groups" })]
+        [SwaggerOperation("Create a group", null, Tags = new[] { "3. Groups/Channels" })]
         [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(string))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
         [SwaggerResponse(StatusCodes.Status401Unauthorized, Description = "Authentication was not provided or it is not valid.", Type = typeof(UnauthorizedResult))]
@@ -76,7 +76,7 @@ namespace ChatApi.Controllers
         }
 
 
-        [SwaggerOperation("Add user to group", null, Tags = new[] { "3. Groups" })]
+        [SwaggerOperation("Add user to group", null, Tags = new[] { "3. Groups/Channels" })]
         [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(string))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
         [SwaggerResponse(StatusCodes.Status401Unauthorized, Description = "Authentication was not provided or it is not valid.", Type = typeof(UnauthorizedResult))]
@@ -90,7 +90,7 @@ namespace ChatApi.Controllers
             try
             {
                 _groupService.AddUserToGroup(name, User.Identity.Name, userToAdd);
-                return ("User added to group {name}");
+                return ($"User added to group {name}");
             }
             catch (Exception ex)
             {
@@ -101,7 +101,7 @@ namespace ChatApi.Controllers
         }
 
 
-        [SwaggerOperation("Remove user from group", null, Tags = new[] { "3. Groups" })]
+        [SwaggerOperation("Remove user from group", null, Tags = new[] { "3. Groups/Channels" })]
         [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(string))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
         [SwaggerResponse(StatusCodes.Status401Unauthorized, Description = "Authentication was not provided or it is not valid.", Type = typeof(UnauthorizedResult))]
@@ -115,7 +115,7 @@ namespace ChatApi.Controllers
             try
             {
                 _groupService.RemoveUserToGroup(name, User.Identity.Name, userToAdd);
-                return ("User removed from the group {name}");
+                return ($"User removed from the group {name}");
             }
             catch (Exception ex)
             {
@@ -126,7 +126,7 @@ namespace ChatApi.Controllers
         }
 
 
-        [SwaggerOperation("Delete group", null, Tags = new[] { "3. Groups" })]
+        [SwaggerOperation("Delete group", null, Tags = new[] { "3. Groups/Channels" })]
         [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(string))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
         [SwaggerResponse(StatusCodes.Status401Unauthorized, Description = "Authentication was not provided or it is not valid.", Type = typeof(UnauthorizedResult))]
