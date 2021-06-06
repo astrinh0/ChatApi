@@ -194,6 +194,29 @@ namespace ChatApi.Infrastructure.Services
                 return null;
             }
         }
+
+        public int? GetNumberOfMessagesUnread(string username)
+        {
+            var user = _userRepository.FindUserByUsername(username);
+
+            if (user != null)
+            {
+                var aux = _messageRepository.GetNumberOfMessagesUnread(user.Id);
+
+                if (aux != null)
+                {
+                    return aux;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
 

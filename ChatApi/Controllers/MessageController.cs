@@ -252,6 +252,40 @@ namespace ChatApi.Controllers
         }
 
         /// <summary>
+        /// Get the number of messages received!
+        /// </summary>
+        /// <returns></returns>
+        [SwaggerOperation("Number of messages unreaded", null, Tags = new[] { "2. Messages" })]
+        [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(int))]
+        [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
+        [SwaggerResponse(StatusCodes.Status401Unauthorized, Description = "Authentication was not provided or it is not valid.", Type = typeof(UnauthorizedResult))]
+        [SwaggerResponse(StatusCodes.Status403Forbidden, Description = "You do not have permissions to perform the operation.", Type = typeof(StatusCodeResult))]
+        [SwaggerResponse(StatusCodes.Status404NotFound, Description = "The requested resource was not found.", Type = typeof(NotFoundResult))]
+        [SwaggerResponse(StatusCodes.Status500InternalServerError, Description = "An unexpected API error has occurred.", Type = typeof(StatusCodeResult))]
+        [HttpGet]
+        [Route("/NumberOfMessagesUnread")]
+        public async Task<int?> GetNumberOfMessagesUnread()
+        {
+            if (User.Identity.Name != null)
+            {
+                try
+                {
+
+                    var messages = _messageService.GetNumberOfMessagesUnread(User.Identity.Name);
+
+                    return messages;
+                }
+                catch (Exception)
+                {
+
+                    return 0;
+                }
+            }
+
+            return 0;
+        }
+
+        /// <summary>
         /// Remove a message from received messages
         /// </summary>
         /// <param name="id"></param>

@@ -4,5 +4,181 @@
         <name>ChatApi</name>
     </assembly>
     <members>
+        <member name="M:ChatApi.Controllers.FileController.FileUpload(ChatApi.Infrastructure.Data.Models.FileUpload)">
+            <summary>
+            Upload a file to API
+            </summary>
+            <param name="fileUpload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ChatApi.Controllers.FileController.GetAllFiles">
+            <summary>
+            See all files from the server
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChatApi.Controllers.FileController.FileDownload(System.String)">
+            <summary>
+            Get a file from server
+            </summary>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ChatApi.Controllers.FileController.FileDelete(System.String)">
+            <summary>
+            Delete a file from server
+            </summary>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ChatApi.Controllers.GroupController.GetGroups">
+            <summary>
+            Get all groups and channels
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChatApi.Controllers.GroupController.AddGroup(ChatApi.Infrastructure.Models.Enums.EnumTypeGroup,System.String)">
+            <summary>
+            Create a group or channel
+            </summary>
+            <param name="type"></param>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ChatApi.Controllers.GroupController.AddUserToGroup(System.String,System.String)">
+            <summary>
+            Add a user to a group
+            </summary>
+            <param name="name"></param>
+            <param name="userToAdd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ChatApi.Controllers.GroupController.SubscribeToChannel(System.String)">
+            <summary>
+            Subscribe to a channel
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ChatApi.Controllers.GroupController.UnsubscribeToChannel(System.String)">
+            <summary>
+            Unsubscribe to a channel
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ChatApi.Controllers.GroupController.RemoveUserFromGroup(System.String,System.String)">
+            <summary>
+            Remove a user from a Group
+            </summary>
+            <param name="name"></param>
+            <param name="userToAdd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ChatApi.Controllers.GroupController.RemoveGroupOrChannel(System.String)">
+            <summary>
+            Delete a group or channel
+            </summary>
+            <param name="groupName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ChatApi.Controllers.MessageController.SendMessageToUser(System.String,System.String)">
+            <summary>
+            Send a message to a user by username
+            </summary>
+            <param name="receiverName"></param>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ChatApi.Controllers.MessageController.SendMessageToGroup(System.String,System.String)">
+            <summary>
+            Send a message to group by group name
+            </summary>
+            <param name="groupName"></param>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ChatApi.Controllers.MessageController.SendMessageToChannel(System.String,System.String)">
+            <summary>
+            Send a message to a channel by channel name
+            </summary>
+            <param name="channelName"></param>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ChatApi.Controllers.MessageController.MessagesSentByUser">
+            <summary>
+            See all messages sent
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChatApi.Controllers.MessageController.MessagesReceivedByUserId">
+            <summary>
+            See all messages received and readed
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChatApi.Controllers.MessageController.MessagesReceivedUnreadedByUserId">
+            <summary>
+            Get unreaded messages.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChatApi.Controllers.MessageController.GetNumberOfMessages">
+            <summary>
+            Get the number of messages received!
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChatApi.Controllers.MessageController.GetNumberOfMessagesUnread">
+            <summary>
+            Get the number of messages received!
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChatApi.Controllers.MessageController.RemoveMessage(System.Int32)">
+            <summary>
+            Remove a message from received messages
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ChatApi.Controllers.UserController.GetUsers">
+            <summary>
+            Get all users from API
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChatApi.Controllers.UserController.AddUser(System.String,System.String,System.String,System.String)">
+            <summary>
+            Add a user to API
+            </summary>
+            <param name="name"></param>
+            <param name="email"></param>
+            <param name="username"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ChatApi.Controllers.UserController.RemoveUser(System.String)">
+            <summary>
+            Remove a user from API
+            </summary>
+            <param name="username"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ChatApi.Controllers.UserController.Authenticate(ChatApi.Infrastructure.Data.Models.AuthenticateModel)">
+            <summary>
+            Basic authorization on API
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ChatApi.Controllers.UserController.ChangePassword(System.String)">
+            <summary>
+            Change a password from a user
+            </summary>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

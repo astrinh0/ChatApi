@@ -25,6 +25,8 @@ namespace ChatApi.Infrastructure.Repos
 
         UserMessage GetReceiver(int messageId);
 
+        int? GetNumberOfMessagesUnread(int userId);
+
 
 
     }
