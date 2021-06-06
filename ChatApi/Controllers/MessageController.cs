@@ -266,6 +266,7 @@ namespace ChatApi.Controllers
         [Route("/NumberOfMessagesUnread")]
         public async Task<int?> GetNumberOfMessagesUnread()
         {
+
             if (User != null)
             {
                 try

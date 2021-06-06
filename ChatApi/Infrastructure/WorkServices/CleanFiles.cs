@@ -43,7 +43,7 @@ namespace ChatApi.Infrastructure.WorkServices
                 using (var scope = _services.CreateScope())
                 {
                     var message = scope.ServiceProvider.GetService<MessageController>();
-
+                    
                     var aux = message.GetNumberOfMessagesUnread();
 
 
