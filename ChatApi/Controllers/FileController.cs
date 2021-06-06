@@ -26,6 +26,13 @@ namespace ChatApi.Controllers
         }
 
 
+
+
+        /// <summary>
+        /// Upload a file to API
+        /// </summary>
+        /// <param name="fileUpload"></param>
+        /// <returns></returns>
         [SwaggerOperation("Upload a file", null, Tags = new[] { "4. Files" })]
         [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(string))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
@@ -49,6 +56,11 @@ namespace ChatApi.Controllers
         }
 
         
+
+        /// <summary>
+        /// See all files from the server
+        /// </summary>
+        /// <returns></returns>
         [SwaggerOperation("See all files", null, Tags = new[] { "4. Files" })]
         [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(List<string>))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
@@ -64,6 +76,12 @@ namespace ChatApi.Controllers
         }
 
 
+
+        /// <summary>
+        /// Get a file from server
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         [SwaggerOperation("Download a file", null, Tags = new[] { "4. Files" })]
         [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(IActionResult))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
@@ -82,7 +100,11 @@ namespace ChatApi.Controllers
             
         }
 
-
+        /// <summary>
+        /// Delete a file from server
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         [SwaggerOperation("Delete a file", null, Tags = new[] { "4. Files" })]
         [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(string))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
@@ -96,8 +118,6 @@ namespace ChatApi.Controllers
         {
 
             return _fileService.FileDelete(fileName);
-
-            
 
         }
 

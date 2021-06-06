@@ -23,6 +23,8 @@ namespace ChatApi.Infrastructure.Services
 
         Message SendMessageToGroup(string sender, string groupName, string message);
 
+        Message SendMessageToChannel(string sender, string channelName, string message);
+
         int? GetNumberOfMessages(string username);
 
     }

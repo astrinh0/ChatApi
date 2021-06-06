@@ -25,6 +25,12 @@ namespace ChatApi.Controllers
             _userService = userService;
         }
 
+
+
+        /// <summary>
+        /// Get all users from API
+        /// </summary>
+        /// <returns></returns>
         [SwaggerOperation("Return all the users", null, Tags = new[] { "1. Users" })]
         [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(List<User>))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
@@ -50,6 +56,15 @@ namespace ChatApi.Controllers
             
         }
 
+
+        /// <summary>
+        /// Add a user to API
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="email"></param>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         [SwaggerOperation("Add a user", null, Tags = new[] { "1. Users" })]
         [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(string))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
@@ -76,6 +91,11 @@ namespace ChatApi.Controllers
         }
 
 
+        /// <summary>
+        /// Remove a user from API
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         [SwaggerOperation("Remove a user", null, Tags = new[] { "1. Users" })]
         [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(string))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
@@ -99,6 +119,11 @@ namespace ChatApi.Controllers
 
 
 
+        /// <summary>
+        /// Basic authorization on API
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [SwaggerOperation("Autenticate a user", null, Tags = new[] { "1. Users" })]
         [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(string))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
@@ -120,6 +145,12 @@ namespace ChatApi.Controllers
 
 
 
+
+        /// <summary>
+        /// Change a password from a user
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
         [SwaggerOperation("Change password", null, Tags = new[] { "1. Users" })]
         [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(string))]
         [SwaggerResponse(StatusCodes.Status400BadRequest, Description = "The endpoint or data structure is not in line with expectations.", Type = typeof(BadRequestResult))]
@@ -133,8 +164,9 @@ namespace ChatApi.Controllers
         {
             try
             {
-                _userService.ChangePassword(User.Identity.Name, password);
-                return "Password Changed!";
+                var aux = _userService.ChangePassword(User.Identity.Name, password);
+                if (aux == true) return "Password Changed!";
+                else return "Something went wrong!";
             }
             catch (Exception ex) { return ex.Message; }
            

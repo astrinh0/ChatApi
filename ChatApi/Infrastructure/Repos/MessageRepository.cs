@@ -269,7 +269,35 @@ namespace ChatApi.Infrastructure.Repos
 
         }
 
-        
+        public Message SendMessageToChannel(int senderId, int channelId, string message)
+        {
+            Message aux = new Message();
+
+            aux.Active = EnumFlag.Y;
+            aux.ActualMessage = message;
+            aux.ChangedAt = null;
+            aux.CreatedAt = DateTime.UtcNow;
+            aux.SenderId = senderId;
+            aux.Readed = EnumFlag.N;
+
+            _context.Messages.Add(aux);
+            _context.SaveChanges();
+
+            GroupMessage groupMessage = new GroupMessage();
+
+            groupMessage.CreatedAt = DateTime.UtcNow;
+            groupMessage.GroupId = channelId;
+            groupMessage.MessageId = aux.Id;
+
+            _context.GroupMessages.Add(groupMessage);
+            _context.SaveChanges();
+
+
+            return aux;
+
+        }
+
+
     }
 }
 

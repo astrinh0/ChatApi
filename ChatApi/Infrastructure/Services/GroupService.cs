@@ -40,13 +40,13 @@ namespace ChatApi.Infrastructure.Services
 
 
 
-        public bool RemoveGroup(string groupName, string ownerName)
+        public bool RemoveGroupOrChannel(string groupName, string ownerName)
         {
             var group = _groupRepository.GetGroupByName(groupName);
             var owner = _userRepository.FindUserByUsername(ownerName);
             
 
-           if (group != null && owner != null && group.OwnerId == owner.Id && group.Type == EnumTypeGroup.G)
+           if (group != null && owner != null && group.OwnerId == owner.Id)
            {
                 _groupRepository.RemoveGroupOrChannel(group.Id);
                 return true;
@@ -152,23 +152,6 @@ namespace ChatApi.Infrastructure.Services
             return false;
         }
 
-        public bool RemoveChannel(string channelName, string ownerName)
-        {
-            var channel = _groupRepository.GetChannelByName(channelName);
-            var owner = _userRepository.FindUserByUsername(ownerName);
-
-
-            if (channel != null && owner != null && channel.OwnerId == owner.Id && channel.Type == EnumTypeGroup.C)
-            {
-                _groupRepository.RemoveGroupOrChannel(channel.Id);
-                return true;
-
-            }
-
-            return false;
-
-
-        }
-
+        
     }
 }

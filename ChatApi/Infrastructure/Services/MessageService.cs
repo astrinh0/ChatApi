@@ -57,6 +57,25 @@ namespace ChatApi.Infrastructure.Services
 
         }
 
+        public Message SendMessageToChannel(string sender, string channelName, string message)
+        {
+            var senderUser = _userRepository.FindUserByUsername(sender);
+            var channel = _groupRepository.GetChannelByName(channelName);
+
+            if (senderUser != null && channel != null)
+            {
+                if (senderUser.Id == channel.OwnerId)
+                {
+                    var aux = _messageRepository.SendMessageToChannel(senderUser.Id, channel.Id, message);
+                    return aux;
+                }
+
+            }
+            return null;
+
+
+        }
+
         public bool RemoveMessage(int id)
         {
             if (_messageRepository.RemoveMessage(id) == true)
@@ -80,6 +99,7 @@ namespace ChatApi.Infrastructure.Services
                     var receiver = _userRepository.UserName(UserMessage.ReceiverId);
                     var newItem = new MessageForJson
                     {
+                        Id = item.Id,
                         Message = item.ActualMessage,
                         Sender = _userRepository.UserName(item.SenderId),
                         Receiver = receiver
@@ -108,6 +128,7 @@ namespace ChatApi.Infrastructure.Services
                 {
                     var newItem = new MessageForJson
                     {
+                        Id = item.Id,
                         Message = item.ActualMessage,
                         Sender = _userRepository.UserName(item.SenderId),
                         Receiver = _userRepository.UserName(user.Id)
@@ -134,6 +155,7 @@ namespace ChatApi.Infrastructure.Services
                 {
                     var newItem = new MessageForJson
                     {
+                        Id = item.Id,
                         Message = item.ActualMessage,
                         Sender = _userRepository.UserName(item.SenderId),
                         Receiver = _userRepository.UserName(user.Id)

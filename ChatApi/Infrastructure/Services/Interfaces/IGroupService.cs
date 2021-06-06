@@ -19,7 +19,7 @@ namespace ChatApi.Infrastructure.Services
         bool UnsubscribeToChannel(string username, string channelName);
 
         bool RemoveUserToGroup(string name, string owner, string userToAdd);
-        bool RemoveGroup(string groupName, string ownerName);
+        bool RemoveGroupOrChannel(string groupName, string ownerName);
 
 
 
