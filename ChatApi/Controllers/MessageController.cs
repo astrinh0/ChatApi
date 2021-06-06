@@ -266,12 +266,12 @@ namespace ChatApi.Controllers
         [Route("/NumberOfMessagesUnread")]
         public async Task<int?> GetNumberOfMessagesUnread()
         {
-            if (User.Identity.Name != null)
+            if (User != null)
             {
                 try
                 {
 
-                    var messages = _messageService.GetNumberOfMessagesUnread(User.Identity.Name);
+                    var messages = await _messageService.GetNumberOfMessagesUnread(User.Identity.Name);
 
                     return messages;
                 }
@@ -281,6 +281,7 @@ namespace ChatApi.Controllers
                     return 0;
                 }
             }
+
 
             return 0;
         }

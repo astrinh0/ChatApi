@@ -195,13 +195,13 @@ namespace ChatApi.Infrastructure.Services
             }
         }
 
-        public int? GetNumberOfMessagesUnread(string username)
+        public async Task<int?> GetNumberOfMessagesUnread(string username)
         {
             var user = _userRepository.FindUserByUsername(username);
 
             if (user != null)
             {
-                var aux = _messageRepository.GetNumberOfMessagesUnread(user.Id);
+                var aux = await _messageRepository.GetNumberOfMessagesUnread(user.Id);
 
                 if (aux != null)
                 {

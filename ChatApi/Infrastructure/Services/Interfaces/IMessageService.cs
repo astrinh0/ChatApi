@@ -27,7 +27,7 @@ namespace ChatApi.Infrastructure.Services
 
         int? GetNumberOfMessages(string username);
 
-        int? GetNumberOfMessagesUnread(string username);
+        Task<int?> GetNumberOfMessagesUnread(string username);
 
     }
 }

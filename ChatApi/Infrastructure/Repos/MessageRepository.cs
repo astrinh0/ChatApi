@@ -302,7 +302,7 @@ namespace ChatApi.Infrastructure.Repos
 
         }
 
-        public int? GetNumberOfMessagesUnread(int userId)
+        public async Task<int?> GetNumberOfMessagesUnread(int userId)
         {
             
             
@@ -311,7 +311,7 @@ namespace ChatApi.Infrastructure.Repos
 
                 var listOfUserMessages = new List<UserMessage>();
 
-                listOfUserMessages = _context.UserMessages.Where(um => um.ReceiverId == userId).ToList();
+                listOfUserMessages =  _context.UserMessages.Where(um => um.ReceiverId == userId).ToList();
 
                 var messages = new List<Message>();
 

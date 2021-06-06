@@ -40,24 +40,24 @@ namespace ChatApi.Infrastructure.WorkServices
                     await Task.Delay(1000, stoppingToken);
                 }
 
-                //using (var scope = _services.CreateScope())
-                //{
-                //    var message = scope.ServiceProvider.GetService<MessageController>();
+                using (var scope = _services.CreateScope())
+                {
+                    var message = scope.ServiceProvider.GetService<MessageController>();
 
-                //    var aux = message.GetNumberOfMessagesUnread();
-                        
+                    var aux = message.GetNumberOfMessagesUnread();
 
-                //        if (aux != null && aux.Result > 0)
-                //        {
-                //            _logger.LogWarning($"You have {aux} notifications", DateTime.UtcNow);
-                //        }
-                    
-                    
-                    
-                //    _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                //    await Task.Delay(1000, stoppingToken);
-                //}
-               
+
+                    if (aux != null && aux.Result > 0)
+                    {
+                        _logger.LogWarning($"You have {aux.Result} notifications", DateTime.UtcNow);
+                    }
+
+
+
+                    _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
+                    await Task.Delay(1000, stoppingToken);
+                }
+
             }
         }
     }
