@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using ChatApi.Infrastructure.Data.Models;
 using ChatApi.Infrastructure.Models.Enums;
 
@@ -32,7 +30,7 @@ namespace ChatApi.Infrastructure.Models
 
         public virtual ICollection<File> Files { get; set; }
 
-        //rever
+
 
         public virtual ICollection<Message> SendMessages { get; set; }
 

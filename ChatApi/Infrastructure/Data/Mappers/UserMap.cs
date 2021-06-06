@@ -3,9 +3,6 @@ using ChatApi.Infrastructure.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ChatApi.Infrastructure.Mappers
 {
@@ -52,24 +49,24 @@ namespace ChatApi.Infrastructure.Mappers
             builder
                 .HasMany(p => p.GroupUsers)
                 .WithOne(p => p.User)
-                .HasForeignKey(p => p.UserId); 
-            
+                .HasForeignKey(p => p.UserId);
+
             builder
                 .HasMany(p => p.OwnerGroups)
                 .WithOne(p => p.Owner)
                 .HasForeignKey(p => p.OwnerId);
-            
+
             builder
                 .HasMany(p => p.Files)
                 .WithOne(p => p.Owner)
                 .HasForeignKey(p => p.OwnerId);
-            
+
             builder
                 .HasMany(p => p.SendMessages)
                 .WithOne(p => p.Sender)
                 .HasForeignKey(p => p.SenderId);
 
-          
+
 
 
 

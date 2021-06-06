@@ -47,13 +47,13 @@ namespace ChatApi.Infrastructure.Services
             {
                 if (_groupRepository.CheckIfUserBelongsToGroupOrChannel(senderUser.Id, group.Id) == true || group.OwnerId == senderUser.Id)
                 {
-                    var aux =_messageRepository.SendMessageToGroup(senderUser.Id, group.Id, message);
+                    var aux = _messageRepository.SendMessageToGroup(senderUser.Id, group.Id, message);
                     return aux;
                 }
-                
+
             }
-                return null;
-            
+            return null;
+
 
         }
 
@@ -108,7 +108,7 @@ namespace ChatApi.Infrastructure.Services
                 }
 
                 return list;
-                
+
             }
             else
             {

@@ -1,19 +1,13 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ChatApi.Infrastructure.DB;
 using ChatApi.Infrastructure.Repos;
 using ChatApi.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication;
@@ -61,7 +55,7 @@ namespace ChatApi
             })
                 .AddJsonOptions(options =>
                 {
-                    
+
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                     options.JsonSerializerOptions.IgnoreNullValues = true;
 
@@ -74,12 +68,13 @@ namespace ChatApi
                 .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
             services.AddSwaggerGen(c =>
-            { c.SwaggerDoc("v1", new OpenApiInfo 
-            { 
-                Title = "ChatApi", 
-                Version = "v1",
-                Description = "Chat Api no ambito da unidade curricular de CD"
-            });
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "ChatApi",
+                    Version = "v1",
+                    Description = "Chat Api no ambito da unidade curricular de CD"
+                });
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
@@ -108,7 +103,7 @@ namespace ChatApi
                 });
 
 
-       
+
             });
             services.AddDbContext<DataContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));

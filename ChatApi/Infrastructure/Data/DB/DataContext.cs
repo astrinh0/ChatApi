@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 namespace ChatApi.Infrastructure.DB
 {
     public class DataContext : DbContext
-    
+
     {
-        public DataContext(DbContextOptions<DataContext> options) : base (options)
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 
         }
@@ -32,7 +32,7 @@ namespace ChatApi.Infrastructure.DB
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.EnableSensitiveDataLogging();
-            
+
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -45,7 +45,7 @@ namespace ChatApi.Infrastructure.DB
             builder.ApplyConfiguration(new GroupUserMap());
             builder.ApplyConfiguration(new FileMap());
         }
-        
-        
+
+
     }
 }

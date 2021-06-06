@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using static System.Formats.Asn1.AsnWriter;
 
 namespace ChatApi.Infrastructure.Helpers
 {

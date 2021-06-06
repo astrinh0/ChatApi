@@ -1,6 +1,5 @@
 ﻿using ChatApi.Infrastructure.Models;
 using ChatApi.Infrastructure.Services;
-using Isopoh.Cryptography.Argon2;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

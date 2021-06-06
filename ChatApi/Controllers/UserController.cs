@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using ChatApi.Infrastructure.Data.Models;
 using ChatApi.Infrastructure.Models;
@@ -53,7 +52,7 @@ namespace ChatApi.Controllers
                 return Json(ex);
             }
 
-            
+
         }
 
 
@@ -133,7 +132,7 @@ namespace ChatApi.Controllers
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Description = "An unexpected API error has occurred.", Type = typeof(StatusCodeResult))]
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public async Task<IActionResult> Authenticate([FromBody]AuthenticateModel model)
+        public async Task<IActionResult> Authenticate([FromBody] AuthenticateModel model)
         {
             var user = await _userService.Authenticate(model.Username, model.Password);
 
@@ -169,7 +168,7 @@ namespace ChatApi.Controllers
                 else return "Something went wrong!";
             }
             catch (Exception ex) { return ex.Message; }
-           
+
         }
     }
 

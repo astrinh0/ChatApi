@@ -136,8 +136,8 @@ namespace ChatApi.Controllers
         {
             try
             {
-               var messages = _messageService.GetSentMessages(User.Identity.Name);
-                
+                var messages = _messageService.GetSentMessages(User.Identity.Name);
+
                 if (messages == null)
                 {
                     return NoContent();
@@ -165,7 +165,7 @@ namespace ChatApi.Controllers
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Description = "An unexpected API error has occurred.", Type = typeof(StatusCodeResult))]
         [HttpGet]
         [Route("/ReceivedMessages")]
-        public ActionResult MessagesReceivedByUserId()
+        public ActionResult MessagesReceivedByUser()
         {
             try
             {
@@ -198,7 +198,7 @@ namespace ChatApi.Controllers
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Description = "An unexpected API error has occurred.", Type = typeof(StatusCodeResult))]
         [HttpGet]
         [Route("/UnreadedMessages")]
-        public ActionResult MessagesReceivedUnreadedByUserId()
+        public ActionResult MessagesReceivedUnreadedByUser()
         {
             try
             {
@@ -306,15 +306,15 @@ namespace ChatApi.Controllers
             try
             {
                 var aux = _messageService.RemoveMessage(id);
-                if (aux == true)  return ("Message deleted!"); 
-                else return  ("Message dont exist or something went wrong"); 
+                if (aux == true) return ("Message deleted!");
+                else return ("Message dont exist or something went wrong");
             }
             catch (Exception ex)
             {
 
                 return ex.Message;
             }
-           
+
         }
     }
 

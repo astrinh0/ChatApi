@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ChatApi.Infrastructure.Data.DTO
+﻿namespace ChatApi.Infrastructure.Data.DTO
 {
     public class MessageForJson
     {

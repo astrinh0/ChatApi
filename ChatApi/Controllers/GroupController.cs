@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ChatApi.Controllers
 {
-    
+
     [Route("[controller]")]
     [ApiController]
     [Authorize]
@@ -51,7 +51,7 @@ namespace ChatApi.Controllers
 
                 return Json(ex);
             }
-            
+
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace ChatApi.Controllers
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Description = "An unexpected API error has occurred.", Type = typeof(StatusCodeResult))]
         [HttpPost]
         [Route("/AddGroup")]
-        public async Task<string> AddGroup(EnumTypeGroup type, string name)
+        public async Task<string> AddGroupOrChannel(EnumTypeGroup type, string name)
         {
             try
             {
@@ -81,7 +81,7 @@ namespace ChatApi.Controllers
 
                 return ex.Message;
             }
-          
+
         }
 
         /// <summary>
@@ -189,11 +189,11 @@ namespace ChatApi.Controllers
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Description = "An unexpected API error has occurred.", Type = typeof(StatusCodeResult))]
         [HttpPost]
         [Route("/RemoveUserFromGroup")]
-        public async Task<string> RemoveUserFromGroup(string name, string userToAdd)
+        public async Task<string> RemoveUserFromGroup(string name, string userToRemove)
         {
             try
             {
-                _groupService.RemoveUserToGroup(name, User.Identity.Name, userToAdd);
+                _groupService.RemoveUserToGroup(name, User.Identity.Name, userToRemove);
                 return ($"User removed from the group {name}");
             }
             catch (Exception ex)
@@ -233,7 +233,7 @@ namespace ChatApi.Controllers
 
         }
 
-        
-        
+
+
     }
 }

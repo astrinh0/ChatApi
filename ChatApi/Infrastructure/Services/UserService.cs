@@ -2,7 +2,6 @@
 using ChatApi.Infrastructure.Models;
 using ChatApi.Infrastructure.Repos;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ChatApi.Infrastructure.Services
@@ -15,10 +14,10 @@ namespace ChatApi.Infrastructure.Services
         {
             _userRepository = userRepository;
         }
-   
+
         public Task<IEnumerable<User>> GetUsers()
         {
-            var users =  _userRepository.GetAll();
+            var users = _userRepository.GetAll();
             return users;
         }
 
@@ -64,7 +63,7 @@ namespace ChatApi.Infrastructure.Services
                 return false;
             }
 
-           
+
         }
 
         public async Task<User> Authenticate(string username, string password)
@@ -92,7 +91,7 @@ namespace ChatApi.Infrastructure.Services
                 return aux;
             }
 
-           
+
             return false;
         }
     }

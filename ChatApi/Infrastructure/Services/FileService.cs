@@ -1,13 +1,10 @@
 ﻿using ChatApi.Infrastructure.Data.Models;
 using ChatApi.Infrastructure.Repos;
-using ChatApi.Infrastructure.Services;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ChatApi.Infrastructure.Services
 {
@@ -43,10 +40,10 @@ namespace ChatApi.Infrastructure.Services
                     fileStream.Flush();
                     System.IO.File.SetAttributes(path, FileAttributes.Normal);
                     var owner = _userRepository.FindUserByUsername(ownerName);
-                    
+
                     var expireDate = DateTime.UtcNow.AddSeconds(30);
-                    
-                  
+
+
                     var file = _fileRepository.AddFile(owner.Id, expireDate, fileUpload.Files.FileName.Replace(".png", ""));
 
                     return ("Upload Done!");

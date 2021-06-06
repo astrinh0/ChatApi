@@ -2,7 +2,6 @@
 using ChatApi.Infrastructure.DB;
 using Microsoft.AspNetCore.Hosting;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -47,7 +46,7 @@ namespace ChatApi.Infrastructure.Repos
                 {
                     if (file.ExpireAt < DateTime.UtcNow && file.Active == Models.Enums.EnumFlag.Y)
                     {
-                        
+
                         file.Active = Models.Enums.EnumFlag.N;
                         var filePath = path + file.Name + ".png";
                         _context.Files.Update(file);

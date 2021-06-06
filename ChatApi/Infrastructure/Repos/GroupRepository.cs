@@ -35,7 +35,7 @@ namespace ChatApi.Infrastructure.Repos
                 CreatedAt = DateTime.UtcNow,
                 Active = EnumFlag.Y
             };
-            
+
 
             _context.Groups.Add(group);
             _context.SaveChanges();
@@ -58,7 +58,7 @@ namespace ChatApi.Infrastructure.Repos
             return true;
         }
 
-        
+
 
 
         public Group GetGroup(int groupId)
@@ -121,7 +121,7 @@ namespace ChatApi.Infrastructure.Repos
 
             _context.GroupUsers.Remove(groupUsers);
             _context.SaveChanges();
-            
+
 
             return true;
         }

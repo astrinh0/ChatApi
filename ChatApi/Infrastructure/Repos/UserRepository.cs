@@ -1,11 +1,8 @@
 ﻿
 
 using ChatApi.Infrastructure.DB;
-using ChatApi.Infrastructure.Helpers;
 using ChatApi.Infrastructure.Models;
 using ChatApi.Infrastructure.Models.Enums;
-using Isopoh.Cryptography.Argon2;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -23,7 +20,7 @@ namespace ChatApi.Infrastructure.Repos
             _context = context;
         }
 
-        public async Task <IEnumerable<User>> GetAll()
+        public async Task<IEnumerable<User>> GetAll()
         {
             var users = await _context.Users.ToListAsync();
             return users;
@@ -67,17 +64,17 @@ namespace ChatApi.Infrastructure.Repos
             return true;
         }
 
-        public bool UserExistsAndActive (int id)
+        public bool UserExistsAndActive(int id)
         {
 
-            if (_context.Users.FirstOrDefault(a => a.Id == id && 
+            if (_context.Users.FirstOrDefault(a => a.Id == id &&
                         a.Active == EnumFlag.Y) != null)
             {
                 return true;
             }
 
             return false;
-            
+
         }
 
         public User FindUserByUsername(string username)
@@ -94,7 +91,7 @@ namespace ChatApi.Infrastructure.Repos
 
         public User FindUser(string username, string password)
         {
-            
+
             return _context.Users.FirstOrDefault(a => a.Username == username && a.Password == password
             && a.Active == EnumFlag.Y);
 

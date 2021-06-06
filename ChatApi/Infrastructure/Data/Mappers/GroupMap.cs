@@ -44,16 +44,16 @@ namespace ChatApi.Infrastructure.Mappers
                 .WithMany(u => u.OwnerGroups)
                 .HasForeignKey(g => g.OwnerId);
 
-      
+
             builder
                 .HasMany(p => p.GroupMessages)
                 .WithOne(p => p.Group)
                 .HasForeignKey(p => p.MessageId);
 
-           
 
-         
-            
+
+
+
         }
     }
 }

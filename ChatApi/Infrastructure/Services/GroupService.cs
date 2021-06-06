@@ -34,7 +34,7 @@ namespace ChatApi.Infrastructure.Services
                 var group = _groupRepository.AddGroup(type, owner.Id, name);
                 return group;
             }
-            
+
             return null;
         }
 
@@ -44,18 +44,18 @@ namespace ChatApi.Infrastructure.Services
         {
             var group = _groupRepository.GetGroupByName(groupName);
             var owner = _userRepository.FindUserByUsername(ownerName);
-            
 
-           if (group != null && owner != null && group.OwnerId == owner.Id)
-           {
+
+            if (group != null && owner != null && group.OwnerId == owner.Id)
+            {
                 _groupRepository.RemoveGroupOrChannel(group.Id);
                 return true;
 
-           }
+            }
 
             return false;
 
-            
+
         }
 
         public bool AddUserToGroup(string name, string owner, string userToAdd)
@@ -91,15 +91,15 @@ namespace ChatApi.Infrastructure.Services
             }
         }
 
-        public bool RemoveUserToGroup(string name, string owner, string userToAdd)
+        public bool RemoveUserToGroup(string name, string owner, string userToRemove)
         {
             var ownerAux = _userRepository.FindUserByUsername(owner);
 
             var group = _groupRepository.GetGroupByName(name);
 
-            if (ownerAux.Id == group.OwnerId && group != null && ownerAux != null)
+            if ((ownerAux.Id == group.OwnerId && group != null && ownerAux != null) || ownerAux.Username == userToRemove)
             {
-                var user = _userRepository.FindUserByUsername(userToAdd);
+                var user = _userRepository.FindUserByUsername(userToRemove);
 
                 if (user != null)
                 {
@@ -107,7 +107,7 @@ namespace ChatApi.Infrastructure.Services
 
                     if (aux == false)
                     {
-                        var addUser = _groupRepository.RemoveUserFromGroupOrChannel(user.Id, group.Id);
+                        var removeUser = _groupRepository.RemoveUserFromGroupOrChannel(user.Id, group.Id);
                         return true;
                     }
 
@@ -152,6 +152,6 @@ namespace ChatApi.Infrastructure.Services
             return false;
         }
 
-        
+
     }
 }

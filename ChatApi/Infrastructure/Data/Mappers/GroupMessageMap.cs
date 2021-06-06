@@ -1,10 +1,6 @@
 ﻿using ChatApi.Infrastructure.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ChatApi.Infrastructure.Mappers
 {
@@ -26,7 +22,7 @@ namespace ChatApi.Infrastructure.Mappers
                 .HasColumnName("gm_createdat");
 
             builder
-                .HasKey(gm => new { gm.GroupId, gm.MessageId});
+                .HasKey(gm => new { gm.GroupId, gm.MessageId });
 
             builder
                  .HasOne(g => g.Group)

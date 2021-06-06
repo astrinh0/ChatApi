@@ -1,13 +1,11 @@
 ﻿using ChatApi.Infrastructure.Data.Models;
 using ChatApi.Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace ChatApi.Controllers
@@ -55,7 +53,7 @@ namespace ChatApi.Controllers
             }
         }
 
-        
+
 
         /// <summary>
         /// See all files from the server
@@ -96,8 +94,8 @@ namespace ChatApi.Controllers
 
             var aux = _fileService.FileDownload(fileName);
 
-           return File(aux, "image/png");
-            
+            return File(aux, "image/png");
+
         }
 
         /// <summary>
@@ -113,7 +111,7 @@ namespace ChatApi.Controllers
         [SwaggerResponse(StatusCodes.Status404NotFound, Description = "The requested resource was not found.", Type = typeof(NotFoundResult))]
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Description = "An unexpected API error has occurred.", Type = typeof(StatusCodeResult))]
         [Route("/FileDelete")]
-        [HttpGet]
+        [HttpPost]
         public async Task<string> FileDelete(string fileName)
         {
 
