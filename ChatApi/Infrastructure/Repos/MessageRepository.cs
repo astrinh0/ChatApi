@@ -145,9 +145,7 @@ namespace ChatApi.Infrastructure.Repos
                         {
                             foreach (var mensagem in msg)
                             {
-                                mensagem.Readed = EnumFlag.Y;
-                                _context.Messages.Update(mensagem);
-                                _context.SaveChanges();
+                               
                                 messages.Add(mensagem);
                             }
                         }

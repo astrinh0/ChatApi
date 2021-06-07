@@ -77,6 +77,7 @@ namespace ChatApi.Controllers
         {
             try
             {
+                
                 var aux = _userService.AddUser(User.Identity.Name, name, email, username, password);
                 if (aux != null) return ($"User: {username} created");
                 else return ("No permission!!!");

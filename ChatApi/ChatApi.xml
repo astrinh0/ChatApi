@@ -31,13 +31,13 @@
             <param name="fileName"></param>
             <returns></returns>
         </member>
-        <member name="M:ChatApi.Controllers.GroupController.GetGroups">
+        <member name="M:ChatApi.Controllers.GroupController.GetGroupsAndChannels">
             <summary>
             Get all groups and channels
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ChatApi.Controllers.GroupController.AddGroup(ChatApi.Infrastructure.Models.Enums.EnumTypeGroup,System.String)">
+        <member name="M:ChatApi.Controllers.GroupController.AddGroupOrChannel(ChatApi.Infrastructure.Models.Enums.EnumTypeGroup,System.String)">
             <summary>
             Create a group or channel
             </summary>
@@ -72,7 +72,7 @@
             Remove a user from a Group
             </summary>
             <param name="name"></param>
-            <param name="userToAdd"></param>
+            <param name="userToRemove"></param>
             <returns></returns>
         </member>
         <member name="M:ChatApi.Controllers.GroupController.RemoveGroupOrChannel(System.String)">
@@ -112,13 +112,13 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ChatApi.Controllers.MessageController.MessagesReceivedByUserId">
+        <member name="M:ChatApi.Controllers.MessageController.MessagesReceivedByUser">
             <summary>
             See all messages received and readed
             </summary>
             <returns></returns>
         </member>
-        <member name="M:ChatApi.Controllers.MessageController.MessagesReceivedUnreadedByUserId">
+        <member name="M:ChatApi.Controllers.MessageController.MessagesReceivedUnreadedByUser">
             <summary>
             Get unreaded messages.
             </summary>

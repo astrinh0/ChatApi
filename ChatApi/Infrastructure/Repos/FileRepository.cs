@@ -35,6 +35,15 @@ namespace ChatApi.Infrastructure.Repos
             return file;
         }
 
+        public File RemoveFile(string fileName)
+        {
+            var file = _context.Files.FirstOrDefault(c => c.Name == fileName);
+            file.Active = Models.Enums.EnumFlag.N;
+            _context.Files.Update(file);
+            _context.SaveChanges();
+            return file;
+        }
+
         public async Task CheckTimeOfFile()
         {
             var files = _context.Files.ToList();

@@ -43,7 +43,7 @@ namespace ChatApi.Infrastructure.Services
 
                     var expireDate = DateTime.UtcNow.AddSeconds(30);
 
-
+                    
                     var file = _fileRepository.AddFile(owner.Id, expireDate, fileUpload.Files.FileName.Replace(".png", ""));
 
                     return ("Upload Done!");
@@ -89,7 +89,9 @@ namespace ChatApi.Infrastructure.Services
             var filePath = path + fileName + ".png";
             if (System.IO.File.Exists(filePath))
             {
+                System.IO.File.SetAttributes(filePath, FileAttributes.Normal);
                 System.IO.File.Delete(path);
+                _fileRepository.RemoveFile(fileName);
                 return ("File deleted!");
             }
 

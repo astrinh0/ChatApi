@@ -68,7 +68,7 @@ namespace ChatApi.Infrastructure.Services
             {
                 var user = _userRepository.FindUserByUsername(userToAdd);
 
-                if (user != null)
+                if (user != null && user != ownerAux)
                 {
                     var aux = _groupRepository.CheckIfUserBelongsToGroupOrChannel(user.Id, group.Id);
 
@@ -97,7 +97,7 @@ namespace ChatApi.Infrastructure.Services
 
             var group = _groupRepository.GetGroupByName(name);
 
-            if ((ownerAux.Id == group.OwnerId && group != null && ownerAux != null) || ownerAux.Username == userToRemove)
+            if ((ownerAux.Id == group.OwnerId && group != null && ownerAux != null) || (ownerAux.Username == userToRemove && group != null && ownerAux != null))
             {
                 var user = _userRepository.FindUserByUsername(userToRemove);
 
@@ -105,9 +105,9 @@ namespace ChatApi.Infrastructure.Services
                 {
                     var aux = _groupRepository.CheckIfUserBelongsToGroupOrChannel(user.Id, group.Id);
 
-                    if (aux == false)
+                    if (aux == true)
                     {
-                        var removeUser = _groupRepository.RemoveUserFromGroupOrChannel(user.Id, group.Id);
+                        _groupRepository.RemoveUserFromGroupOrChannel(user.Id, group.Id);
                         return true;
                     }
 

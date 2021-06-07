@@ -8,5 +8,7 @@ namespace ChatApi.Infrastructure.Repos
     {
         File AddFile(int ownerId, DateTime expireDate, string fileName);
         Task CheckTimeOfFile();
+
+        File RemoveFile(string fileName);
     }
 }

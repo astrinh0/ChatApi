@@ -21,7 +21,7 @@ namespace ChatApi.Infrastructure.Repos
 
         public async Task<IEnumerable<Group>> GetAllGroups()
         {
-            var group = await _context.Groups.Where(g => g.Type == EnumTypeGroup.G).ToListAsync();
+            var group = await _context.Groups.ToListAsync();
             return group;
         }
 
@@ -47,10 +47,6 @@ namespace ChatApi.Infrastructure.Repos
         {
             var group = _context.Groups.Find(id);
 
-            if (group == null)
-            {
-                return false;
-            }
 
             group.Active = EnumFlag.N;
             _context.Groups.Update(group);

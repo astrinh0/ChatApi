@@ -39,7 +39,7 @@ namespace ChatApi.Controllers
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Description = "An unexpected API error has occurred.", Type = typeof(StatusCodeResult))]
         [HttpGet]
         [Route("/GetAllGroups")]
-        public async Task<ActionResult<Group>> GetGroups()
+        public async Task<ActionResult<Group>> GetGroupsAndChannels()
         {
             try
             {
@@ -178,7 +178,7 @@ namespace ChatApi.Controllers
         /// Remove a user from a Group
         /// </summary>
         /// <param name="name"></param>
-        /// <param name="userToAdd"></param>
+        /// <param name="userToRemove"></param>
         /// <returns></returns>
         [SwaggerOperation("Remove user from group", null, Tags = new[] { "3. Groups/Channels" })]
         [SwaggerResponse(StatusCodes.Status200OK, Description = "Method successfully executed.", Type = typeof(string))]
