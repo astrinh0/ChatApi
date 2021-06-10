@@ -28,7 +28,7 @@ CREATE TABLE "User" (
   CREATE TABLE "Group" (
    gr_id int generated always as identity,
    gr_type varchar(1) not null,
-   gr_name varchar(20) not null,
+   gr_name varchar(40) not null,
    gr_owner int not null,
    gr_createdat date not null default current_date,
    gr_changedat date,
@@ -40,7 +40,7 @@ CREATE TABLE "User" (
    CREATE TABLE "File" (
    fl_id int generated always as identity,
    fl_owner_id int not null,
-   fl_name varchar(20) not null,
+   fl_name varchar(40) not null,
    fl_createdat timestamp(0) not null default current_date,
    fl_endedat timestamp(0) not null,
    fl_active varchar(1) not null,
