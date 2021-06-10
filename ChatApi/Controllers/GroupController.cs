@@ -39,11 +39,11 @@ namespace ChatApi.Controllers
         [SwaggerResponse(StatusCodes.Status500InternalServerError, Description = "An unexpected API error has occurred.", Type = typeof(StatusCodeResult))]
         [HttpGet]
         [Route("/GetAllGroups")]
-        public async Task<ActionResult<Group>> GetGroupsAndChannels()
+        public ActionResult<Group> GetGroupsAndChannels()
         {
             try
             {
-                var groups = await _groupService.GetGroups();
+                var groups =  _groupService.GetGroups();
                 return Ok(groups);
             }
             catch (Exception ex)
@@ -73,8 +73,9 @@ namespace ChatApi.Controllers
         {
             try
             {
-                _groupService.AddGroupOrChannel(type, User.Identity.Name, name);
-                return ("Group/Channel created!");
+                var aux = _groupService.AddGroupOrChannel(type, User.Identity.Name, name);
+                if (aux != null) return ("Group/Channel created!");
+                else return "";
             }
             catch (Exception ex)
             {
@@ -103,8 +104,9 @@ namespace ChatApi.Controllers
         {
             try
             {
-                _groupService.AddUserToGroup(name, User.Identity.Name, userToAdd);
-                return ($"User added to group {name}");
+               var aux = _groupService.AddUserToGroup(name, User.Identity.Name, userToAdd);
+                if (aux == true) return ($"User added to group {name}");
+                else return ($"{User.Identity.Name} isnt the owner!");
             }
             catch (Exception ex)
             {
@@ -193,8 +195,9 @@ namespace ChatApi.Controllers
         {
             try
             {
-                _groupService.RemoveUserToGroup(name, User.Identity.Name, userToRemove);
-                return ($"User removed from the group {name}");
+                var aux = _groupService.RemoveUserToGroup(name, User.Identity.Name, userToRemove);
+                if (aux == true) return ($"User removed from the group {name}");
+                else return ($"{userToRemove} doesnt belong to {name}");
             }
             catch (Exception ex)
             {
@@ -222,8 +225,9 @@ namespace ChatApi.Controllers
         {
             try
             {
-                _groupService.RemoveGroupOrChannel(groupName, User.Identity.Name);
-                return ("Group/Channel deleted!");
+                var aux = _groupService.RemoveGroupOrChannel(groupName, User.Identity.Name);
+                if (aux == true) return ("Group/Channel deleted!");
+                else return "Group/Channel doesnt exist!";
             }
             catch (Exception ex)
             {

@@ -7,7 +7,7 @@ namespace ChatApi.Infrastructure.Services
 {
     public interface IGroupService
     {
-        Task<IEnumerable<Group>> GetGroups();
+        List<Group> GetGroups();
         Group AddGroupOrChannel(EnumTypeGroup type, string username, string name);
 
         bool AddUserToGroup(string name, string owner, string userToAdd);

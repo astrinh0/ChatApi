@@ -19,7 +19,7 @@ namespace ChatApi.Infrastructure.Services
         }
 
 
-        public Task<IEnumerable<Group>> GetGroups()
+        public List<Group> GetGroups()
         {
             var groups = _groupRepository.GetAllGroups();
             return groups;

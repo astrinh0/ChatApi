@@ -19,9 +19,9 @@ namespace ChatApi.Infrastructure.Repos
             _context = context;
         }
 
-        public async Task<IEnumerable<Group>> GetAllGroups()
+        public List<Group> GetAllGroups()
         {
-            var group = await _context.Groups.ToListAsync();
+            var group =  _context.Groups.ToList();
             return group;
         }
 
@@ -72,7 +72,7 @@ namespace ChatApi.Infrastructure.Repos
 
         public Group GetGroupByName(string groupName)
         {
-            var group = _context.Groups.FirstOrDefault(g => g.Name == groupName && g.Type == EnumTypeGroup.G);
+            var group = _context.Groups.FirstOrDefault(g => g.Name == groupName);
 
 
             if (group != null)

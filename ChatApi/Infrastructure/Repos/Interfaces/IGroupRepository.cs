@@ -7,7 +7,7 @@ namespace ChatApi.Infrastructure.Repos
 {
     public interface IGroupRepository
     {
-        Task<IEnumerable<Group>> GetAllGroups();
+        List<Group> GetAllGroups();
         Group AddGroup(EnumTypeGroup type, int ownerId, string name);
         bool RemoveGroupOrChannel(int id);
 
