@@ -6,7 +6,7 @@ CREATE TABLE "User" (
    us_email varchar(50) not null,
    us_active varchar(1) not null,
    us_role varchar(15),
-   us_createdat date not null current_date,
+   us_createdat date not null default current_date,
    us_username varchar(25) not null,
    us_password varchar(100) not null,
    us_changedat date,

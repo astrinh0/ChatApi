@@ -17,6 +17,7 @@ values
 	('Tomo Sokota', 'tomo@gmail.com', 'N', 'User', null, 'tomoUser', '12345'),
 	('Carlos Secretário', 'carlos@gmail.com', 'N', 'User', null, 'carlosUser', '12345');
 
+
  
 ------------------- GROUP DATA ---------------------------------------------------------------------------------------------------------
 insert into "Group" (gr_type, gr_owner, gr_changedat, gr_active, gr_name)
@@ -69,7 +70,7 @@ values
 
 insert into "File"(fl_owner_id, fl_endedat, fl_changedat, fl_active, fl_name)
 values
-	(11, '2020-04-25', null, 'Y', 'Selfie')
+	(11, '2020-04-25', null, 'Y', 'Selfie'),
 	(2, '2010-08-12', null, 'Y', 'Documento'),
 	(8, '1999-05-20', null, 'N', 'Georgina'),
 	(13, '2015-07-08', null, 'N', 'Ficheiro'),
